@@ -111,7 +111,7 @@ export default function HeroSection({
 
           {/* Subtitle */}
           <p className="font-outfit font-medium text-[clamp(2rem,4vw,3rem)] leading-[0.94] tracking-[-0.02em] text-[var(--surface-black)] text-center mt-2">
-            is a visual designer, using craft to tell stories and clarify.
+            is a visual designer crafting impactful, engaging narratives.
           </p>
 
           {/* Tagline */}
