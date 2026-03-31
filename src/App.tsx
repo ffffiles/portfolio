@@ -1,19 +1,12 @@
 import { useRef, useState, useCallback } from 'react'
 import PencilCanvas from './components/PencilCanvas'
 import HeroSection from './components/HeroSection'
-import CaseStudyPanel from './components/CaseStudyPanel'
-import { type CaseStudy } from './data/caseStudies'
-
-interface ActiveStudy {
-  study: CaseStudy
-  cardRect: DOMRect
-}
+import { caseStudies } from './data/caseStudies'
 
 export default function App() {
   const clearRef = useRef<(() => void) | null>(null)
   const undoRef = useRef<(() => void) | null>(null)
   const redoRef = useRef<(() => void) | null>(null)
-  const [active, setActive] = useState<ActiveStudy | null>(null)
   const [color, setColor] = useState('#171717')
   const [strokeCount, setStrokeCount] = useState(0)
   const [redoCount, setRedoCount] = useState(0)
@@ -27,10 +20,6 @@ export default function App() {
   function handleUndo() { undoRef.current?.() }
   function handleRedo() { redoRef.current?.() }
 
-  function handleCloseStudy() {
-    setActive(null)
-  }
-
   return (
     <div className="w-full h-full overflow-hidden bg-light relative">
       <PencilCanvas
@@ -39,10 +28,11 @@ export default function App() {
         onRedoRef={redoRef}
         onCountChange={handleCountChange}
         color={color}
-        disabled={active !== null}
+        disabled={false}
       />
 
       <HeroSection
+        studies={caseStudies}
         color={color}
         onColorChange={setColor}
         strokeCount={strokeCount}
@@ -51,15 +41,6 @@ export default function App() {
         onRedo={handleRedo}
         onClear={handleClear}
       />
-
-      {active && (
-        <CaseStudyPanel
-          key={active.study.id}
-          study={active.study}
-          cardRect={active.cardRect}
-          onClose={handleCloseStudy}
-        />
-      )}
     </div>
   )
 }
