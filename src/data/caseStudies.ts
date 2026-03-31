@@ -12,7 +12,7 @@ export const caseStudies: CaseStudy[] = [
     id: 'valorant-esports-hud',
     title: 'Valorant Esports HUD',
     category: 'Product',
-    year: '2021-23',
+    year: '2021-25',
     thumbnailUrl: 'https://www.figma.com/api/mcp/asset/1114c29e-2ea5-4fbd-a50a-79f111fa81d8',
     comingSoon: true,
   },

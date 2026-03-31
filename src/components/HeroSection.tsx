@@ -27,29 +27,21 @@ export default function HeroSection({
   return (
     <div className="fixed inset-0 z-10 pointer-events-none">
 
-      {/* Color palette + label — top left */}
-      <div className="absolute top-6 left-6 flex items-center gap-3 pointer-events-auto">
-        <div
-          className="flex items-center gap-[6px] bg-[var(--surface-white)] border border-[var(--surface-elevation)] rounded-full px-2 py-[6px]"
-          style={{ boxShadow: '0 8px 8px -8px rgba(0,0,0,0.25)' }}
-        >
-          {COLORS.map(c => (
-            <button
-              key={c}
-              className={`swatch cursor-pointer ${color === c ? 'active' : ''}`}
-              data-color={c}
-              style={{ background: c }}
-              onClick={() => onColorChange(c)}
-              aria-label={c}
-            />
-          ))}
-        </div>
-        <span
-          className="font-dm text-base text-[var(--text-gray)] select-none tracking-[0.01em]"
-          style={{ fontVariationSettings: "'opsz' 14" }}
-        >
-          Draw a little something
-        </span>
+      {/* Color palette — top left */}
+      <div
+        className="absolute top-6 left-6 flex items-center gap-[6px] bg-[var(--surface-white)] border border-[var(--surface-elevation)] rounded-full px-2 py-[6px] pointer-events-auto"
+        style={{ boxShadow: '0 8px 8px -8px rgba(0,0,0,0.25)' }}
+      >
+        {COLORS.map(c => (
+          <button
+            key={c}
+            className={`swatch cursor-pointer ${color === c ? 'active' : ''}`}
+            data-color={c}
+            style={{ background: c }}
+            onClick={() => onColorChange(c)}
+            aria-label={c}
+          />
+        ))}
       </div>
 
       {/* Controls — top right */}
@@ -67,10 +59,10 @@ export default function HeroSection({
 
       {/* Centered content — matches Figma: 800px wide, vertically centered */}
       <div className="absolute inset-0 flex items-center justify-center overflow-y-auto py-20 pointer-events-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-        <div className="flex flex-col items-center gap-10 w-[min(800px,90vw)] pointer-events-auto my-auto">
+        <div className="flex flex-col items-center gap-10 w-[min(800px,90vw)] pointer-events-none my-auto">
 
           {/* Hero block: Carl Filer pill + subtitle + contact */}
-          <div className="flex flex-col items-center gap-2 w-[min(600px,100%)]">
+          <div className="flex flex-col items-center gap-2 w-[min(600px,100%)] select-none">
             <div className="bg-[var(--brand-yellow)] rounded-[8px] px-3 py-2">
               <span
                 className="font-dm font-medium text-[40px] leading-[0.9] tracking-[-0.8px] text-[var(--surface-black)]"
@@ -88,7 +80,7 @@ export default function HeroSection({
           </div>
 
           {/* Contact pills */}
-          <div className="flex gap-2 items-center">
+          <div className="flex gap-2 items-center pointer-events-auto">
             <a
               href="mailto:carlfiler@me.com"
               className="flex items-center gap-2 bg-[var(--surface-elevation)] rounded-[4px] p-2 cursor-pointer no-underline"
@@ -133,7 +125,7 @@ export default function HeroSection({
 function CaseStudyItem({ study }: { study: CaseStudy }) {
   return (
     <div
-      className="flex gap-6 items-center p-1 rounded-xl cursor-pointer transition-colors duration-100 hover:bg-black/[0.04] group w-full md:w-[calc(50%-4px)]"
+      className="flex gap-6 items-center p-1 rounded-xl cursor-pointer transition-colors duration-100 hover:bg-black/[0.04] group w-full md:w-[calc(50%-4px)] pointer-events-auto"
     >
       <img
         src={study.thumbnailUrl}
