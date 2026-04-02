@@ -141,7 +141,7 @@ export default function PencilCanvas({ onClearRef, onUndoRef, onRedoRef, onCount
     function isOverInteractive(x: number, y: number): boolean {
       const el = document.elementFromPoint(x, y)
       if (!el) return false
-      const interactive = el.closest('button, a, [role="button"]')
+      const interactive = el.closest('button, a, [role="button"], [data-clickable]')
       return interactive !== null
     }
 

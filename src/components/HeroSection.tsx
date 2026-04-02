@@ -1,4 +1,6 @@
+import { useRef } from 'react'
 import type { CaseStudy } from '../data/caseStudies'
+import { preloadCaseStudyImages } from './CaseStudyPanel'
 
 // LinkedIn icon from Figma
 const imgLinkedIn = 'https://www.figma.com/api/mcp/asset/58153043-3d47-4317-be87-1ff5776fbfb4'
@@ -14,6 +16,7 @@ interface Props {
   onUndo: () => void
   onRedo: () => void
   onClear: () => void
+  onSelectStudy: (id: string) => void
 }
 
 const COLORS = ['#171717', '#ffdd00', '#19d9ff']
@@ -23,6 +26,7 @@ export default function HeroSection({
   color, onColorChange,
   strokeCount, redoCount,
   onUndo, onRedo, onClear,
+  onSelectStudy,
 }: Props) {
   return (
     <div className="fixed inset-0 z-10 pointer-events-none">
@@ -31,6 +35,7 @@ export default function HeroSection({
       <div
         className="absolute top-6 left-6 flex items-center gap-[6px] bg-[var(--surface-white)] border border-[var(--surface-elevation)] rounded-full px-2 py-[6px] pointer-events-auto"
         style={{ boxShadow: '0 8px 8px -8px rgba(0,0,0,0.25)' }}
+        data-entrance="4"
       >
         {COLORS.map(c => (
           <button
@@ -45,7 +50,7 @@ export default function HeroSection({
       </div>
 
       {/* Controls — top right */}
-      <div className="absolute top-6 right-6 flex items-center pointer-events-auto">
+      <div className="absolute top-6 right-6 flex items-center pointer-events-auto" data-entrance="4">
         <button className="ctrl-btn cursor-pointer" onClick={onUndo} disabled={strokeCount === 0} aria-label="Undo">
           <span className="material-icons">undo</span>
         </button>
@@ -62,7 +67,7 @@ export default function HeroSection({
         <div className="flex flex-col items-center gap-10 w-[min(800px,90vw)] pointer-events-none my-auto">
 
           {/* Hero block: Carl Filer pill + subtitle + contact */}
-          <div className="flex flex-col items-center gap-2 w-[min(600px,100%)] select-none">
+          <div className="flex flex-col items-center gap-2 w-[min(600px,100%)] select-none" data-entrance="1">
             <div className="bg-[var(--brand-yellow)] rounded-[8px] px-3 py-2">
               <span
                 className="font-dm font-medium text-[40px] leading-[0.9] tracking-[-0.8px] text-[var(--surface-black)]"
@@ -80,7 +85,7 @@ export default function HeroSection({
           </div>
 
           {/* Contact pills */}
-          <div className="flex gap-2 items-center pointer-events-auto">
+          <div className="flex gap-2 items-center pointer-events-auto" data-entrance="2">
             <a
               href="mailto:carlfiler@me.com"
               className="flex items-center gap-2 bg-[var(--surface-elevation)] rounded-[4px] p-2 cursor-pointer no-underline"
@@ -110,9 +115,9 @@ export default function HeroSection({
           </div>
 
           {/* Case studies — 2-col flex-wrap, stacks at tablet */}
-          <div className="flex flex-wrap gap-2 w-full">
+          <div className="flex flex-wrap gap-2 w-full" data-entrance="3">
             {studies.map(study => (
-              <CaseStudyItem key={study.id} study={study} />
+              <CaseStudyItem key={study.id} study={study} onSelect={study.hasPage ? onSelectStudy : undefined} />
             ))}
           </div>
 
@@ -122,10 +127,22 @@ export default function HeroSection({
   )
 }
 
-function CaseStudyItem({ study }: { study: CaseStudy }) {
+function CaseStudyItem({ study, onSelect }: { study: CaseStudy; onSelect?: (id: string) => void }) {
+  const preloadedRef = useRef(false)
+
+  function handleMouseEnter() {
+    if (onSelect && !preloadedRef.current) {
+      preloadedRef.current = true
+      preloadCaseStudyImages()
+    }
+  }
+
   return (
     <div
-      className="flex gap-6 items-center p-1 rounded-xl cursor-pointer transition-colors duration-100 hover:bg-black/[0.04] group w-full md:w-[calc(50%-4px)] pointer-events-auto"
+      className={`flex gap-6 items-center p-1 rounded-xl transition-colors duration-100 hover:bg-black/[0.04] group w-full md:w-[calc(50%-4px)] pointer-events-auto ${onSelect ? 'cursor-pointer' : 'cursor-default'}`}
+      onClick={onSelect ? () => onSelect(study.id) : undefined}
+      onMouseEnter={handleMouseEnter}
+      data-clickable={onSelect ? '' : undefined}
     >
       <img
         src={study.thumbnailUrl}

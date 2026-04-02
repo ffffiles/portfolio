@@ -1,6 +1,7 @@
 import { useRef, useState, useCallback } from 'react'
 import PencilCanvas from './components/PencilCanvas'
 import HeroSection from './components/HeroSection'
+import CaseStudyPanel from './components/CaseStudyPanel'
 import { caseStudies } from './data/caseStudies'
 
 export default function App() {
@@ -10,6 +11,7 @@ export default function App() {
   const [color, setColor] = useState('#171717')
   const [strokeCount, setStrokeCount] = useState(0)
   const [redoCount, setRedoCount] = useState(0)
+  const [selectedStudy, setSelectedStudy] = useState<string | null>(null)
 
   const handleCountChange = useCallback((strokes: number, redos: number) => {
     setStrokeCount(strokes)
@@ -28,7 +30,7 @@ export default function App() {
         onRedoRef={redoRef}
         onCountChange={handleCountChange}
         color={color}
-        disabled={false}
+        disabled={selectedStudy !== null}
       />
 
       <HeroSection
@@ -40,7 +42,12 @@ export default function App() {
         onUndo={handleUndo}
         onRedo={handleRedo}
         onClear={handleClear}
+        onSelectStudy={setSelectedStudy}
       />
+
+      {selectedStudy && (
+        <CaseStudyPanel onClose={() => setSelectedStudy(null)} />
+      )}
     </div>
   )
 }
