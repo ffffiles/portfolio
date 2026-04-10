@@ -1,15 +1,15 @@
 import { useEffect, useRef, useState, useCallback } from 'react'
 
-// Figma assets
-const imgHero = 'https://www.figma.com/api/mcp/asset/9aa6eb64-0be9-496a-ab70-f0d9340da863'
-const imgGrid1 = 'https://www.figma.com/api/mcp/asset/363c854a-bb1f-4dcc-bd96-985bbae66d27'
-const imgGrid2 = 'https://www.figma.com/api/mcp/asset/f77113c1-1800-446a-9c49-0868bba24bb9'
-const imgScoreboard = 'https://www.figma.com/api/mcp/asset/5b19010b-0fb2-4a79-aca7-da769078b110'
-const imgClutch = 'https://www.figma.com/api/mcp/asset/6aeaa17f-1000-4c22-9c21-bc6474135ba2'
-const imgKDA = 'https://www.figma.com/api/mcp/asset/56e49d44-0f25-4360-a211-7829189a1a29'
-const imgRoundInfo = 'https://www.figma.com/api/mcp/asset/d0865154-0dc9-4129-b120-92963a3b6862'
-const imgResults = 'https://www.figma.com/api/mcp/asset/fe6accc3-8a47-4a99-b6b3-4f1c4bf490f7'
-const imgStage = 'https://www.figma.com/api/mcp/asset/2e68966c-d31b-4b2e-842c-d8db4c60ee46'
+// Local assets
+const imgHero = '/images/case-hero.jpg'
+const imgGrid1 = '/images/case-grid1.jpg'
+const imgGrid2 = '/images/case-grid2.jpg'
+const imgScoreboard = '/images/case-scoreboard.jpg'
+const imgClutch = '/images/case-clutch.jpg'
+const imgKDA = '/images/case-kda.jpg'
+const imgRoundInfo = '/images/case-roundinfo.jpg'
+const imgResults = '/images/case-results.jpg'
+const imgStage = '/images/case-stage.jpg'
 
 const ALL_IMAGES = [imgHero, imgStage, imgGrid1, imgGrid2, imgScoreboard, imgClutch, imgKDA, imgRoundInfo, imgResults]
 
