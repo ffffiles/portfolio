@@ -64,7 +64,6 @@ function ptDist(a: { x: number; y: number }, b: { x: number; y: number }) {
 export default function PencilCanvas({ onClearRef, onUndoRef, onRedoRef, onCountChange, color, disabled = false }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const cursorRef = useRef<HTMLDivElement>(null)
-  const hintRef = useRef<HTMLDivElement>(null)
   const disabledRef = useRef(disabled)
   disabledRef.current = disabled
   const colorRef = useRef(color)
@@ -153,13 +152,6 @@ export default function PencilCanvas({ onClearRef, onUndoRef, onRedoRef, onCount
         cursor.style.top = (y - 50) + 'px'
         cursor.style.display = overInteractive ? 'none' : 'block'
       }
-      const hint = hintRef.current
-      if (hint) {
-        const hasStrokes = strokesRef.current.length > 0
-        hint.style.left = (x + 32) + 'px'
-        hint.style.top = (y - 14) + 'px'
-        hint.style.display = (hasStrokes || overInteractive) ? 'none' : 'block'
-      }
     }
 
     function onMouseDown(e: MouseEvent) {
@@ -201,16 +193,12 @@ export default function PencilCanvas({ onClearRef, onUndoRef, onRedoRef, onCount
     function onMouseEnter() {
       const cursor = cursorRef.current
       if (cursor) cursor.style.display = 'block'
-      const hint = hintRef.current
-      if (hint && strokesRef.current.length === 0) hint.style.display = 'block'
     }
 
     function onMouseLeave() {
       finishStroke()
       const cursor = cursorRef.current
       if (cursor) cursor.style.display = 'none'
-      const hint = hintRef.current
-      if (hint) hint.style.display = 'none'
     }
 
     function onTouchStart(e: TouchEvent) {
@@ -283,24 +271,7 @@ export default function PencilCanvas({ onClearRef, onUndoRef, onRedoRef, onCount
         className="fixed inset-0 z-0"
         style={{ pointerEvents: disabled ? 'none' : 'auto' }}
       />
-      <div ref={cursorRef} id="pencil-cursor"><img src="/images/cursor-pencil.svg" alt="" draggable={false} style={{ width: 52, height: 52, objectFit: 'contain' }} /></div>
-      <div
-        ref={hintRef}
-        id="pencil-hint"
-        style={{
-          position: 'fixed',
-          pointerEvents: 'none',
-          zIndex: 9999,
-          fontSize: '12px',
-          color: '#777',
-          whiteSpace: 'nowrap',
-          fontFamily: "'DM Sans', sans-serif",
-          userSelect: 'none',
-          display: 'none',
-        }}
-      >
-        Draw!
-      </div>
+      <div ref={cursorRef} id="pencil-cursor"><img src="/images/cursor-pencil.svg" alt="" draggable={false} style={{ width: 40, height: 40, objectFit: 'contain' }} /></div>
     </>
   )
 }

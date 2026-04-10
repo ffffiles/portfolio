@@ -88,8 +88,7 @@ body.case-open,
 body.case-open * {
   cursor: auto !important;
 }
-body.case-open #pencil-cursor,
-body.case-open #pencil-hint {
+body.case-open #pencil-cursor {
   display: none !important;
 }
 
