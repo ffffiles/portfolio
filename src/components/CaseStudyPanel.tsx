@@ -110,9 +110,9 @@ export default function CaseStudyPanel({ onClose }: Props) {
           className="case-study-scroll bg-[var(--surface-white)] rounded-tl-[8px] rounded-tr-[8px] h-full"
         >
           {/* ── Hero: two-column split ── */}
-          <div className="relative flex w-full" style={{ minHeight: '90vh' }}>
+          <div className="relative flex flex-col md:flex-row w-full" style={{ minHeight: '90vh' }}>
             {/* Left: text */}
-            <div className="flex flex-col justify-center gap-6 px-[clamp(24px,5vw,80px)] py-[100px] w-1/2" data-animate>
+            <div className="flex flex-col justify-center gap-6 px-[clamp(24px,5vw,80px)] py-[60px] md:py-[100px] w-full md:w-1/2" data-animate>
               <div className="bg-[var(--brand-yellow)] rounded-[4px] p-1 inline-flex items-center self-start">
                 <span className="font-inter font-semibold text-[10px] text-[var(--surface-black)] uppercase leading-none">
                   Riot Games
@@ -126,7 +126,7 @@ export default function CaseStudyPanel({ onClose }: Props) {
               </p>
             </div>
             {/* Right: hero image */}
-            <div className="w-1/2 overflow-hidden" data-animate>
+            <div className="w-full md:w-1/2 overflow-hidden" data-animate>
               <img
                 src={imgHero}
                 alt="Valorant Esports HUD hero"
