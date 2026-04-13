@@ -98,7 +98,7 @@ export default function CaseStudyPanel({ onClose }: Props) {
         <div className="absolute top-0 right-0 p-6 z-30 pointer-events-none">
           <button
             onClick={handleClose}
-            className="w-10 h-10 flex items-center justify-center rounded-full bg-white/90 backdrop-blur-sm shadow-sm hover:bg-white transition-colors cursor-pointer pointer-events-auto"
+            className="w-10 h-10 flex items-center justify-center rounded-full bg-white/90 backdrop-blur-sm shadow-sm hover:bg-white transition-all duration-150 ease-out active:scale-[0.96] cursor-pointer pointer-events-auto"
             aria-label="Close"
           >
             <span className="material-icons text-[24px] text-[var(--surface-black)]">close</span>
