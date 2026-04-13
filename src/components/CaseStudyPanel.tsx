@@ -107,7 +107,7 @@ export default function CaseStudyPanel({ onClose }: Props) {
 
         <div
           ref={scrollRef}
-          className="case-study-scroll bg-[var(--surface-white)] rounded-tl-[24px] rounded-tr-[24px] h-full"
+          className="case-study-scroll bg-[var(--surface-white)] rounded-tl-[8px] rounded-tr-[8px] h-full"
         >
           {/* ── Hero: two-column split ── */}
           <div className="relative flex w-full" style={{ minHeight: '90vh' }}>
@@ -204,7 +204,7 @@ export default function CaseStudyPanel({ onClose }: Props) {
           <div className="bg-[var(--surface-elevation)] w-full px-[clamp(24px,8vw,160px)] py-[100px]">
             <div className="flex flex-wrap gap-4 w-full max-w-[1600px] mx-auto" data-animate>
               <div className="flex flex-col w-full md:w-[calc(66.666%-8px)]">
-                <div className="rounded-[24px] overflow-hidden aspect-[2/1]">
+                <div className="rounded-[8px] overflow-hidden aspect-[2/1]">
                   <img src={imgScoreboard} alt="Main scoreboard" className="w-full h-full object-cover" draggable={false} />
                 </div>
                 <p className="font-inter font-medium text-[14px] leading-[1.6] tracking-[-0.28px] text-[#6f6f6f] text-center px-6 py-[10px]">
@@ -212,7 +212,7 @@ export default function CaseStudyPanel({ onClose }: Props) {
                 </p>
               </div>
               <div className="flex flex-col w-full md:w-[calc(33.333%-8px)]">
-                <div className="rounded-[24px] overflow-hidden aspect-square">
+                <div className="rounded-[8px] overflow-hidden aspect-square">
                   <img src={imgClutch} alt="Clutch view" className="w-full h-full object-cover" draggable={false} />
                 </div>
                 <p className="font-inter font-medium text-[14px] leading-[1.6] tracking-[-0.28px] text-[#6f6f6f] text-center px-6 py-[10px]">
@@ -220,7 +220,7 @@ export default function CaseStudyPanel({ onClose }: Props) {
                 </p>
               </div>
               <div className="flex flex-col w-full md:w-[calc(33.333%-8px)]">
-                <div className="rounded-[24px] overflow-hidden aspect-square">
+                <div className="rounded-[8px] overflow-hidden aspect-square">
                   <img src={imgKDA} alt="KDA display" className="w-full h-full object-cover" draggable={false} />
                 </div>
                 <p className="font-inter font-medium text-[14px] leading-[1.6] tracking-[-0.28px] text-[#6f6f6f] text-center px-6 py-[10px]">
@@ -228,7 +228,7 @@ export default function CaseStudyPanel({ onClose }: Props) {
                 </p>
               </div>
               <div className="flex flex-col w-full md:w-[calc(66.666%-8px)]">
-                <div className="rounded-[24px] overflow-hidden aspect-[2/1]">
+                <div className="rounded-[8px] overflow-hidden aspect-[2/1]">
                   <img src={imgRoundInfo} alt="Round info" className="w-full h-full object-cover" draggable={false} />
                 </div>
                 <p className="font-inter font-medium text-[14px] leading-[1.6] tracking-[-0.28px] text-[#6f6f6f] text-center px-6 py-[10px]">
@@ -263,7 +263,7 @@ export default function CaseStudyPanel({ onClose }: Props) {
             <h2 className="font-pangaia text-[40px] leading-[1.1] text-[var(--surface-white)] text-center" data-animate>
               See it in action:
             </h2>
-            <div className="w-full aspect-video rounded-[24px] overflow-hidden max-w-[1600px] mx-auto" data-animate>
+            <div className="w-full aspect-video rounded-[8px] overflow-hidden max-w-[1600px] mx-auto" data-animate>
               <iframe
                 className="w-full h-full"
                 src="https://www.youtube.com/embed/HkJuEcNu_8E"
