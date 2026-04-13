@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import type { CaseStudy } from '../data/caseStudies'
 import { preloadCaseStudyImages } from './CaseStudyPanel'
 
@@ -24,6 +24,17 @@ export default function HeroSection({
   onUndo, onRedo, onClear,
   onSelectStudy,
 }: Props) {
+  const projectsScrollRef = useRef<HTMLDivElement>(null)
+  const [projectsScrolled, setProjectsScrolled] = useState(false)
+
+  useEffect(() => {
+    const el = projectsScrollRef.current
+    if (!el) return
+    function onScroll() { setProjectsScrolled(el!.scrollTop > 10) }
+    el.addEventListener('scroll', onScroll, { passive: true })
+    return () => el.removeEventListener('scroll', onScroll)
+  }, [])
+
   return (
     <div className="fixed inset-0 z-10 pointer-events-none">
 
@@ -93,11 +104,24 @@ export default function HeroSection({
           </div>
           </div>{/* end headline+pills group */}
 
-          {/* Case studies — 2-col flex-wrap, stacks at tablet */}
-          <div className="flex flex-wrap gap-2 w-full p-[10px]" data-entrance="3">
-            {studies.map(study => (
-              <CaseStudyItem key={study.id} study={study} onSelect={study.hasPage ? onSelectStudy : undefined} />
-            ))}
+          {/* Case studies — scrollable on mobile */}
+          <div className="relative w-full" data-entrance="3">
+            {/* Top fade */}
+            <div
+              className="absolute top-0 left-0 right-0 h-20 pointer-events-none z-10 transition-opacity duration-200 md:hidden"
+              style={{
+                background: 'linear-gradient(to bottom, var(--surface-white) 0%, transparent 100%)',
+                opacity: projectsScrolled ? 1 : 0,
+              }}
+            />
+            <div
+              ref={projectsScrollRef}
+              className="flex flex-wrap gap-2 w-full p-[10px] overflow-y-auto max-h-[45dvh] md:max-h-none md:overflow-visible [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            >
+              {studies.map(study => (
+                <CaseStudyItem key={study.id} study={study} onSelect={study.hasPage ? onSelectStudy : undefined} />
+              ))}
+            </div>
           </div>
 
         </div>
