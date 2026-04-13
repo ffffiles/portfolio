@@ -212,7 +212,7 @@ export default function CaseStudyPanel({ onClose }: Props) {
                 </p>
               </div>
               <div className="flex flex-col w-full md:w-[calc(33.333%-8px)]">
-                <div className="rounded-[24px] overflow-hidden aspect-[2/1]">
+                <div className="rounded-[24px] overflow-hidden aspect-square">
                   <img src={imgClutch} alt="Clutch view" className="w-full h-full object-cover" draggable={false} />
                 </div>
                 <p className="font-inter font-medium text-[14px] leading-[1.6] tracking-[-0.28px] text-[#6f6f6f] text-center px-6 py-[10px]">
@@ -220,7 +220,7 @@ export default function CaseStudyPanel({ onClose }: Props) {
                 </p>
               </div>
               <div className="flex flex-col w-full md:w-[calc(33.333%-8px)]">
-                <div className="rounded-[24px] overflow-hidden aspect-[2/1]">
+                <div className="rounded-[24px] overflow-hidden aspect-square">
                   <img src={imgKDA} alt="KDA display" className="w-full h-full object-cover" draggable={false} />
                 </div>
                 <p className="font-inter font-medium text-[14px] leading-[1.6] tracking-[-0.28px] text-[#6f6f6f] text-center px-6 py-[10px]">
