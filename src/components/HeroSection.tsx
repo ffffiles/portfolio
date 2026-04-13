@@ -70,8 +70,8 @@ export default function HeroSection({
       </div>
 
       {/* Centered content — matches Figma: 800px wide, vertically centered */}
-      <div className="absolute inset-0 flex flex-col items-center overflow-hidden md:justify-center md:overflow-y-auto py-20 pointer-events-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden overscroll-contain">
-        <div className="flex flex-col items-center w-[min(820px,90vw)] gap-[72px] pointer-events-none md:my-auto shrink-0 h-full md:h-auto min-h-0">
+      <div className="absolute inset-0 flex items-center justify-center overflow-y-auto py-20 pointer-events-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden overscroll-contain">
+        <div className="flex flex-col items-center w-[min(820px,90vw)] gap-[72px] pointer-events-none my-auto shrink-0">
 
           {/* Headline + contact pills group */}
           <div className="flex flex-col items-center gap-[24px] w-full" data-entrance="1">
@@ -105,7 +105,7 @@ export default function HeroSection({
           </div>{/* end headline+pills group */}
 
           {/* Case studies — scrollable on mobile */}
-          <div className="relative w-full flex-1 min-h-0 md:flex-none" data-entrance="3">
+          <div className="relative w-full" data-entrance="3">
             {/* Top fade */}
             <div
               className="absolute top-0 left-0 right-0 h-20 pointer-events-none z-10 transition-opacity duration-200 md:hidden"
@@ -116,7 +116,7 @@ export default function HeroSection({
             />
             <div
               ref={projectsScrollRef}
-              className="flex flex-wrap gap-2 w-full p-[10px] overflow-y-auto h-full md:h-auto md:overflow-visible [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+              className="flex flex-wrap gap-2 w-full p-[10px] overflow-y-auto max-h-[45dvh] md:max-h-none md:overflow-visible [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
             >
               {studies.map(study => (
                 <CaseStudyItem key={study.id} study={study} onSelect={study.hasPage ? onSelectStudy : undefined} />
