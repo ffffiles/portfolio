@@ -28,6 +28,7 @@ interface Props {
 
 export default function CaseStudyPanel({ onClose }: Props) {
   const [visible, setVisible] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const scrollRef = useRef<HTMLDivElement>(null)
 
   // Slide in on mount + set cursor to normal + disable smooth scroller
@@ -54,6 +55,17 @@ export default function CaseStudyPanel({ onClose }: Props) {
     }
     container.addEventListener('wheel', onWheel, { passive: false })
     return () => container.removeEventListener('wheel', onWheel)
+  }, [])
+
+  // Track scroll for top fade
+  useEffect(() => {
+    const container = scrollRef.current
+    if (!container) return
+    function onScroll() {
+      setScrolled(container!.scrollTop > 10)
+    }
+    container.addEventListener('scroll', onScroll, { passive: true })
+    return () => container.removeEventListener('scroll', onScroll)
   }, [])
 
   // Scroll-triggered animations
@@ -104,6 +116,9 @@ export default function CaseStudyPanel({ onClose }: Props) {
             <span className="material-icons text-[24px] text-[var(--surface-black)]">close</span>
           </button>
         </div>
+
+        {/* Top fade — appears when scrolled */}
+        <div className={`case-top-fade ${scrolled ? 'case-top-fade--visible' : ''}`} />
 
         <div
           ref={scrollRef}
