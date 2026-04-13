@@ -188,7 +188,7 @@ export default function CaseStudyPanel({ onClose }: Props) {
           {/* ── Player Cards — dark bg, image left / text right ── */}
           <div className="bg-[var(--surface-black)] w-full overflow-hidden">
             <div className="flex items-center justify-between px-[clamp(24px,5vw,80px)] py-[clamp(60px,8vw,100px)] max-w-[1800px] mx-auto gap-[clamp(24px,4vw,80px)]" data-animate>
-              <div className="flex-1 rounded-[8px] overflow-hidden">
+              <div className="flex-1 overflow-hidden">
                 <img src={imgGrid1} alt="Player card UI" className="w-full h-full object-contain" draggable={false} />
               </div>
               <div className="flex flex-col gap-6 text-[var(--surface-white)] w-[clamp(280px,30%,523px)] shrink-0">
