@@ -3,8 +3,8 @@ import Footer from './Footer'
 
 // Local assets
 const imgHero = '/images/case-hero.jpg'
-const imgGrid1 = '/images/case-grid1.jpg'
-const imgGrid2 = '/images/case-grid2.jpg'
+const imgGrid1 = '/images/case-grid1.png'
+const imgGrid2 = '/images/case-grid2.png'
 const imgScoreboard = '/images/case-scoreboard.jpg'
 const imgClutch = '/images/case-clutch.jpg'
 const imgKDA = '/images/case-kda.jpg'
