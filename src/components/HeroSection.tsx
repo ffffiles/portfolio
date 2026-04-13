@@ -30,7 +30,7 @@ export default function HeroSection({
       {/* Color palette — top left */}
       <div
         className="absolute top-6 left-6 flex items-center gap-[6px] bg-[var(--surface-white)] rounded-full px-2 py-[6px] pointer-events-auto"
-        style={{ boxShadow: '0 0 0 1px rgba(0,0,0,0.06), 0 1px 2px -1px rgba(0,0,0,0.06), 0 2px 4px 0 rgba(0,0,0,0.04)' }}
+        style={{ boxShadow: '0px 2px 8px 0px rgba(0,0,0,0.05), 0px 0px 2px 0px rgba(0,0,0,0.12), 0px 4px 4px -4px rgba(0,0,0,0.1)' }}
         data-entrance="4"
       >
         {COLORS.map(c => (
@@ -60,24 +60,22 @@ export default function HeroSection({
 
       {/* Centered content — matches Figma: 800px wide, vertically centered */}
       <div className="absolute inset-0 flex items-center justify-center overflow-y-auto py-20 pointer-events-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden overscroll-contain">
-        <div className="flex flex-col items-center w-[min(800px,90vw)] pointer-events-none my-auto shrink-0">
+        <div className="flex flex-col items-center w-[min(820px,90vw)] gap-[72px] pointer-events-none my-auto shrink-0">
 
-          {/* Hero headline */}
-          <p
-            className="mb-6 font-domine font-normal text-[24px] leading-[1.4] tracking-[-0.48px] text-[var(--surface-black)] text-center text-balance select-none"
-            data-entrance="1"
-          >
-            Carl Filer is a visual designer crafting impactful, engaging narratives.
-          </p>
+          {/* Headline + contact pills group */}
+          <div className="flex flex-col items-center gap-[24px] w-full" data-entrance="1">
+            <p className="font-domine font-normal text-[40px] leading-[1.1] tracking-[0] text-[var(--surface-black)] text-center text-balance select-none">
+              Carl Filer is a visual designer crafting impactful, engaging narratives.
+            </p>
 
           {/* Contact pills */}
-          <div className="mb-10 md:mb-20 flex gap-2 items-center pointer-events-auto" data-entrance="2">
+          <div className="flex gap-2 items-center pointer-events-auto" data-entrance="2">
             <a
               href="mailto:carlfiler@me.com"
               className="flex items-center gap-2 bg-[var(--button-gray)] hover:bg-[var(--surface-elevation)] rounded-[4px] pl-[8px] pr-[12px] py-[8px] cursor-pointer no-underline transition-all duration-150 ease-out active:scale-[0.96]"
             >
               <img src="/images/icon-mail.svg" alt="" className="w-6 h-6 shrink-0" />
-              <span className="font-inter font-medium text-[14px] leading-none tracking-[-0.28px] text-[var(--surface-black)] whitespace-nowrap">
+              <span className="font-inter font-semibold text-[14px] leading-none tracking-[-0.28px] text-[var(--surface-black)] whitespace-nowrap">
                 carlfiler@me.com
               </span>
             </a>
@@ -88,14 +86,15 @@ export default function HeroSection({
               className="flex items-center gap-2 bg-[var(--button-gray)] hover:bg-[var(--surface-elevation)] rounded-[4px] pl-[8px] pr-[12px] py-[8px] cursor-pointer no-underline transition-all duration-150 ease-out active:scale-[0.96]"
             >
               <img src="/images/icon-linkedin.svg" alt="LinkedIn" className="w-6 h-6 shrink-0" />
-              <span className="font-inter font-medium text-[14px] leading-none tracking-[-0.28px] text-[var(--surface-black)] whitespace-nowrap">
+              <span className="font-inter font-semibold text-[14px] leading-none tracking-[-0.28px] text-[var(--surface-black)] whitespace-nowrap">
                 LinkedIn
               </span>
             </a>
           </div>
+          </div>{/* end headline+pills group */}
 
           {/* Case studies — 2-col flex-wrap, stacks at tablet */}
-          <div className="flex flex-wrap gap-2 w-full" data-entrance="3">
+          <div className="flex flex-wrap gap-2 w-full p-[10px]" data-entrance="3">
             {studies.map(study => (
               <CaseStudyItem key={study.id} study={study} onSelect={study.hasPage ? onSelectStudy : undefined} />
             ))}
@@ -127,7 +126,8 @@ function CaseStudyItem({ study, onSelect }: { study: CaseStudy; onSelect?: (id: 
       <img
         src={study.thumbnailUrl}
         alt={study.title}
-        className="w-20 h-20 rounded-lg object-cover shrink-0 outline outline-1 -outline-offset-1 outline-black/10"
+        className="w-20 h-20 rounded-lg object-cover shrink-0"
+        style={{ boxShadow: '0px 2px 8px 0px rgba(0,0,0,0.05), 0px 0px 2px 0px rgba(0,0,0,0.12), 0px 4px 4px -4px rgba(0,0,0,0.1)' }}
         draggable={false}
       />
       <div className="flex flex-col gap-2 min-w-0">
@@ -138,7 +138,7 @@ function CaseStudyItem({ study, onSelect }: { study: CaseStudy; onSelect?: (id: 
             </span>
           </div>
         )}
-        <span className="font-inter font-medium text-[16px] leading-none tracking-[-0.48px] text-[var(--surface-black)]">
+        <span className="font-inter font-semibold text-[14px] leading-none tracking-[-0.28px] text-[var(--surface-black)]">
           {study.title}
         </span>
         <span className="font-inter font-medium text-[12px] leading-none tracking-[-0.24px] text-[var(--text-gray)]">
