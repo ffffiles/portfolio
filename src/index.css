@@ -91,11 +91,6 @@ body {
 }
 .case-slide--visible { transform: translateY(0); }
 
-/* Lock body scroll when case study is open (mobile) */
-body.case-open {
-  overflow: hidden;
-}
-
 /* Normal cursor when case study is open */
 body.case-open,
 body.case-open * {
@@ -103,23 +98,6 @@ body.case-open * {
 }
 body.case-open #pencil-cursor {
   display: none !important;
-}
-
-/* ── Case study top fade ──────────────────────────────────────────────────── */
-.case-top-fade {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 80px;
-  background: linear-gradient(to bottom, var(--surface-white) 0%, transparent 100%);
-  pointer-events: none;
-  z-index: 10;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-.case-top-fade--visible {
-  opacity: 1;
 }
 
 /* ── Scroll-triggered animations ─────────────────────────────────────────── */
