@@ -7,23 +7,23 @@ export default function Footer() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-[1600px]">
         <a
           href="mailto:carlfiler@me.com"
-          className="bg-[var(--black-elevation)] hover:bg-[#2a2929] rounded-[clamp(24px,5vw,80px)] flex items-center justify-between px-[clamp(24px,5vw,100px)] py-[clamp(40px,5vw,100px)] no-underline transition-all duration-150 ease-out active:scale-[0.96]"
+          className="group bg-[var(--black-elevation)] hover:bg-[#272626] rounded-[clamp(24px,5vw,80px)] flex items-center justify-between px-[clamp(24px,5vw,100px)] py-[clamp(40px,5vw,100px)] no-underline transition-[background-color,transform] duration-[200ms,250ms] ease-out hover:-translate-y-1 active:scale-[0.96]"
         >
           <span className="font-domine font-normal text-[clamp(16px,2vw,24px)] leading-[1.4] tracking-[-0.48px] text-[var(--surface-white)]">
             carlfiler@me.com
           </span>
-          <img src="/images/icon-arrow.svg" alt="" className="w-6 h-6" />
+          <img src="/images/icon-arrow.svg" alt="" className="w-6 h-6 transition-transform duration-[250ms] ease-out group-hover:translate-x-[5px] group-hover:-translate-y-[5px]" />
         </a>
         <a
           href="https://www.linkedin.com/in/carlfiler"
           target="_blank"
           rel="noopener noreferrer"
-          className="bg-[var(--black-elevation)] hover:bg-[#2a2929] rounded-[clamp(24px,5vw,80px)] flex items-center justify-between px-[clamp(24px,5vw,100px)] py-[clamp(40px,5vw,100px)] no-underline transition-all duration-150 ease-out active:scale-[0.96]"
+          className="group bg-[var(--black-elevation)] hover:bg-[#272626] rounded-[clamp(24px,5vw,80px)] flex items-center justify-between px-[clamp(24px,5vw,100px)] py-[clamp(40px,5vw,100px)] no-underline transition-[background-color,transform] duration-[200ms,250ms] ease-out hover:-translate-y-1 active:scale-[0.96]"
         >
           <span className="font-domine font-normal text-[clamp(16px,2vw,24px)] leading-[1.4] tracking-[-0.48px] text-[var(--surface-white)]">
             LinkedIn
           </span>
-          <img src="/images/icon-arrow.svg" alt="" className="w-6 h-6" />
+          <img src="/images/icon-arrow.svg" alt="" className="w-6 h-6 transition-transform duration-[250ms] ease-out group-hover:translate-x-[5px] group-hover:-translate-y-[5px]" />
         </a>
       </div>
     </div>
