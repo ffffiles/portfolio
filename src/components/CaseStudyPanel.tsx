@@ -97,62 +97,59 @@ export default function CaseStudyPanel({ onClose }: Props) {
           ref={scrollRef}
           className="case-study-scroll bg-[var(--surface-white)] rounded-tl-[24px] rounded-tr-[24px] h-full"
         >
-          {/* Sticky close button */}
-          <div className="sticky top-0 z-10 flex items-center justify-end p-6">
-            <button
-              onClick={handleClose}
-              className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-black/5 transition-colors cursor-pointer"
-              aria-label="Close"
-            >
-              <span className="material-icons text-[24px] text-[var(--surface-black)]">close</span>
-            </button>
-          </div>
-
-          {/* Header section */}
-          <div className="flex flex-col items-center justify-center px-4 py-[100px]" data-animate>
-            <div className="flex flex-col gap-6 items-center w-full max-w-[1200px]">
-              <div className="flex items-center justify-center w-full">
-                <div className="bg-[var(--brand-yellow)] rounded-[4px] p-1 flex items-center">
-                  <span className="font-inter font-semibold text-[10px] text-[var(--surface-black)] uppercase leading-none">
-                    Riot Games
-                  </span>
-                </div>
+          {/* ── Hero: two-column split ── */}
+          <div className="relative flex w-full min-h-[600px]" data-animate>
+            {/* Left: text */}
+            <div className="flex flex-col justify-center gap-6 px-[clamp(24px,5vw,80px)] py-[100px] w-1/2">
+              <div className="bg-[var(--brand-yellow)] rounded-[4px] p-1 inline-flex items-center self-start">
+                <span className="font-inter font-semibold text-[10px] text-[var(--surface-black)] uppercase leading-none">
+                  Riot Games
+                </span>
               </div>
-              <h1 className="font-domine font-normal text-[clamp(36px,8vw,64px)] leading-none tracking-[-1.28px] text-[var(--surface-black)] text-center w-full">
+              <h1 className="font-pangaia text-[clamp(36px,5vw,64px)] leading-[1.1] tracking-[-1.28px] text-[var(--surface-black)]">
                 Valorant Esports HUD
               </h1>
-              <p className="font-domine font-normal text-[20px] leading-[1.4] tracking-[-0.4px] text-[var(--text-gray)] text-center max-w-[800px]">
-                Valorant was a success on launch. It had an eager esports scene. But it's in-game observer didn't provide enough info for viewers to follow a match.
+              <p className="font-inter font-normal text-[20px] leading-[1.4] tracking-[-0.8px] text-[var(--surface-black)] max-w-[560px]">
+                Valorant had appetite for a huge esports scene, but it's in-game observer didn't provide enough info for viewers to follow a match.
               </p>
+            </div>
+            {/* Right: hero image */}
+            <div className="w-1/2 overflow-hidden">
+              <img
+                src={imgHero}
+                alt="Valorant Esports HUD hero"
+                className="w-full h-full object-cover"
+                draggable={false}
+                fetchPriority="high"
+              />
+            </div>
+            {/* Sticky close */}
+            <div className="absolute top-0 right-0 flex justify-end p-6 w-full pointer-events-none">
+              <button
+                onClick={handleClose}
+                className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-black/5 transition-colors cursor-pointer pointer-events-auto"
+                aria-label="Close"
+              >
+                <span className="material-icons text-[24px] text-[var(--surface-black)]">close</span>
+              </button>
             </div>
           </div>
 
-          {/* Hero image — full bleed */}
-          <div className="relative w-full" data-animate>
-            <img
-              src={imgHero}
-              alt="Valorant Esports HUD hero"
-              className="w-full object-cover"
-              draggable={false}
-              fetchPriority="high"
-            />
-          </div>
-
-          {/* The solution */}
-          <div className="flex flex-col items-center justify-center py-[100px] px-4" data-animate>
-            <div className="flex flex-col gap-6 items-center w-full max-w-[1200px]">
-              <h2 className="font-domine font-normal text-[24px] leading-[1.4] tracking-[-0.48px] text-[var(--surface-black)] w-full">
+          {/* ── The solution — dark bg ── */}
+          <div className="bg-[var(--surface-black)] w-full px-[clamp(24px,8vw,160px)] py-[clamp(60px,10vw,212px)]" data-animate>
+            <div className="flex flex-col gap-6 w-full max-w-[1200px] mx-auto">
+              <h2 className="font-pangaia text-[40px] leading-[1.1] text-[var(--surface-white)]">
                 The solution
               </h2>
-              <div className="flex flex-col md:flex-row gap-10 items-start w-full">
-                <p className="flex-1 font-domine font-normal text-[20px] leading-[1.4] tracking-[-0.4px] text-[var(--surface-black)]">
-                  Build an observer HUD that displays player, round and team info. Player data has to display instantly. And everything has to be in-sync with a feed of game footage.
+              <div className="flex flex-col md:flex-row gap-[100px] items-start w-full">
+                <p className="flex-1 font-inter font-normal text-[20px] leading-[1.4] tracking-[-0.8px] text-[var(--surface-white)]">
+                  Build an observer HUD that displays player, round and team info. Player data has to display instantly. And everything has to sync perfectly with the live broadcast.
                 </p>
-                <div className="flex-1 flex flex-col gap-6 max-w-[800px]">
-                  <p className="font-domine font-normal text-[14px] leading-[1.4] tracking-[-0.28px] text-[var(--text-gray-light)]">
+                <div className="flex-1 flex flex-col gap-6">
+                  <p className="font-inter font-medium text-[14px] leading-[1.6] tracking-[-0.28px] text-[var(--surface-white)]">
                     To accomplish this we worked across a large swath of disciplines: Design, product, engineering, of course, but also working with game teams to align on a direction and aesthetic, broadcast teams to ensure the tech and strategy worked, and shout-casters so that they could announce a game, in real time, using the HUD we provided.
                   </p>
-                  <p className="font-domine font-normal text-[14px] leading-[1.4] tracking-[-0.28px] text-[var(--text-gray-light)]">
+                  <p className="font-inter font-medium text-[14px] leading-[1.6] tracking-[-0.28px] text-[var(--surface-white)]">
                     This group updates the HUD most years for the years end tournament; Masters.
                   </p>
                 </div>
@@ -160,126 +157,110 @@ export default function CaseStudyPanel({ onClose }: Props) {
             </div>
           </div>
 
-          {/* Stage photo */}
-          <div className="w-full px-[clamp(16px,8vw,160px)]" data-animate>
+          {/* ── Stage photo — full bleed, dark bg ── */}
+          <div className="bg-[var(--surface-black)] w-full" data-animate>
             <img
               src={imgStage}
               alt="Valorant Champions stage"
-              className="w-full rounded-[24px] object-cover"
+              className="w-full object-cover"
               draggable={false}
             />
           </div>
 
-          {/* Feature grid: Broadcast HUD + Player Cards */}
-          <div className="w-full px-[clamp(16px,8vw,160px)] py-[100px]" data-animate>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-[1600px] mx-auto">
-              {/* Row 1: Broadcast HUD text + large image spanning 2 cols */}
-              <div className="rounded-[24px] flex flex-col gap-4 items-start justify-center px-[clamp(24px,3vw,40px)] py-12">
-                <p className="font-domine font-normal text-[24px] leading-[1.4] tracking-[-0.48px] text-[#131514]">
-                  Broadcast HUD
-                </p>
-                <p className="font-domine font-normal text-[20px] leading-[1.4] tracking-[-0.4px] text-[var(--text-gray-light)]">
+          {/* ── Broadcast HUD — dark bg, text left / image right ── */}
+          <div className="bg-[var(--surface-black)] w-full overflow-hidden" data-animate>
+            <div className="flex items-center justify-between px-[clamp(24px,5vw,80px)] py-[clamp(60px,8vw,100px)] max-w-[1800px] mx-auto gap-[clamp(24px,4vw,80px)]">
+              <div className="flex flex-col gap-6 text-[var(--surface-white)] w-[clamp(280px,30%,523px)] shrink-0">
+                <h2 className="font-pangaia text-[40px] leading-[1.1]">Broadcast HUD</h2>
+                <p className="font-inter font-normal text-[20px] leading-[1.4] tracking-[-0.8px]">
                   The main broadcast HUD has 3 main views to represent the major game states; Buy Phase, Play Phase, and Timeout. Buy Phase (right) tries to provide viewers with all the info they want while staying as unobtrusive as possible.
                 </p>
               </div>
-              <div className="md:col-span-2 rounded-[24px] overflow-hidden">
+              <div className="flex-1 rounded-[8px] overflow-hidden">
                 <img src={imgGrid2} alt="Broadcast HUD UI" className="w-full h-full object-cover" draggable={false} />
               </div>
+            </div>
+          </div>
 
-              {/* Row 2: large image spanning 2 cols + Player Cards text */}
-              <div className="md:col-span-2 rounded-[24px] overflow-hidden">
+          {/* ── Player Cards — dark bg, image left / text right ── */}
+          <div className="bg-[var(--surface-black)] w-full overflow-hidden" data-animate>
+            <div className="flex items-center justify-between px-[clamp(24px,5vw,80px)] py-[clamp(60px,8vw,100px)] max-w-[1800px] mx-auto gap-[clamp(24px,4vw,80px)]">
+              <div className="flex-1 rounded-[8px] overflow-hidden">
                 <img src={imgGrid1} alt="Player card UI" className="w-full h-full object-cover" draggable={false} />
               </div>
-              <div className="rounded-[24px] flex flex-col gap-4 items-start justify-center px-[clamp(24px,3vw,40px)] py-12">
-                <p className="font-domine font-normal text-[24px] leading-[1.4] tracking-[-0.48px] text-[#131514]">
-                  Player Cards
-                </p>
-                <p className="font-domine font-normal text-[20px] leading-[1.4] tracking-[-0.4px] text-[var(--text-gray-light)]">
+              <div className="flex flex-col gap-6 text-[var(--surface-white)] w-[clamp(280px,30%,523px)] shrink-0">
+                <h2 className="font-pangaia text-[40px] leading-[1.1]">Player Cards</h2>
+                <p className="font-inter font-normal text-[20px] leading-[1.4] tracking-[-0.8px]">
                   These are one of the most important pieces of information we show. All the player information on one card, each element of which has several different states.
                 </p>
               </div>
             </div>
           </div>
 
-          {/* Image gallery with captions */}
-          <div className="w-full px-[clamp(16px,8vw,160px)] pb-[100px]" data-animate>
+          {/* ── Image gallery — light gray bg ── */}
+          <div className="bg-[var(--surface-elevation)] w-full px-[clamp(24px,8vw,160px)] py-[100px]" data-animate>
             <div className="flex flex-wrap gap-4 w-full max-w-[1600px] mx-auto">
-              {/* Large image - scoreboard */}
               <div className="flex flex-col w-full md:w-[calc(66.666%-8px)]">
-                <div className="rounded-[24px] overflow-hidden">
-                  <img src={imgScoreboard} alt="Main scoreboard" className="w-full object-cover" draggable={false} />
+                <div className="rounded-[24px] overflow-hidden aspect-[2/1]">
+                  <img src={imgScoreboard} alt="Main scoreboard" className="w-full h-full object-cover" draggable={false} />
                 </div>
-                <div className="px-6 py-[10px]">
-                  <p className="font-domine font-normal text-[14px] leading-[1.4] tracking-[-0.28px] text-[var(--text-gray-light)] text-center">
-                    The main scoreboard.
-                  </p>
-                </div>
+                <p className="font-inter font-medium text-[14px] leading-[1.6] tracking-[-0.28px] text-[#6f6f6f] text-center px-6 py-[10px]">
+                  The main scoreboard.
+                </p>
               </div>
-
-              {/* Small image - clutch */}
               <div className="flex flex-col w-full md:w-[calc(33.333%-8px)]">
-                <div className="rounded-[24px] overflow-hidden">
-                  <img src={imgClutch} alt="Clutch view" className="w-full object-cover" draggable={false} />
+                <div className="rounded-[24px] overflow-hidden aspect-[2/1]">
+                  <img src={imgClutch} alt="Clutch view" className="w-full h-full object-cover" draggable={false} />
                 </div>
-                <div className="px-6 py-[10px]">
-                  <p className="font-domine font-normal text-[14px] leading-[1.4] tracking-[-0.28px] text-[var(--text-gray-light)] text-center">
-                    When a team is down to the last player we focus on them only.
-                  </p>
-                </div>
+                <p className="font-inter font-medium text-[14px] leading-[1.6] tracking-[-0.28px] text-[#6f6f6f] text-center px-6 py-[10px]">
+                  When a team is down to the last player we focus on them only.
+                </p>
               </div>
-
-              {/* Small image - KDA */}
               <div className="flex flex-col w-full md:w-[calc(33.333%-8px)]">
-                <div className="rounded-[24px] overflow-hidden">
-                  <img src={imgKDA} alt="KDA display" className="w-full object-cover" draggable={false} />
+                <div className="rounded-[24px] overflow-hidden aspect-[2/1]">
+                  <img src={imgKDA} alt="KDA display" className="w-full h-full object-cover" draggable={false} />
                 </div>
-                <div className="px-6 py-[10px]">
-                  <p className="font-domine font-normal text-[14px] leading-[1.4] tracking-[-0.28px] text-[var(--text-gray-light)] text-center">
-                    K/D/A is shown between rounds and during timeouts.
-                  </p>
-                </div>
+                <p className="font-inter font-medium text-[14px] leading-[1.6] tracking-[-0.28px] text-[#6f6f6f] text-center px-6 py-[10px]">
+                  K/D/A is shown between rounds and during timeouts.
+                </p>
               </div>
-
-              {/* Large image - round info */}
               <div className="flex flex-col w-full md:w-[calc(66.666%-8px)]">
-                <div className="rounded-[24px] overflow-hidden">
-                  <img src={imgRoundInfo} alt="Round info" className="w-full object-cover" draggable={false} />
+                <div className="rounded-[24px] overflow-hidden aspect-[2/1]">
+                  <img src={imgRoundInfo} alt="Round info" className="w-full h-full object-cover" draggable={false} />
                 </div>
-                <div className="px-6 py-[10px]">
-                  <p className="font-domine font-normal text-[14px] leading-[1.4] tracking-[-0.28px] text-[var(--text-gray-light)] text-center">
-                    Round over round info. Round number, who won, and how is displayed during every Buy Phase.
-                  </p>
-                </div>
+                <p className="font-inter font-medium text-[14px] leading-[1.6] tracking-[-0.28px] text-[#6f6f6f] text-center px-6 py-[10px]">
+                  Round over round info. Round number, who won, and how is displayed during every Buy Phase.
+                </p>
               </div>
             </div>
           </div>
 
-          {/* Results section */}
-          <div className="flex flex-col items-center justify-center px-4 py-[100px]" data-animate>
-            <div className="flex flex-col md:flex-row gap-[clamp(24px,4vw,80px)] items-center w-full max-w-[1600px] mx-auto px-[clamp(0px,6vw,120px)]">
-              <div className="flex-1 rounded-[24px] overflow-hidden aspect-square">
-                <img src={imgResults} alt="Results" className="w-full h-full object-cover" draggable={false} />
-              </div>
-              <div className="flex-1 flex flex-col gap-4 justify-center">
-                <h2 className="font-domine font-normal text-[24px] leading-[1.4] tracking-[-0.48px] text-[var(--surface-black)]">
+          {/* ── Results — white bg, text left / image right ── */}
+          <div className="bg-[var(--surface-white)] w-full" data-animate>
+            <div className="flex flex-col md:flex-row w-full min-h-[600px]">
+              <div className="flex flex-col justify-center gap-4 px-[clamp(24px,8vw,197px)] py-[100px] w-full md:w-1/2">
+                <h2 className="font-pangaia text-[40px] leading-[1.1] text-[var(--surface-black)]">
                   Results
                 </h2>
-                <p className="font-domine font-normal text-[20px] leading-[1.4] tracking-[-0.4px] text-[var(--text-gray)]">
-                  The Valorant HUD has been an enormous success. User satisfaction scores are regularly in the high 70's, the product scales to meet our needs, and The 2024 HUD was a part of the "Outstanding Esports Championship Coverage" Emmy win.
+                <p className="font-inter font-normal text-[20px] leading-[1.4] tracking-[-0.8px] text-[var(--text-gray)]">
+                  The Valorant HUD has been an enormous success. User satisfaction scores are regularly in the high 70's, the product scales to meet our needs, and The 2024 HUD was a part of Riot's Outstanding Esports Championship Coverage Emmy win.
                 </p>
-                <p className="font-domine font-normal text-[14px] leading-[1.4] tracking-[-0.28px] text-[var(--text-gray)] max-w-[800px]">
+                <p className="font-inter font-medium text-[14px] leading-[1.6] tracking-[-0.28px] text-[var(--text-gray)]">
                   This project was a large part of why EPLEX redesigned all our esports HUDs in 2025, and continues to be a great link between game teams and esports.
                 </p>
               </div>
+              <div className="w-full md:w-1/2 overflow-hidden">
+                <img src={imgResults} alt="Results" className="w-full h-full object-cover" draggable={false} />
+              </div>
             </div>
           </div>
 
-          {/* See it in action — YouTube embed */}
-          <div className="flex flex-col gap-[10px] items-start px-[clamp(16px,8vw,160px)] py-[100px]" data-animate>
-            <h2 className="font-domine font-normal text-[24px] leading-[1.4] tracking-[-0.48px] text-[var(--surface-black)] w-full text-center">
+          {/* ── See it in action — dark bg ── */}
+          <div className="bg-[var(--surface-black)] w-full px-[clamp(24px,8vw,160px)] py-[100px] flex flex-col gap-10" data-animate>
+            <h2 className="font-pangaia text-[40px] leading-[1.1] text-[var(--surface-white)] text-center">
               See it in action:
             </h2>
-            <div className="w-full aspect-video rounded-[24px] overflow-hidden">
+            <div className="w-full aspect-video rounded-[24px] overflow-hidden max-w-[1600px] mx-auto">
               <iframe
                 className="w-full h-full"
                 src="https://www.youtube.com/embed/HkJuEcNu_8E"
