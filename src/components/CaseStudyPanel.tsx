@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from 'react'
+import Footer from './Footer'
 
 // Local assets
 const imgHero = '/images/case-hero.jpg'
@@ -94,7 +95,7 @@ export default function CaseStudyPanel({ onClose }: Props) {
       <div className={`case-slide ${visible ? 'case-slide--visible' : ''}`}>
         <div
           ref={scrollRef}
-          className="case-study-scroll bg-[#efefef] rounded-tl-[24px] rounded-tr-[24px] h-full"
+          className="case-study-scroll bg-[var(--surface-white)] rounded-tl-[24px] rounded-tr-[24px] h-full"
         >
           {/* Sticky close button */}
           <div className="sticky top-0 z-10 flex items-center justify-end p-6">
@@ -108,49 +109,30 @@ export default function CaseStudyPanel({ onClose }: Props) {
           </div>
 
           {/* Header section */}
-          <div className="flex flex-col items-center justify-center pt-[150px] pb-0 px-4" data-animate>
-            <div className="flex flex-col gap-10 items-start w-full max-w-[1200px]">
-              <div className="flex flex-col gap-4 items-start w-full">
-                <div className="flex gap-4 items-center">
-                  <div className="bg-[var(--brand-yellow)] rounded-[4px] px-1 py-1 flex items-center">
-                    <span
-                      className="font-dm font-medium text-[14px] text-black uppercase leading-[0.9]"
-                      style={{ fontVariationSettings: "'opsz' 14" }}
-                    >
-                      Riot Games
-                    </span>
-                  </div>
-                  <span
-                    className="font-dm font-normal text-[14px] text-[var(--text-gray)] tracking-[0.14px] leading-[0.9]"
-                    style={{ fontVariationSettings: "'opsz' 14" }}
-                  >
-                    Product / 2021-25
+          <div className="flex flex-col items-center justify-center px-4 py-[100px]" data-animate>
+            <div className="flex flex-col gap-6 items-center w-full max-w-[1200px]">
+              <div className="flex items-center justify-center w-full">
+                <div className="bg-[var(--brand-yellow)] rounded-[4px] p-1 flex items-center">
+                  <span className="font-inter font-semibold text-[10px] text-[var(--surface-black)] uppercase leading-none">
+                    Riot Games
                   </span>
                 </div>
-                <h1
-                  className="font-dm font-semibold text-[clamp(36px,5vw,64px)] leading-[0.94] tracking-[-0.06em] text-[var(--surface-black)]"
-                  style={{ fontVariationSettings: "'opsz' 14" }}
-                >
-                  Valorant Esports HUD
-                </h1>
               </div>
-
-              {/* Intro paragraph */}
-              <p
-                className="font-dm font-normal text-[clamp(20px,2.5vw,32px)] leading-[1.2] tracking-[-0.02em] text-[var(--text-gray)] w-full"
-                style={{ fontVariationSettings: "'opsz' 14" }}
-              >
+              <h1 className="font-domine font-normal text-[clamp(36px,8vw,64px)] leading-none tracking-[-1.28px] text-[var(--surface-black)] text-center w-full">
+                Valorant Esports HUD
+              </h1>
+              <p className="font-domine font-normal text-[20px] leading-[1.4] tracking-[-0.4px] text-[var(--text-gray)] text-center max-w-[800px]">
                 Valorant was a success on launch. It had an eager esports scene. But it's in-game observer didn't provide enough info for viewers to follow a match.
               </p>
             </div>
           </div>
 
-          {/* Hero image */}
-          <div className="relative w-full mt-10 px-[clamp(16px,8vw,160px)]" data-animate>
+          {/* Hero image — full bleed */}
+          <div className="relative w-full" data-animate>
             <img
               src={imgHero}
               alt="Valorant Esports HUD hero"
-              className="w-full rounded-[24px] object-cover"
+              className="w-full object-cover"
               draggable={false}
               fetchPriority="high"
             />
@@ -159,30 +141,18 @@ export default function CaseStudyPanel({ onClose }: Props) {
           {/* The solution */}
           <div className="flex flex-col items-center justify-center py-[100px] px-4" data-animate>
             <div className="flex flex-col gap-6 items-center w-full max-w-[1200px]">
-              <h2
-                className="font-dm font-normal text-[clamp(24px,2.5vw,32px)] leading-[1.2] tracking-[-0.02em] text-[var(--surface-black)] w-full"
-                style={{ fontVariationSettings: "'opsz' 14" }}
-              >
+              <h2 className="font-domine font-normal text-[24px] leading-[1.4] tracking-[-0.48px] text-[var(--surface-black)] w-full">
                 The solution
               </h2>
-              <div className="flex flex-col md:flex-row gap-10 items-start w-full text-[var(--text-gray)]">
-                <p
-                  className="flex-1 font-dm font-normal text-[clamp(18px,2vw,24px)] leading-[1.2] tracking-[-0.02em]"
-                  style={{ fontVariationSettings: "'opsz' 14" }}
-                >
+              <div className="flex flex-col md:flex-row gap-10 items-start w-full">
+                <p className="flex-1 font-domine font-normal text-[20px] leading-[1.4] tracking-[-0.4px] text-[var(--surface-black)]">
                   Build an observer HUD that displays player, round and team info. Player data has to display instantly. And everything has to be in-sync with a feed of game footage.
                 </p>
                 <div className="flex-1 flex flex-col gap-6 max-w-[800px]">
-                  <p
-                    className="font-dm font-normal text-[clamp(15px,1.2vw,18px)] leading-[1.2] tracking-[-0.02em]"
-                    style={{ fontVariationSettings: "'opsz' 14" }}
-                  >
+                  <p className="font-domine font-normal text-[14px] leading-[1.4] tracking-[-0.28px] text-[var(--text-gray-light)]">
                     To accomplish this we worked across a large swath of disciplines: Design, product, engineering, of course, but also working with game teams to align on a direction and aesthetic, broadcast teams to ensure the tech and strategy worked, and shout-casters so that they could announce a game, in real time, using the HUD we provided.
                   </p>
-                  <p
-                    className="font-dm font-normal text-[clamp(15px,1.2vw,18px)] leading-[1.2] tracking-[-0.02em]"
-                    style={{ fontVariationSettings: "'opsz' 14" }}
-                  >
+                  <p className="font-domine font-normal text-[14px] leading-[1.4] tracking-[-0.28px] text-[var(--text-gray-light)]">
                     This group updates the HUD most years for the years end tournament; Masters.
                   </p>
                 </div>
@@ -191,7 +161,7 @@ export default function CaseStudyPanel({ onClose }: Props) {
           </div>
 
           {/* Stage photo */}
-          <div className="w-full px-[clamp(16px,8vw,160px)] py-10" data-animate>
+          <div className="w-full px-[clamp(16px,8vw,160px)]" data-animate>
             <img
               src={imgStage}
               alt="Valorant Champions stage"
@@ -201,20 +171,14 @@ export default function CaseStudyPanel({ onClose }: Props) {
           </div>
 
           {/* Feature grid: Broadcast HUD + Player Cards */}
-          <div className="w-full px-[clamp(16px,8vw,160px)] pb-[100px]" data-animate>
+          <div className="w-full px-[clamp(16px,8vw,160px)] py-[100px]" data-animate>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-[1600px] mx-auto">
               {/* Row 1: Broadcast HUD text + large image spanning 2 cols */}
-              <div className="bg-[#e3e3e3] rounded-[24px] flex flex-col gap-4 items-start justify-center px-[clamp(24px,3vw,40px)] py-12">
-                <p
-                  className="font-dm font-normal text-[clamp(24px,2vw,32px)] leading-[1.12] tracking-[-0.02em] text-[#131514]"
-                  style={{ fontVariationSettings: "'opsz' 14" }}
-                >
+              <div className="rounded-[24px] flex flex-col gap-4 items-start justify-center px-[clamp(24px,3vw,40px)] py-12">
+                <p className="font-domine font-normal text-[24px] leading-[1.4] tracking-[-0.48px] text-[#131514]">
                   Broadcast HUD
                 </p>
-                <p
-                  className="font-dm font-normal text-[clamp(16px,1.3vw,20px)] leading-[1.4] tracking-[-0.02em] text-[#6f6f6f]"
-                  style={{ fontVariationSettings: "'opsz' 14" }}
-                >
+                <p className="font-domine font-normal text-[20px] leading-[1.4] tracking-[-0.4px] text-[var(--text-gray-light)]">
                   The main broadcast HUD has 3 main views to represent the major game states; Buy Phase, Play Phase, and Timeout. Buy Phase (right) tries to provide viewers with all the info they want while staying as unobtrusive as possible.
                 </p>
               </div>
@@ -226,17 +190,11 @@ export default function CaseStudyPanel({ onClose }: Props) {
               <div className="md:col-span-2 rounded-[24px] overflow-hidden">
                 <img src={imgGrid1} alt="Player card UI" className="w-full h-full object-cover" draggable={false} />
               </div>
-              <div className="bg-[#e3e3e3] rounded-[24px] flex flex-col gap-4 items-start justify-center px-[clamp(24px,3vw,40px)] py-12">
-                <p
-                  className="font-dm font-normal text-[clamp(24px,2vw,32px)] leading-[1.12] tracking-[-0.02em] text-[#131514]"
-                  style={{ fontVariationSettings: "'opsz' 14" }}
-                >
+              <div className="rounded-[24px] flex flex-col gap-4 items-start justify-center px-[clamp(24px,3vw,40px)] py-12">
+                <p className="font-domine font-normal text-[24px] leading-[1.4] tracking-[-0.48px] text-[#131514]">
                   Player Cards
                 </p>
-                <p
-                  className="font-dm font-normal text-[clamp(16px,1.3vw,20px)] leading-[1.4] tracking-[-0.02em] text-[#6f6f6f]"
-                  style={{ fontVariationSettings: "'opsz' 14" }}
-                >
+                <p className="font-domine font-normal text-[20px] leading-[1.4] tracking-[-0.4px] text-[var(--text-gray-light)]">
                   These are one of the most important pieces of information we show. All the player information on one card, each element of which has several different states.
                 </p>
               </div>
@@ -252,10 +210,7 @@ export default function CaseStudyPanel({ onClose }: Props) {
                   <img src={imgScoreboard} alt="Main scoreboard" className="w-full object-cover" draggable={false} />
                 </div>
                 <div className="px-6 py-[10px]">
-                  <p
-                    className="font-instrument font-medium text-[clamp(16px,1.3vw,20px)] leading-[1.4] tracking-[-0.02em] text-[#6f6f6f]"
-                    style={{ fontVariationSettings: "'wdth' 100" }}
-                  >
+                  <p className="font-domine font-normal text-[14px] leading-[1.4] tracking-[-0.28px] text-[var(--text-gray-light)] text-center">
                     The main scoreboard.
                   </p>
                 </div>
@@ -267,10 +222,7 @@ export default function CaseStudyPanel({ onClose }: Props) {
                   <img src={imgClutch} alt="Clutch view" className="w-full object-cover" draggable={false} />
                 </div>
                 <div className="px-6 py-[10px]">
-                  <p
-                    className="font-instrument font-medium text-[clamp(16px,1.3vw,20px)] leading-[1.4] tracking-[-0.02em] text-[#6f6f6f]"
-                    style={{ fontVariationSettings: "'wdth' 100" }}
-                  >
+                  <p className="font-domine font-normal text-[14px] leading-[1.4] tracking-[-0.28px] text-[var(--text-gray-light)] text-center">
                     When a team is down to the last player we focus on them only.
                   </p>
                 </div>
@@ -282,10 +234,7 @@ export default function CaseStudyPanel({ onClose }: Props) {
                   <img src={imgKDA} alt="KDA display" className="w-full object-cover" draggable={false} />
                 </div>
                 <div className="px-6 py-[10px]">
-                  <p
-                    className="font-instrument font-medium text-[clamp(16px,1.3vw,20px)] leading-[1.4] tracking-[-0.02em] text-[#6f6f6f]"
-                    style={{ fontVariationSettings: "'wdth' 100" }}
-                  >
+                  <p className="font-domine font-normal text-[14px] leading-[1.4] tracking-[-0.28px] text-[var(--text-gray-light)] text-center">
                     K/D/A is shown between rounds and during timeouts.
                   </p>
                 </div>
@@ -297,10 +246,7 @@ export default function CaseStudyPanel({ onClose }: Props) {
                   <img src={imgRoundInfo} alt="Round info" className="w-full object-cover" draggable={false} />
                 </div>
                 <div className="px-6 py-[10px]">
-                  <p
-                    className="font-instrument font-medium text-[clamp(16px,1.3vw,20px)] leading-[1.4] tracking-[-0.02em] text-[#6f6f6f]"
-                    style={{ fontVariationSettings: "'wdth' 100" }}
-                  >
+                  <p className="font-domine font-normal text-[14px] leading-[1.4] tracking-[-0.28px] text-[var(--text-gray-light)] text-center">
                     Round over round info. Round number, who won, and how is displayed during every Buy Phase.
                   </p>
                 </div>
@@ -315,22 +261,13 @@ export default function CaseStudyPanel({ onClose }: Props) {
                 <img src={imgResults} alt="Results" className="w-full h-full object-cover" draggable={false} />
               </div>
               <div className="flex-1 flex flex-col gap-4 justify-center">
-                <h2
-                  className="font-dm font-normal text-[clamp(24px,2.5vw,32px)] leading-[1.2] tracking-[-0.02em] text-[var(--surface-black)]"
-                  style={{ fontVariationSettings: "'opsz' 14" }}
-                >
+                <h2 className="font-domine font-normal text-[24px] leading-[1.4] tracking-[-0.48px] text-[var(--surface-black)]">
                   Results
                 </h2>
-                <p
-                  className="font-dm font-normal text-[clamp(18px,2vw,24px)] leading-[1.2] tracking-[-0.02em] text-[var(--text-gray)]"
-                  style={{ fontVariationSettings: "'opsz' 14" }}
-                >
+                <p className="font-domine font-normal text-[20px] leading-[1.4] tracking-[-0.4px] text-[var(--text-gray)]">
                   The Valorant HUD has been an enormous success. User satisfaction scores are regularly in the high 70's, the product scales to meet our needs, and The 2024 HUD was a part of the "Outstanding Esports Championship Coverage" Emmy win.
                 </p>
-                <p
-                  className="font-dm font-normal text-[clamp(15px,1.2vw,18px)] leading-[1.2] tracking-[-0.02em] text-[var(--text-gray)] max-w-[800px]"
-                  style={{ fontVariationSettings: "'opsz' 14" }}
-                >
+                <p className="font-domine font-normal text-[14px] leading-[1.4] tracking-[-0.28px] text-[var(--text-gray)] max-w-[800px]">
                   This project was a large part of why EPLEX redesigned all our esports HUDs in 2025, and continues to be a great link between game teams and esports.
                 </p>
               </div>
@@ -339,13 +276,10 @@ export default function CaseStudyPanel({ onClose }: Props) {
 
           {/* See it in action — YouTube embed */}
           <div className="flex flex-col gap-[10px] items-start px-[clamp(16px,8vw,160px)] py-[100px]" data-animate>
-            <h2
-              className="font-dm font-normal text-[clamp(24px,2.5vw,32px)] leading-[1.2] tracking-[-0.02em] text-[var(--surface-black)] w-full"
-              style={{ fontVariationSettings: "'opsz' 14" }}
-            >
+            <h2 className="font-domine font-normal text-[24px] leading-[1.4] tracking-[-0.48px] text-[var(--surface-black)] w-full text-center">
               See it in action:
             </h2>
-            <div className="w-full aspect-video">
+            <div className="w-full aspect-video rounded-[24px] overflow-hidden">
               <iframe
                 className="w-full h-full"
                 src="https://www.youtube.com/embed/HkJuEcNu_8E"
@@ -356,6 +290,9 @@ export default function CaseStudyPanel({ onClose }: Props) {
               />
             </div>
           </div>
+
+          {/* Footer */}
+          <Footer />
 
         </div>
       </div>

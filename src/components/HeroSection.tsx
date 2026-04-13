@@ -29,8 +29,8 @@ export default function HeroSection({
 
       {/* Color palette — top left */}
       <div
-        className="absolute top-6 left-6 flex items-center gap-[6px] bg-[var(--surface-white)] border border-[var(--surface-elevation)] rounded-full px-2 py-[6px] pointer-events-auto"
-        style={{ boxShadow: '0 8px 8px -8px rgba(0,0,0,0.25)' }}
+        className="absolute top-6 left-6 flex items-center gap-[6px] bg-[var(--surface-white)] rounded-full px-2 py-[6px] pointer-events-auto"
+        style={{ boxShadow: '0 0 0 1px rgba(0,0,0,0.06), 0 1px 2px -1px rgba(0,0,0,0.06), 0 2px 4px 0 rgba(0,0,0,0.04)' }}
         data-entrance="4"
       >
         {COLORS.map(c => (
@@ -60,37 +60,24 @@ export default function HeroSection({
 
       {/* Centered content — matches Figma: 800px wide, vertically centered */}
       <div className="absolute inset-0 flex items-center justify-center overflow-y-auto py-20 pointer-events-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-        <div className="flex flex-col items-center gap-10 w-[min(800px,90vw)] pointer-events-none my-auto">
+        <div className="flex flex-col items-center w-[min(800px,90vw)] pointer-events-none my-auto">
 
-          {/* Hero block: Carl Filer pill + subtitle + contact */}
-          <div className="flex flex-col items-center gap-2 w-[min(600px,100%)] select-none" data-entrance="1">
-            <div className="bg-[var(--brand-yellow)] rounded-[8px] px-3 py-2">
-              <span
-                className="font-dm font-medium text-[40px] leading-[0.9] tracking-[-0.8px] text-[var(--surface-black)]"
-                style={{ fontVariationSettings: "'opsz' 14" }}
-              >
-                Carl Filer
-              </span>
-            </div>
-            <p
-              className="font-dm font-medium text-[40px] leading-none tracking-[-0.8px] text-[var(--surface-black)] text-center"
-              style={{ fontVariationSettings: "'opsz' 14" }}
-            >
-              is a visual designer crafting impactful, engaging narratives.
-            </p>
-          </div>
+          {/* Hero headline */}
+          <p
+            className="mb-6 font-domine font-normal text-[24px] leading-[1.4] tracking-[-0.48px] text-[var(--surface-black)] text-center text-balance select-none"
+            data-entrance="1"
+          >
+            Carl Filer is a visual designer crafting impactful, engaging narratives.
+          </p>
 
           {/* Contact pills */}
-          <div className="flex gap-2 items-center pointer-events-auto" data-entrance="2">
+          <div className="mb-20 flex gap-2 items-center pointer-events-auto" data-entrance="2">
             <a
               href="mailto:carlfiler@me.com"
-              className="flex items-center gap-2 bg-[var(--surface-elevation)] rounded-[4px] p-2 cursor-pointer no-underline"
+              className="flex items-center gap-2 bg-[var(--button-gray)] rounded-[4px] p-2 cursor-pointer no-underline transition-transform duration-150 ease-out active:scale-[0.96]"
             >
               <img src="/images/icon-mail.svg" alt="" className="w-6 h-6 shrink-0" />
-              <span
-                className="font-dm font-semibold text-base tracking-[-0.32px] text-[var(--text-gray)] whitespace-nowrap"
-                style={{ fontVariationSettings: "'opsz' 14" }}
-              >
+              <span className="font-inter font-medium text-[14px] leading-none tracking-[-0.28px] text-[var(--surface-black)] whitespace-nowrap">
                 carlfiler@me.com
               </span>
             </a>
@@ -98,13 +85,10 @@ export default function HeroSection({
               href="https://www.linkedin.com/in/carlfiler"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 bg-[var(--surface-elevation)] rounded-[4px] p-2 cursor-pointer no-underline"
+              className="flex items-center gap-2 bg-[var(--button-gray)] rounded-[4px] p-2 cursor-pointer no-underline transition-transform duration-150 ease-out active:scale-[0.96]"
             >
               <img src="/images/icon-linkedin.svg" alt="LinkedIn" className="w-6 h-6 shrink-0" />
-              <span
-                className="font-dm font-semibold text-base tracking-[-0.32px] text-[var(--text-gray)] whitespace-nowrap"
-                style={{ fontVariationSettings: "'opsz' 14" }}
-              >
+              <span className="font-inter font-medium text-[14px] leading-none tracking-[-0.28px] text-[var(--surface-black)] whitespace-nowrap">
                 LinkedIn
               </span>
             </a>
@@ -135,7 +119,7 @@ function CaseStudyItem({ study, onSelect }: { study: CaseStudy; onSelect?: (id: 
 
   return (
     <div
-      className={`flex gap-6 items-center p-1 rounded-xl transition-colors duration-100 hover:bg-black/[0.04] group w-full md:w-[calc(50%-4px)] pointer-events-auto ${onSelect ? 'cursor-pointer' : 'cursor-default'}`}
+      className={`flex gap-6 items-center p-1 rounded-xl transition-all duration-150 ease-out hover:bg-black/[0.04] active:scale-[0.96] group w-full md:w-[calc(50%-4px)] pointer-events-auto ${onSelect ? 'cursor-pointer' : 'cursor-default'}`}
       onClick={onSelect ? () => onSelect(study.id) : undefined}
       onMouseEnter={handleMouseEnter}
       data-clickable={onSelect ? '' : undefined}
@@ -143,31 +127,22 @@ function CaseStudyItem({ study, onSelect }: { study: CaseStudy; onSelect?: (id: 
       <img
         src={study.thumbnailUrl}
         alt={study.title}
-        className="w-20 h-20 rounded-lg object-cover shrink-0"
+        className="w-20 h-20 rounded-lg object-cover shrink-0 outline outline-1 -outline-offset-1 outline-black/10"
         draggable={false}
       />
       <div className="flex flex-col gap-2 min-w-0">
         {study.comingSoon && (
           <div className="inline-flex items-center bg-[var(--brand-yellow)] rounded-[4px] p-1 self-start">
-            <span
-              className="font-dm font-medium text-[14px] text-black uppercase leading-[0.9]"
-              style={{ fontVariationSettings: "'opsz' 14" }}
-            >
+            <span className="font-inter font-semibold text-[10px] text-[var(--surface-black)] uppercase leading-none">
               Coming soon
             </span>
           </div>
         )}
-        <span
-          className="font-dm font-medium text-[20px] leading-[0.9] tracking-[-0.2px] text-black"
-          style={{ fontVariationSettings: "'opsz' 14" }}
-        >
+        <span className="font-inter font-medium text-[16px] leading-none tracking-[-0.48px] text-[var(--surface-black)]">
           {study.title}
         </span>
-        <span
-          className="font-dm font-normal text-[14px] leading-[0.9] tracking-[0.14px] text-[var(--text-gray)]"
-          style={{ fontVariationSettings: "'opsz' 14" }}
-        >
-          {study.category} / {study.year}
+        <span className="font-inter font-medium text-[12px] leading-none tracking-[-0.24px] text-[var(--text-gray)]">
+          {study.category}
         </span>
       </div>
     </div>

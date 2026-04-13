@@ -12,11 +12,14 @@
   --text-tag:      clamp(0.75rem, 0.8vw + 0.2rem, 1rem);
   --text-label:    clamp(1rem, 1.2vw + 0.3rem, 1.375rem);
 
-  --surface-white: #fbfbfb;
+  --surface-white: #fefefe;
   --surface-black: #171717;
   --surface-elevation: #efefef;
-  --brand-yellow: #ffdd00;
+  --brand-yellow: #fff41a;
+  --button-gray: #f6f6f6;
+  --black-elevation: #1e1d1d;
   --text-gray: #777;
+  --text-gray-light: #6f6f6f;
 }
 
 /* ── Global reset ─────────────────────────────────────────────────────────── */
@@ -24,6 +27,11 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 html, body, #root {
@@ -96,17 +104,19 @@ body.case-open #pencil-cursor {
 [data-animate] {
   opacity: 0;
   transform: translateY(30px);
-  transition: opacity 0.55s ease-out, transform 0.55s ease-out;
+  filter: blur(4px);
+  transition: opacity 0.55s ease-out, transform 0.55s ease-out, filter 0.55s ease-out;
 }
 [data-animate].is-visible {
   opacity: 1;
   transform: translateY(0);
+  filter: blur(0);
 }
 
 /* ── Staggered entrance animations ────────────────────────────────────── */
 @keyframes fade-up {
-  from { opacity: 0; transform: translateY(30px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(30px); filter: blur(4px); }
+  to   { opacity: 1; transform: translateY(0); filter: blur(0); }
 }
 [data-entrance] {
   opacity: 0;
@@ -164,6 +174,8 @@ body.case-open #pencil-cursor {
 
 /* ── Typography utilities ─────────────────────────────────────────────────── */
 .font-dm      { font-family: 'DM Sans', sans-serif; }
+.font-domine  { font-family: 'Domine', serif; }
+.font-inter   { font-family: 'Inter', sans-serif; }
 .font-forum   { font-family: 'Forum', serif; }
 .font-onest   { font-family: 'Onest', sans-serif; font-weight: 600; }
 .font-instrument { font-family: 'Instrument Sans', sans-serif; }
