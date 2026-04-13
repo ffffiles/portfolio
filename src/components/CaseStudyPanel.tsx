@@ -98,7 +98,7 @@ export default function CaseStudyPanel({ onClose }: Props) {
           className="case-study-scroll bg-[var(--surface-white)] rounded-tl-[24px] rounded-tr-[24px] h-full"
         >
           {/* ── Hero: two-column split ── */}
-          <div className="relative flex w-full min-h-[600px]" data-animate>
+          <div className="relative flex w-full" style={{ minHeight: '90vh' }}>
             {/* Left: text */}
             <div className="flex flex-col justify-center gap-6 px-[clamp(24px,5vw,80px)] py-[100px] w-1/2">
               <div className="bg-[var(--brand-yellow)] rounded-[4px] p-1 inline-flex items-center self-start">
@@ -127,7 +127,7 @@ export default function CaseStudyPanel({ onClose }: Props) {
             <div className="absolute top-0 right-0 flex justify-end p-6 w-full pointer-events-none">
               <button
                 onClick={handleClose}
-                className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-black/5 transition-colors cursor-pointer pointer-events-auto"
+                className="w-10 h-10 flex items-center justify-center rounded-full bg-white/90 backdrop-blur-sm shadow-sm hover:bg-white transition-colors cursor-pointer pointer-events-auto"
                 aria-label="Close"
               >
                 <span className="material-icons text-[24px] text-[var(--surface-black)]">close</span>
@@ -136,8 +136,8 @@ export default function CaseStudyPanel({ onClose }: Props) {
           </div>
 
           {/* ── The solution — dark bg ── */}
-          <div className="bg-[var(--surface-black)] w-full px-[clamp(24px,8vw,160px)] py-[clamp(60px,10vw,212px)]" data-animate>
-            <div className="flex flex-col gap-6 w-full max-w-[1200px] mx-auto">
+          <div className="bg-[var(--surface-black)] w-full px-[clamp(24px,8vw,160px)] py-[clamp(60px,10vw,212px)]">
+            <div className="flex flex-col gap-6 w-full max-w-[1200px] mx-auto" data-animate>
               <h2 className="font-pangaia text-[40px] leading-[1.1] text-[var(--surface-white)]">
                 The solution
               </h2>
@@ -158,7 +158,7 @@ export default function CaseStudyPanel({ onClose }: Props) {
           </div>
 
           {/* ── Stage photo — full bleed, dark bg ── */}
-          <div className="bg-[var(--surface-black)] w-full" data-animate>
+          <div className="bg-[var(--surface-black)] w-full">
             <img
               src={imgStage}
               alt="Valorant Champions stage"
@@ -168,7 +168,7 @@ export default function CaseStudyPanel({ onClose }: Props) {
           </div>
 
           {/* ── Broadcast HUD — dark bg, text left / image right ── */}
-          <div className="bg-[var(--surface-black)] w-full overflow-hidden" data-animate>
+          <div className="bg-[var(--surface-black)] w-full overflow-hidden">
             <div className="flex items-center justify-between px-[clamp(24px,5vw,80px)] py-[clamp(60px,8vw,100px)] max-w-[1800px] mx-auto gap-[clamp(24px,4vw,80px)]">
               <div className="flex flex-col gap-6 text-[var(--surface-white)] w-[clamp(280px,30%,523px)] shrink-0">
                 <h2 className="font-pangaia text-[40px] leading-[1.1]">Broadcast HUD</h2>
@@ -183,7 +183,7 @@ export default function CaseStudyPanel({ onClose }: Props) {
           </div>
 
           {/* ── Player Cards — dark bg, image left / text right ── */}
-          <div className="bg-[var(--surface-black)] w-full overflow-hidden" data-animate>
+          <div className="bg-[var(--surface-black)] w-full overflow-hidden">
             <div className="flex items-center justify-between px-[clamp(24px,5vw,80px)] py-[clamp(60px,8vw,100px)] max-w-[1800px] mx-auto gap-[clamp(24px,4vw,80px)]">
               <div className="flex-1 rounded-[8px] overflow-hidden">
                 <img src={imgGrid1} alt="Player card UI" className="w-full h-full object-cover" draggable={false} />
@@ -198,7 +198,7 @@ export default function CaseStudyPanel({ onClose }: Props) {
           </div>
 
           {/* ── Image gallery — light gray bg ── */}
-          <div className="bg-[var(--surface-elevation)] w-full px-[clamp(24px,8vw,160px)] py-[100px]" data-animate>
+          <div className="bg-[var(--surface-elevation)] w-full px-[clamp(24px,8vw,160px)] py-[100px]">
             <div className="flex flex-wrap gap-4 w-full max-w-[1600px] mx-auto">
               <div className="flex flex-col w-full md:w-[calc(66.666%-8px)]">
                 <div className="rounded-[24px] overflow-hidden aspect-[2/1]">
@@ -236,7 +236,7 @@ export default function CaseStudyPanel({ onClose }: Props) {
           </div>
 
           {/* ── Results — white bg, text left / image right ── */}
-          <div className="bg-[var(--surface-white)] w-full" data-animate>
+          <div className="bg-[var(--surface-white)] w-full">
             <div className="flex flex-col md:flex-row w-full min-h-[600px]">
               <div className="flex flex-col justify-center gap-4 px-[clamp(24px,8vw,197px)] py-[100px] w-full md:w-1/2">
                 <h2 className="font-pangaia text-[40px] leading-[1.1] text-[var(--surface-black)]">
@@ -256,7 +256,7 @@ export default function CaseStudyPanel({ onClose }: Props) {
           </div>
 
           {/* ── See it in action — dark bg ── */}
-          <div className="bg-[var(--surface-black)] w-full px-[clamp(24px,8vw,160px)] py-[100px] flex flex-col gap-10" data-animate>
+          <div className="bg-[var(--surface-black)] w-full px-[clamp(24px,8vw,160px)] py-[100px] flex flex-col gap-10">
             <h2 className="font-pangaia text-[40px] leading-[1.1] text-[var(--surface-white)] text-center">
               See it in action:
             </h2>
