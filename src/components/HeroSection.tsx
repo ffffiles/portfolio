@@ -64,7 +64,7 @@ export default function HeroSection({
 
           {/* Headline + contact pills group */}
           <div className="flex flex-col items-center gap-[24px] w-full" data-entrance="1">
-            <p className="font-domine font-normal text-[40px] leading-[1.1] tracking-[0] text-[var(--surface-black)] text-center text-balance select-none">
+            <p className="font-pangaia text-[40px] leading-[1.1] tracking-[0] text-[var(--surface-black)] text-center text-balance select-none">
               Carl Filer is a visual designer crafting impactful, engaging narratives.
             </p>
 

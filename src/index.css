@@ -172,9 +172,19 @@ body.case-open #pencil-cursor {
 .ctrl-btn:disabled:hover { background: transparent; color: #444; }
 .ctrl-btn .material-icons { font-size: 20px; user-select: none; }
 
+/* ── PP Pangaia ───────────────────────────────────────────────────────────── */
+@font-face {
+  font-family: 'PP Pangaia';
+  src: url('/fonts/PPPangaia-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ── Typography utilities ─────────────────────────────────────────────────── */
 .font-dm      { font-family: 'DM Sans', sans-serif; }
 .font-domine  { font-family: 'Domine', serif; }
+.font-pangaia { font-family: 'PP Pangaia', serif; font-weight: 500; }
 .font-inter   { font-family: 'Inter', sans-serif; }
 .font-forum   { font-family: 'Forum', serif; }
 .font-onest   { font-family: 'Onest', sans-serif; font-weight: 600; }
