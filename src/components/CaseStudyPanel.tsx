@@ -2,15 +2,15 @@ import { useEffect, useRef, useState, useCallback } from 'react'
 import Footer from './Footer'
 
 // Local assets
-const imgHero = '/images/case-hero.jpg'
-const imgGrid1 = '/images/case-grid1.png'
-const imgGrid2 = '/images/case-grid2.png'
-const imgScoreboard = '/images/case-scoreboard.jpg'
-const imgClutch = '/images/case-clutch.jpg'
-const imgKDA = '/images/case-kda.jpg'
-const imgRoundInfo = '/images/case-roundinfo.jpg'
-const imgResults = '/images/case-results.jpg'
-const imgStage = '/images/case-stage.jpg'
+const imgHero = '/images/case-hero.webp'
+const imgGrid1 = '/images/case-grid1.webp'
+const imgGrid2 = '/images/case-grid2.webp'
+const imgScoreboard = '/images/case-scoreboard.webp'
+const imgClutch = '/images/case-clutch.webp'
+const imgKDA = '/images/case-kda.webp'
+const imgRoundInfo = '/images/case-roundinfo.webp'
+const imgResults = '/images/case-results.webp'
+const imgStage = '/images/case-stage.webp'
 
 const ALL_IMAGES = [imgHero, imgStage, imgGrid1, imgGrid2, imgScoreboard, imgClutch, imgKDA, imgRoundInfo, imgResults]
 
@@ -166,6 +166,7 @@ export default function CaseStudyPanel({ onClose }: Props) {
               src={imgStage}
               alt="Valorant Champions stage"
               className="w-full object-cover"
+              loading="lazy"
               draggable={false}
             />
           </div>
@@ -180,7 +181,7 @@ export default function CaseStudyPanel({ onClose }: Props) {
                 </p>
               </div>
               <div className="flex-1 rounded-[8px] overflow-hidden">
-                <img src={imgGrid2} alt="Broadcast HUD UI" className="w-full h-full object-contain" draggable={false} />
+                <img src={imgGrid2} alt="Broadcast HUD UI" className="w-full h-full object-contain" loading="lazy" draggable={false} />
               </div>
             </div>
           </div>
@@ -189,7 +190,7 @@ export default function CaseStudyPanel({ onClose }: Props) {
           <div className="bg-[var(--surface-black)] w-full overflow-hidden">
             <div className="flex items-center justify-between px-[clamp(24px,5vw,80px)] py-[clamp(60px,8vw,100px)] max-w-[1800px] mx-auto gap-[clamp(24px,4vw,80px)]" data-animate>
               <div className="flex-1 overflow-hidden">
-                <img src={imgGrid1} alt="Player card UI" className="w-full h-full object-contain" draggable={false} />
+                <img src={imgGrid1} alt="Player card UI" className="w-full h-full object-contain" loading="lazy" draggable={false} />
               </div>
               <div className="flex flex-col gap-6 text-[var(--surface-white)] w-[clamp(280px,30%,523px)] shrink-0">
                 <h2 className="font-pangaia text-[40px] leading-[1.1]">Player Cards</h2>
@@ -205,7 +206,7 @@ export default function CaseStudyPanel({ onClose }: Props) {
             <div className="flex flex-wrap gap-4 w-full max-w-[1600px] mx-auto" data-animate>
               <div className="flex flex-col w-full md:w-[calc(66.666%-8px)]">
                 <div className="rounded-[8px] overflow-hidden aspect-[2/1]">
-                  <img src={imgScoreboard} alt="Main scoreboard" className="w-full h-full object-cover" draggable={false} />
+                  <img src={imgScoreboard} alt="Main scoreboard" className="w-full h-full object-cover" loading="lazy" draggable={false} />
                 </div>
                 <p className="font-inter font-medium text-[14px] leading-[1.6] tracking-[-0.28px] text-[#6f6f6f] text-center px-6 py-[10px]">
                   The main scoreboard.
@@ -213,7 +214,7 @@ export default function CaseStudyPanel({ onClose }: Props) {
               </div>
               <div className="flex flex-col w-full md:w-[calc(33.333%-8px)]">
                 <div className="rounded-[8px] overflow-hidden aspect-square">
-                  <img src={imgClutch} alt="Clutch view" className="w-full h-full object-cover" draggable={false} />
+                  <img src={imgClutch} alt="Clutch view" className="w-full h-full object-cover" loading="lazy" draggable={false} />
                 </div>
                 <p className="font-inter font-medium text-[14px] leading-[1.6] tracking-[-0.28px] text-[#6f6f6f] text-center px-6 py-[10px]">
                   When a team is down to the last player we focus on them only.
@@ -221,7 +222,7 @@ export default function CaseStudyPanel({ onClose }: Props) {
               </div>
               <div className="flex flex-col w-full md:w-[calc(33.333%-8px)]">
                 <div className="rounded-[8px] overflow-hidden aspect-square">
-                  <img src={imgKDA} alt="KDA display" className="w-full h-full object-cover" draggable={false} />
+                  <img src={imgKDA} alt="KDA display" className="w-full h-full object-cover" loading="lazy" draggable={false} />
                 </div>
                 <p className="font-inter font-medium text-[14px] leading-[1.6] tracking-[-0.28px] text-[#6f6f6f] text-center px-6 py-[10px]">
                   K/D/A is shown between rounds and during timeouts.
@@ -229,7 +230,7 @@ export default function CaseStudyPanel({ onClose }: Props) {
               </div>
               <div className="flex flex-col w-full md:w-[calc(66.666%-8px)]">
                 <div className="rounded-[8px] overflow-hidden aspect-[2/1]">
-                  <img src={imgRoundInfo} alt="Round info" className="w-full h-full object-cover" draggable={false} />
+                  <img src={imgRoundInfo} alt="Round info" className="w-full h-full object-cover" loading="lazy" draggable={false} />
                 </div>
                 <p className="font-inter font-medium text-[14px] leading-[1.6] tracking-[-0.28px] text-[#6f6f6f] text-center px-6 py-[10px]">
                   Round over round info. Round number, who won, and how is displayed during every Buy Phase.
@@ -253,7 +254,7 @@ export default function CaseStudyPanel({ onClose }: Props) {
                 </p>
               </div>
               <div className="w-full md:w-1/2 overflow-hidden">
-                <img src={imgResults} alt="Results" className="w-full h-full object-cover" draggable={false} />
+                <img src={imgResults} alt="Results" className="w-full h-full object-cover" loading="lazy" draggable={false} />
               </div>
             </div>
           </div>
