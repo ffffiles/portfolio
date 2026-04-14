@@ -173,8 +173,8 @@ export default function CaseStudyPanel({ onClose }: Props) {
 
           {/* ── Broadcast HUD — dark bg, text left / image right ── */}
           <div className="bg-[var(--surface-black)] w-full overflow-hidden">
-            <div className="flex items-center justify-between px-[clamp(24px,5vw,80px)] py-[clamp(60px,8vw,100px)] max-w-[1800px] mx-auto gap-[clamp(24px,4vw,80px)]" data-animate>
-              <div className="flex flex-col gap-6 text-[var(--surface-white)] w-[clamp(280px,30%,523px)] shrink-0">
+            <div className="flex flex-col md:flex-row items-center justify-between px-[clamp(24px,5vw,80px)] py-[clamp(60px,8vw,100px)] max-w-[1800px] mx-auto gap-[clamp(24px,4vw,80px)]" data-animate>
+              <div className="flex flex-col gap-6 text-[var(--surface-white)] w-full md:w-[clamp(280px,30%,523px)] md:shrink-0">
                 <h2 className="font-pangaia text-[40px] leading-[1.1]">Broadcast HUD</h2>
                 <p className="font-inter font-normal text-[20px] leading-[1.4] tracking-[-0.8px]">
                   The main broadcast HUD has 3 main views to represent the major game states; Buy Phase, Play Phase, and Timeout. Buy Phase (right) tries to provide viewers with all the info they want while staying as unobtrusive as possible.
@@ -188,11 +188,11 @@ export default function CaseStudyPanel({ onClose }: Props) {
 
           {/* ── Player Cards — dark bg, image left / text right ── */}
           <div className="bg-[var(--surface-black)] w-full overflow-hidden">
-            <div className="flex items-center justify-between px-[clamp(24px,5vw,80px)] py-[clamp(60px,8vw,100px)] max-w-[1800px] mx-auto gap-[clamp(24px,4vw,80px)]" data-animate>
+            <div className="flex flex-col-reverse md:flex-row items-center justify-between px-[clamp(24px,5vw,80px)] py-[clamp(60px,8vw,100px)] max-w-[1800px] mx-auto gap-[clamp(24px,4vw,80px)]" data-animate>
               <div className="flex-1 overflow-hidden">
                 <img src={imgGrid1} alt="Player card UI" className="w-full h-full object-contain" loading="lazy" draggable={false} />
               </div>
-              <div className="flex flex-col gap-6 text-[var(--surface-white)] w-[clamp(280px,30%,523px)] shrink-0">
+              <div className="flex flex-col gap-6 text-[var(--surface-white)] w-full md:w-[clamp(280px,30%,523px)] md:shrink-0">
                 <h2 className="font-pangaia text-[40px] leading-[1.1]">Player Cards</h2>
                 <p className="font-inter font-normal text-[20px] leading-[1.4] tracking-[-0.8px]">
                   These are one of the most important pieces of information we show. All the player information on one card, each element of which has several different states.
