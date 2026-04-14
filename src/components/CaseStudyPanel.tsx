@@ -28,7 +28,11 @@ interface Props {
 
 export default function CaseStudyPanel({ onClose }: Props) {
   const [visible, setVisible] = useState(false)
+  const [lightboxSrc, setLightboxSrc] = useState<string | null>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
+
+  const openLightbox = useCallback((src: string) => setLightboxSrc(src), [])
+  const closeLightbox = useCallback(() => setLightboxSrc(null), [])
 
   // Slide in on mount + set cursor to normal + disable smooth scroller
   useEffect(() => {
@@ -83,6 +87,18 @@ export default function CaseStudyPanel({ onClose }: Props) {
     setTimeout(onClose, 400)
   }, [onClose])
 
+  // Escape closes lightbox first, then panel
+  useEffect(() => {
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key === 'Escape') {
+        if (lightboxSrc) closeLightbox()
+        else handleClose()
+      }
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [lightboxSrc, closeLightbox, handleClose])
+
   return (
     <>
       {/* Scrim */}
@@ -90,6 +106,29 @@ export default function CaseStudyPanel({ onClose }: Props) {
         className={`case-scrim ${visible ? 'case-scrim--visible' : ''}`}
         onClick={handleClose}
       />
+
+      {/* Lightbox */}
+      {lightboxSrc && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
+          onClick={closeLightbox}
+        >
+          <img
+            src={lightboxSrc}
+            alt=""
+            className="max-w-[90vw] max-h-[90vh] object-contain rounded-[8px] shadow-2xl"
+            draggable={false}
+            onClick={e => e.stopPropagation()}
+          />
+          <button
+            onClick={closeLightbox}
+            className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-full bg-white/90 backdrop-blur-sm shadow-sm hover:bg-white transition-all duration-150 ease-out active:scale-[0.96] cursor-pointer"
+            aria-label="Close lightbox"
+          >
+            <span className="material-icons text-[24px] text-[var(--surface-black)]">close</span>
+          </button>
+        </div>
+      )}
 
       {/* Sliding panel */}
       <div className={`case-slide ${visible ? 'case-slide--visible' : ''}`}>
@@ -165,9 +204,10 @@ export default function CaseStudyPanel({ onClose }: Props) {
               data-animate
               src={imgStage}
               alt="Valorant Champions stage"
-              className="w-full object-cover"
+              className="w-full object-cover cursor-zoom-in"
               loading="lazy"
               draggable={false}
+              onClick={() => openLightbox(imgStage)}
             />
           </div>
 
@@ -181,7 +221,7 @@ export default function CaseStudyPanel({ onClose }: Props) {
                 </p>
               </div>
               <div className="flex-1 rounded-[8px] overflow-hidden">
-                <img src={imgGrid2} alt="Broadcast HUD UI" className="w-full h-full object-contain" loading="lazy" draggable={false} />
+                <img src={imgGrid2} alt="Broadcast HUD UI" className="w-full h-full object-contain cursor-zoom-in" loading="lazy" draggable={false} onClick={() => openLightbox(imgGrid2)} />
               </div>
             </div>
           </div>
@@ -190,7 +230,7 @@ export default function CaseStudyPanel({ onClose }: Props) {
           <div className="bg-[var(--surface-black)] w-full overflow-hidden">
             <div className="flex flex-col-reverse md:flex-row items-center justify-between px-[clamp(24px,5vw,80px)] py-[clamp(60px,8vw,100px)] max-w-[1800px] mx-auto gap-[clamp(24px,4vw,80px)]" data-animate>
               <div className="flex-1 overflow-hidden">
-                <img src={imgGrid1} alt="Player card UI" className="w-full h-full object-contain" loading="lazy" draggable={false} />
+                <img src={imgGrid1} alt="Player card UI" className="w-full h-full object-contain cursor-zoom-in" loading="lazy" draggable={false} onClick={() => openLightbox(imgGrid1)} />
               </div>
               <div className="flex flex-col gap-6 text-[var(--surface-white)] w-full md:w-[clamp(280px,30%,523px)] md:shrink-0">
                 <h2 className="font-pangaia text-[40px] leading-[1.1]">Player Cards</h2>
@@ -206,7 +246,7 @@ export default function CaseStudyPanel({ onClose }: Props) {
             <div className="flex flex-wrap gap-4 w-full max-w-[1600px] mx-auto" data-animate>
               <div className="flex flex-col w-full md:w-[calc(66.666%-8px)]">
                 <div className="rounded-[8px] overflow-hidden aspect-[2/1]">
-                  <img src={imgScoreboard} alt="Main scoreboard" className="w-full h-full object-cover" loading="lazy" draggable={false} />
+                  <img src={imgScoreboard} alt="Main scoreboard" className="w-full h-full object-cover cursor-zoom-in" loading="lazy" draggable={false} onClick={() => openLightbox(imgScoreboard)} />
                 </div>
                 <p className="font-inter font-medium text-[14px] leading-[1.6] tracking-[-0.28px] text-[#6f6f6f] text-center px-6 py-[10px]">
                   The main scoreboard.
@@ -214,7 +254,7 @@ export default function CaseStudyPanel({ onClose }: Props) {
               </div>
               <div className="flex flex-col w-full md:w-[calc(33.333%-8px)]">
                 <div className="rounded-[8px] overflow-hidden aspect-square">
-                  <img src={imgClutch} alt="Clutch view" className="w-full h-full object-cover" loading="lazy" draggable={false} />
+                  <img src={imgClutch} alt="Clutch view" className="w-full h-full object-cover cursor-zoom-in" loading="lazy" draggable={false} onClick={() => openLightbox(imgClutch)} />
                 </div>
                 <p className="font-inter font-medium text-[14px] leading-[1.6] tracking-[-0.28px] text-[#6f6f6f] text-center px-6 py-[10px]">
                   When a team is down to the last player we focus on them only.
@@ -222,7 +262,7 @@ export default function CaseStudyPanel({ onClose }: Props) {
               </div>
               <div className="flex flex-col w-full md:w-[calc(33.333%-8px)]">
                 <div className="rounded-[8px] overflow-hidden aspect-square">
-                  <img src={imgKDA} alt="KDA display" className="w-full h-full object-cover" loading="lazy" draggable={false} />
+                  <img src={imgKDA} alt="KDA display" className="w-full h-full object-cover cursor-zoom-in" loading="lazy" draggable={false} onClick={() => openLightbox(imgKDA)} />
                 </div>
                 <p className="font-inter font-medium text-[14px] leading-[1.6] tracking-[-0.28px] text-[#6f6f6f] text-center px-6 py-[10px]">
                   K/D/A is shown between rounds and during timeouts.
@@ -230,7 +270,7 @@ export default function CaseStudyPanel({ onClose }: Props) {
               </div>
               <div className="flex flex-col w-full md:w-[calc(66.666%-8px)]">
                 <div className="rounded-[8px] overflow-hidden aspect-[2/1]">
-                  <img src={imgRoundInfo} alt="Round info" className="w-full h-full object-cover" loading="lazy" draggable={false} />
+                  <img src={imgRoundInfo} alt="Round info" className="w-full h-full object-cover cursor-zoom-in" loading="lazy" draggable={false} onClick={() => openLightbox(imgRoundInfo)} />
                 </div>
                 <p className="font-inter font-medium text-[14px] leading-[1.6] tracking-[-0.28px] text-[#6f6f6f] text-center px-6 py-[10px]">
                   Round over round info. Round number, who won, and how is displayed during every Buy Phase.
@@ -254,7 +294,7 @@ export default function CaseStudyPanel({ onClose }: Props) {
                 </p>
               </div>
               <div className="w-full md:w-1/2 overflow-hidden">
-                <img src={imgResults} alt="Results" className="w-full h-full object-cover" loading="lazy" draggable={false} />
+                <img src={imgResults} alt="Results" className="w-full h-full object-cover cursor-zoom-in" loading="lazy" draggable={false} onClick={() => openLightbox(imgResults)} />
               </div>
             </div>
           </div>
