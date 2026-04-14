@@ -96,6 +96,9 @@ body.case-open,
 body.case-open * {
   cursor: auto !important;
 }
+body.case-open [data-lightbox] {
+  cursor: pointer !important;
+}
 body.case-open #pencil-cursor {
   display: none !important;
 }
