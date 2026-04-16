@@ -100,13 +100,9 @@ export default function CaseStudyPage() {
         aria-label="Back to portfolio"
         className="fixed top-0 left-0 z-40 p-6 cursor-pointer bg-transparent border-0"
       >
-        <img
-          src="/favicon.svg"
-          alt="Carl Filer"
-          className="w-[28px] h-[28px] select-none"
-          draggable={false}
-          style={{ filter: 'brightness(0) invert(1)', opacity: 0.85 }}
-        />
+        <svg width="28" height="28" viewBox="0 0 512 513" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+          <path d="M476 134.278C476 161.278 454.112 183.167 427.111 183.167H217.224C208.059 183.167 199.269 186.807 192.788 193.288C186.307 199.769 182.667 208.559 182.667 217.724V305.389C182.667 318.889 193.611 329.833 207.111 329.833H280.444C307.445 329.833 329.333 351.722 329.333 378.722V427.611C329.333 454.612 307.445 476.5 280.444 476.5H84.8889C57.8884 476.5 36 454.612 36 427.611V232.056C36 205.055 57.8883 183.167 84.8889 183.167H158.216C164.701 183.167 170.92 180.591 175.505 176.005C180.091 171.42 182.667 165.201 182.667 158.716V85.3889C182.667 58.3883 204.555 36.5 231.556 36.5H427.111C454.112 36.5 476 58.3883 476 85.3889V134.278Z" fill="white" fillOpacity="0.85" />
+        </svg>
       </button>
 
       {/* ── Scroll container ──────────────────────────────────────────────── */}
@@ -119,22 +115,17 @@ export default function CaseStudyPage() {
         {/* ── 1. Hero ───────────────────────────────────────────────────── */}
         <section
           className="relative flex flex-col md:flex-row w-full"
-          style={{ minHeight: '100vh', backgroundColor: 'var(--cs-bg-dark)' }}
+          style={{ height: '100vh', backgroundColor: 'var(--cs-bg-dark)' }}
         >
           {/* Left: text */}
           <div
-            className="flex flex-col justify-center items-center gap-5 px-[clamp(32px,5vw,80px)] py-[clamp(80px,10vw,120px)] w-full md:w-1/2 text-center"
+            className="flex flex-col justify-center items-center gap-5 px-[clamp(32px,5vw,80px)] py-[clamp(80px,10vw,120px)] w-full md:w-1/2 md:h-full text-center"
             data-animate
           >
-            {/* Brand logo mark */}
-            <img
-              src="/favicon.svg"
-              alt=""
-              aria-hidden
-              className="w-7 h-7 mb-2 opacity-60"
-              style={{ filter: 'invert(1) sepia(1) saturate(0.5) brightness(0.85)' }}
-              draggable={false}
-            />
+            {/* Brand logo mark — CFX path only, no background */}
+            <svg width="28" height="28" viewBox="0 0 512 513" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden className="mb-2 opacity-50">
+              <path d="M476 134.278C476 161.278 454.112 183.167 427.111 183.167H217.224C208.059 183.167 199.269 186.807 192.788 193.288C186.307 199.769 182.667 208.559 182.667 217.724V305.389C182.667 318.889 193.611 329.833 207.111 329.833H280.444C307.445 329.833 329.333 351.722 329.333 378.722V427.611C329.333 454.612 307.445 476.5 280.444 476.5H84.8889C57.8884 476.5 36 454.612 36 427.611V232.056C36 205.055 57.8883 183.167 84.8889 183.167H158.216C164.701 183.167 170.92 180.591 175.505 176.005C180.091 171.42 182.667 165.201 182.667 158.716V85.3889C182.667 58.3883 204.555 36.5 231.556 36.5H427.111C454.112 36.5 476 58.3883 476 85.3889V134.278Z" fill="var(--cs-text-mute)" />
+            </svg>
 
             {/* Category label */}
             <p
@@ -169,7 +160,7 @@ export default function CaseStudyPage() {
           </div>
 
           {/* Right: hero art */}
-          <div className="w-full md:w-1/2 overflow-hidden" style={{ minHeight: '50vw' }} data-animate>
+          <div className="w-full md:w-1/2 md:h-full overflow-hidden" data-animate>
             <img
               src={imgHero}
               alt="Valorant Esports HUD hero artwork"
@@ -224,22 +215,24 @@ export default function CaseStudyPage() {
           </div>
         </section>
 
-        {/* ── 3. Broadcast HUD — white bg, centred image ────────────────── */}
+        {/* ── 3. Broadcast HUD — white bg, centred video ────────────────── */}
         <section
           className="w-full px-[clamp(24px,4vw,40px)] py-[clamp(40px,6vw,80px)]"
           style={{ backgroundColor: '#ffffff' }}
         >
           <div className="flex flex-col gap-8 max-w-[1440px] mx-auto" data-animate>
             <div className="rounded-[8px] overflow-hidden">
-              <img
-                src={imgBroadcastHud}
-                alt="Broadcast HUD UI"
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
                 className="w-full object-cover"
-                data-lightbox
-                loading="lazy"
-                draggable={false}
-                onClick={() => openLightbox(imgBroadcastHud)}
-              />
+                aria-label="Broadcast HUD demonstration"
+                poster={imgBroadcastHud}
+              >
+                <source src="/videos/broadcast-hud.mp4" type="video/mp4" />
+              </video>
             </div>
             <div className="max-w-[800px] mx-auto flex flex-col gap-4 text-center">
               <h2
