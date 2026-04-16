@@ -1,7 +1,5 @@
 import type { CaseStudy } from '../data/caseStudies'
-import { Carousel } from './Carousel'
 import CaseStudyCard from './CaseStudyCard'
-
 
 interface Props {
   studies: CaseStudy[]
@@ -56,53 +54,46 @@ export default function HeroSection({
         </button>
       </div>
 
-      {/* Centered content — matches Figma: 800px wide, vertically centered */}
+      {/* Centered content */}
       <div className="absolute inset-0 flex items-center justify-center overflow-y-auto py-20 pointer-events-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden overscroll-contain">
         <div className="flex flex-col items-center w-[min(820px,90vw)] gap-[72px] pointer-events-none my-auto shrink-0">
 
-          {/* Headline + contact pills group */}
+          {/* Headline + contact pills */}
           <div className="flex flex-col items-center gap-[24px] w-full" data-entrance="1">
             <p className="font-pangaia text-[40px] leading-[1.1] tracking-[0] text-[var(--surface-black)] text-center text-balance select-none">
               Carl Filer is a visual designer crafting impactful, engaging narratives.
             </p>
 
-          {/* Contact pills */}
-          <div className="flex gap-2 items-center pointer-events-auto" data-entrance="2">
-            <a
-              href="mailto:carlfiler@me.com"
-              className="flex items-center gap-2 bg-[var(--button-gray)] hover:bg-[var(--surface-elevation)] rounded-[4px] pl-[8px] pr-[12px] py-[8px] cursor-pointer no-underline transition-all duration-150 ease-out active:scale-[0.96]"
-            >
-              <img src="/images/icon-mail.svg" alt="" className="w-6 h-6 shrink-0" />
-              <span className="font-inter font-semibold text-[14px] leading-none tracking-[-0.28px] text-[var(--surface-black)] whitespace-nowrap">
-                carlfiler@me.com
-              </span>
-            </a>
-            <a
-              href="https://www.linkedin.com/in/carlfiler"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 bg-[var(--button-gray)] hover:bg-[var(--surface-elevation)] rounded-[4px] pl-[8px] pr-[12px] py-[8px] cursor-pointer no-underline transition-all duration-150 ease-out active:scale-[0.96]"
-            >
-              <img src="/images/icon-linkedin.svg" alt="LinkedIn" className="w-6 h-6 shrink-0" />
-              <span className="font-inter font-semibold text-[14px] leading-none tracking-[-0.28px] text-[var(--surface-black)] whitespace-nowrap">
-                LinkedIn
-              </span>
-            </a>
+            {/* Contact pills */}
+            <div className="flex gap-2 items-center pointer-events-auto" data-entrance="2">
+              <a
+                href="mailto:carlfiler@me.com"
+                className="flex items-center gap-2 bg-[var(--button-gray)] hover:bg-[var(--surface-elevation)] rounded-[4px] pl-[8px] pr-[12px] py-[8px] cursor-pointer no-underline transition-all duration-150 ease-out active:scale-[0.96]"
+              >
+                <img src="/images/icon-mail.svg" alt="" className="w-6 h-6 shrink-0" />
+                <span className="font-inter font-semibold text-[14px] leading-none tracking-[-0.28px] text-[var(--surface-black)] whitespace-nowrap">
+                  carlfiler@me.com
+                </span>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/carlfiler"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 bg-[var(--button-gray)] hover:bg-[var(--surface-elevation)] rounded-[4px] pl-[8px] pr-[12px] py-[8px] cursor-pointer no-underline transition-all duration-150 ease-out active:scale-[0.96]"
+              >
+                <img src="/images/icon-linkedin.svg" alt="LinkedIn" className="w-6 h-6 shrink-0" />
+                <span className="font-inter font-semibold text-[14px] leading-none tracking-[-0.28px] text-[var(--surface-black)] whitespace-nowrap">
+                  LinkedIn
+                </span>
+              </a>
+            </div>
           </div>
-          </div>{/* end headline+pills group */}
 
-          {/* Case studies — focused-stack carousel */}
-          <div className="relative w-full flex justify-center pointer-events-auto" data-entrance="3">
-            <Carousel
-              items={studies}
-              getKey={(s) => s.id}
-              renderCard={(s, isCenter) => (
-                <CaseStudyCard study={s} isCenter={isCenter} />
-              )}
-              cardWidth={280}
-              cardAspect={3 / 4}
-              ariaLabel="Case studies"
-            />
+          {/* Case study list — 2-column grid */}
+          <div className="flex flex-wrap gap-2 w-full pointer-events-auto" data-entrance="3">
+            {studies.map(s => (
+              <CaseStudyCard key={s.id} study={s} />
+            ))}
           </div>
 
         </div>
@@ -110,4 +101,3 @@ export default function HeroSection({
     </div>
   )
 }
-

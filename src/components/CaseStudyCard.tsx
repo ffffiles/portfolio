@@ -3,90 +3,59 @@ import { useTransitionNavigate } from '../context/TransitionContext'
 
 interface Props {
   study: CaseStudy
-  isCenter: boolean
 }
 
-// Palette of card background colors — matches the varied tones in the design
-// (light grey, near-black, warm cream). Keyed by study id so each card keeps
-// its identity across shuffles.
-const CARD_BG: Record<string, string> = {
-  'valorant-esports-hud': '#d9d9d9',
-  'riot-esports-network': '#1e1d1d',
-  'root-new-user-signup': '#f4efe3',
-  'branding-root-insurance': '#e8e8e8',
-}
-
-export default function CaseStudyCard({ study, isCenter }: Props) {
+export default function CaseStudyCard({ study }: Props) {
   const transitionTo = useTransitionNavigate()
-  const background = CARD_BG[study.id] ?? '#e8e8e8'
-  const isDark = background === '#1e1d1d'
-  const labelColor = isDark ? '#ffffff' : 'var(--surface-black)'
-  const sublabelColor = isDark ? 'rgba(255,255,255,0.6)' : 'var(--text-gray)'
 
-  function handleView() {
+  function handleClick() {
     if (study.hasPage) transitionTo(`/case/${study.id}`)
   }
 
   return (
     <div
-      className="relative w-full h-full rounded-[24px] overflow-hidden flex flex-col p-4 pb-5"
-      style={{
-        background,
-        boxShadow:
-          '0 1px 2px rgba(0,0,0,0.06), 0 12px 32px rgba(0,0,0,0.12), 0 2px 6px rgba(0,0,0,0.05)',
-        outline: '1px solid rgba(0,0,0,0.04)',
-      }}
+      role={study.hasPage ? 'button' : undefined}
+      tabIndex={study.hasPage ? 0 : undefined}
+      onClick={handleClick}
+      onKeyDown={study.hasPage ? (e) => { if (e.key === 'Enter' || e.key === ' ') handleClick() } : undefined}
+      aria-label={study.hasPage ? `View ${study.title}` : undefined}
+      className={[
+        'flex flex-row items-center gap-6 p-1 rounded-[12px] w-full sm:w-[calc(50%-4px)]',
+        'bg-[var(--surface-white)]',
+        study.hasPage
+          ? 'cursor-pointer transition-shadow duration-150 hover:shadow-[0_2px_12px_rgba(0,0,0,0.08)] active:scale-[0.99] transition-transform'
+          : '',
+      ].join(' ')}
+      style={{ border: '1px solid var(--surface-elevation)' }}
     >
-      {/* Image sits inside the card with background showing as a frame */}
+      {/* Thumbnail */}
       <div
-        className="relative w-full flex-1 rounded-[14px] overflow-hidden min-h-0"
-        style={{ outline: '1px solid rgba(0,0,0,0.04)' }}
+        className="shrink-0 w-20 h-20 rounded-[8px] overflow-hidden"
+        style={{
+          boxShadow: '0px 2px 8px rgba(0,0,0,0.05), 0px 0px 2px rgba(0,0,0,0.12), 0px 4px 4px -4px rgba(0,0,0,0.1)',
+        }}
       >
         <img
           src={study.thumbnailUrl}
           alt={study.title}
           draggable={false}
-          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+          className="w-full h-full object-cover"
         />
       </div>
 
-      {/* Bottom label + view pill */}
-      <div className="flex items-end justify-between pt-3 gap-3">
-        <div className="flex flex-col gap-[6px] min-w-0">
-          <span
-            className="font-inter text-[10px] uppercase tracking-[0.08em] leading-none"
-            style={{ color: sublabelColor }}
-          >
-            {study.category}
+      {/* Text */}
+      <div className="flex flex-col gap-2 min-w-0">
+        {study.comingSoon && (
+          <span className="self-start font-inter font-semibold text-[10px] text-[var(--surface-black)] uppercase leading-none bg-[var(--brand-yellow)] rounded-[4px] px-1 py-1">
+            Coming soon
           </span>
-          <span
-            className="font-inter font-semibold text-[14px] leading-tight tracking-[-0.01em] text-balance"
-            style={{ color: labelColor }}
-          >
-            {study.comingSoon ? `[${study.title}]` : study.title}
-          </span>
-        </div>
-
-        {isCenter && study.hasPage && (
-          <button
-            type="button"
-            onClick={handleView}
-            className="shrink-0 flex items-center gap-1 bg-white text-[var(--surface-black)] rounded-full pl-3 pr-[10px] py-[6px] font-inter font-semibold text-[12px] leading-none tracking-[-0.01em] shadow-[0_1px_2px_rgba(0,0,0,0.08),0_4px_12px_rgba(0,0,0,0.1)] transition-transform duration-150 ease-out active:scale-[0.96] pointer-events-auto cursor-pointer"
-            aria-label={`View ${study.title}`}
-          >
-            View
-            <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden>
-              <path
-                d="M3 6h6M6 3l3 3-3 3"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                fill="none"
-              />
-            </svg>
-          </button>
         )}
+        <span className="font-inter font-semibold text-[14px] leading-tight tracking-[-0.28px] text-[var(--surface-black)] truncate">
+          {study.title}
+        </span>
+        <span className="font-inter font-medium text-[12px] leading-none tracking-[-0.24px] text-[var(--text-gray)]">
+          {study.category}
+        </span>
       </div>
     </div>
   )
