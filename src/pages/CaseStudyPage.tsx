@@ -2,15 +2,15 @@ import { useEffect, useRef, useState, useCallback } from 'react'
 import { useTransitionNavigate } from '../context/TransitionContext'
 
 // ── Assets ────────────────────────────────────────────────────────────────
-const imgHero        = '/images/case-hero.webp'
-const imgBroadcastHud = '/images/case-grid2.webp'
-const imgScoreboard  = '/images/case-scoreboard.webp'
-const imgClutch      = '/images/case-clutch.webp'
-const imgRoundInfo   = '/images/case-roundinfo.webp'
-const imgKDA         = '/images/case-kda.webp'
-const imgPlayerCards = '/images/case-grid1.webp'
-const imgResults     = '/images/case-results.webp'
-const imgStage       = '/images/case-stage.webp'
+const imgHero         = '/images/case-hero.webp'
+const imgBroadcastHud = '/images/case-broadcast-hud.webp'
+const imgScoreboard   = '/images/case-scoreboard.webp'
+const imgClutch       = '/images/case-clutch.webp'
+const imgRoundInfo    = '/images/case-roundinfo.webp'
+const imgKDA          = '/images/case-kda.webp'
+const imgPlayerCards  = '/images/case-grid1.webp'
+const imgPlayerCardsBg = '/images/case-player-cards.webp'
+const imgResults      = '/images/case-results.webp'
 
 export default function CaseStudyPage() {
   const transitionTo = useTransitionNavigate()
@@ -305,10 +305,10 @@ export default function CaseStudyPage() {
           className="relative w-full overflow-hidden"
           style={{ minHeight: '60vh' }}
         >
-          {/* Background: stage photo, dark-tinted */}
+          {/* Background: player cards section artwork */}
           <div className="absolute inset-0">
             <img
-              src={imgStage}
+              src={imgPlayerCardsBg}
               alt=""
               aria-hidden
               className="w-full h-full object-cover"
