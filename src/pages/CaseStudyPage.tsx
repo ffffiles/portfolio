@@ -20,10 +20,23 @@ export default function CaseStudyPage() {
   const openLightbox  = useCallback((src: string) => setLightboxSrc(src), [])
   const closeLightbox = useCallback(() => setLightboxSrc(null), [])
 
-  // Restore normal cursor while on this page
+  // Restore normal cursor + disable mrD-SmoothScroller while on this page
   useEffect(() => {
     document.body.classList.add('case-open')
-    return () => document.body.classList.remove('case-open')
+    document.body.classList.remove('mrd-smooth')
+    return () => {
+      document.body.classList.remove('case-open')
+      document.body.classList.add('mrd-smooth')
+    }
+  }, [])
+
+  // Prevent mrD-SmoothScroller from intercepting wheel events inside the scroll container
+  useEffect(() => {
+    const container = scrollRef.current
+    if (!container) return
+    function onWheel(e: WheelEvent) { e.stopPropagation() }
+    container.addEventListener('wheel', onWheel, { passive: false })
+    return () => container.removeEventListener('wheel', onWheel)
   }, [])
 
   // Scroll-triggered fade-up animations
@@ -85,15 +98,14 @@ export default function CaseStudyPage() {
       <button
         onClick={() => transitionTo('/')}
         aria-label="Back to portfolio"
-        className="fixed top-0 left-0 z-40 p-6 cursor-pointer"
-        style={{ mixBlendMode: 'exclusion' }}
+        className="fixed top-0 left-0 z-40 p-6 cursor-pointer bg-transparent border-0"
       >
         <img
           src="/favicon.svg"
           alt="Carl Filer"
           className="w-[28px] h-[28px] select-none"
           draggable={false}
-          style={{ filter: 'invert(1)' }}
+          style={{ filter: 'brightness(0) invert(1)', opacity: 0.85 }}
         />
       </button>
 
@@ -415,7 +427,7 @@ export default function CaseStudyPage() {
                 border: '1px solid rgba(255,255,255,0.1)',
               }}
             >
-              <img src="/images/icon-mail.svg" alt="" className="w-5 h-5 shrink-0" style={{ filter: 'invert(1)' }} />
+              <img src="/images/icon-mail.svg" alt="" className="w-5 h-5 shrink-0" style={{ filter: 'brightness(0) invert(1)' }} />
               carlfiler@me.com
             </a>
             <a
@@ -428,7 +440,7 @@ export default function CaseStudyPage() {
                 border: '1px solid rgba(255,255,255,0.1)',
               }}
             >
-              <img src="/images/icon-linkedin.svg" alt="" className="w-5 h-5 shrink-0" style={{ filter: 'invert(1)' }} />
+              <img src="/images/icon-linkedin.svg" alt="" className="w-5 h-5 shrink-0" style={{ filter: 'brightness(0) invert(1)' }} />
               LinkedIn
             </a>
           </div>
