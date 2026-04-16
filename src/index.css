@@ -184,6 +184,25 @@ body.case-open #pencil-cursor {
   font-display: swap;
 }
 
+/* ── Tungsten Bold ────────────────────────────────────────────────────────── */
+@font-face {
+  font-family: 'Tungsten';
+  src: url('/fonts/Tungsten-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ── Case study color tokens ──────────────────────────────────────────────── */
+:root {
+  --cs-bg-dark:   #111113;
+  --cs-bg-black:  #000000;
+  --cs-text-head: #dfe1d3;
+  --cs-text-mute: #a2a590;
+  --cs-text-gold: #d7c081;
+  --cs-text-body: #171717;
+}
+
 /* ── Typography utilities ─────────────────────────────────────────────────── */
 .font-dm      { font-family: 'DM Sans', sans-serif; }
 .font-domine  { font-family: 'Domine', serif; }
@@ -193,3 +212,5 @@ body.case-open #pencil-cursor {
 .font-onest   { font-family: 'Onest', sans-serif; font-weight: 600; }
 .font-instrument { font-family: 'Instrument Sans', sans-serif; }
 .font-quicksand  { font-family: 'Quicksand', sans-serif; font-weight: 700; }
+.font-tungsten   { font-family: 'Tungsten', sans-serif; font-weight: 700; }
+.font-noto       { font-family: 'Noto Serif', serif; font-variation-settings: 'wdth' 87.5; }

@@ -1,6 +1,6 @@
-import { useRef, useState, useEffect } from 'react'
 import type { CaseStudy } from '../data/caseStudies'
-import { preloadCaseStudyImages } from './CaseStudyPanel'
+import { Carousel } from './Carousel'
+import CaseStudyCard from './CaseStudyCard'
 
 
 interface Props {
@@ -12,7 +12,6 @@ interface Props {
   onUndo: () => void
   onRedo: () => void
   onClear: () => void
-  onSelectStudy: (id: string) => void
 }
 
 const COLORS = ['#171717', '#ffdd00', '#19d9ff']
@@ -22,19 +21,7 @@ export default function HeroSection({
   color, onColorChange,
   strokeCount, redoCount,
   onUndo, onRedo, onClear,
-  onSelectStudy,
 }: Props) {
-  const projectsScrollRef = useRef<HTMLDivElement>(null)
-  const [projectsScrolled, setProjectsScrolled] = useState(false)
-
-  useEffect(() => {
-    const el = projectsScrollRef.current
-    if (!el) return
-    function onScroll() { setProjectsScrolled(el!.scrollTop > 10) }
-    el.addEventListener('scroll', onScroll, { passive: true })
-    return () => el.removeEventListener('scroll', onScroll)
-  }, [])
-
   return (
     <div className="fixed inset-0 z-10 pointer-events-none">
 
@@ -104,24 +91,18 @@ export default function HeroSection({
           </div>
           </div>{/* end headline+pills group */}
 
-          {/* Case studies — scrollable on mobile */}
-          <div className="relative w-full" data-entrance="3">
-            {/* Top fade */}
-            <div
-              className="absolute top-0 left-0 right-0 h-20 pointer-events-none z-10 transition-opacity duration-200 md:hidden"
-              style={{
-                background: 'linear-gradient(to bottom, var(--surface-white) 0%, transparent 100%)',
-                opacity: projectsScrolled ? 1 : 0,
-              }}
+          {/* Case studies — focused-stack carousel */}
+          <div className="relative w-full flex justify-center pointer-events-auto" data-entrance="3">
+            <Carousel
+              items={studies}
+              getKey={(s) => s.id}
+              renderCard={(s, isCenter) => (
+                <CaseStudyCard study={s} isCenter={isCenter} />
+              )}
+              cardWidth={280}
+              cardAspect={3 / 4}
+              ariaLabel="Case studies"
             />
-            <div
-              ref={projectsScrollRef}
-              className="flex flex-wrap gap-2 w-full p-[10px] overflow-y-auto max-h-[45dvh] md:max-h-none md:overflow-visible [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-            >
-              {studies.map(study => (
-                <CaseStudyItem key={study.id} study={study} onSelect={study.hasPage ? onSelectStudy : undefined} />
-              ))}
-            </div>
           </div>
 
         </div>
@@ -130,45 +111,3 @@ export default function HeroSection({
   )
 }
 
-function CaseStudyItem({ study, onSelect }: { study: CaseStudy; onSelect?: (id: string) => void }) {
-  const preloadedRef = useRef(false)
-
-  function handleMouseEnter() {
-    if (onSelect && !preloadedRef.current) {
-      preloadedRef.current = true
-      preloadCaseStudyImages()
-    }
-  }
-
-  return (
-    <div
-      className={`flex gap-6 items-center p-1 rounded-xl transition-all duration-150 ease-out hover:bg-black/[0.04] active:scale-[0.96] group w-full md:w-[calc(50%-4px)] pointer-events-auto ${onSelect ? 'cursor-pointer' : 'cursor-default'}`}
-      onClick={onSelect ? () => onSelect(study.id) : undefined}
-      onMouseEnter={handleMouseEnter}
-      data-clickable={onSelect ? '' : undefined}
-    >
-      <img
-        src={study.thumbnailUrl}
-        alt={study.title}
-        className="w-20 h-20 rounded-lg object-cover shrink-0"
-        style={{ boxShadow: '0px 2px 8px 0px rgba(0,0,0,0.05), 0px 0px 2px 0px rgba(0,0,0,0.12), 0px 4px 4px -4px rgba(0,0,0,0.1)' }}
-        draggable={false}
-      />
-      <div className="flex flex-col gap-2 min-w-0">
-        {study.comingSoon && (
-          <div className="inline-flex items-center bg-[var(--brand-yellow)] rounded-[4px] p-1 self-start">
-            <span className="font-inter font-semibold text-[10px] text-[var(--surface-black)] uppercase leading-none">
-              Coming soon
-            </span>
-          </div>
-        )}
-        <span className="font-inter font-semibold text-[14px] leading-none tracking-[-0.28px] text-[var(--surface-black)]">
-          {study.title}
-        </span>
-        <span className="font-inter font-medium text-[12px] leading-none tracking-[-0.24px] text-[var(--text-gray)]">
-          {study.category}
-        </span>
-      </div>
-    </div>
-  )
-}
