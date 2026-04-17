@@ -105,12 +105,6 @@ body.case-open #pencil-cursor {
   display: none !important;
 }
 
-/* Subtle outline on case study content images for depth */
-body.case-open img:not([aria-hidden]):not(.lightbox-img) {
-  outline: 1px solid rgba(255, 255, 255, 0.07);
-  outline-offset: -1px;
-}
-
 /* ── Scroll-triggered animations ─────────────────────────────────────────── */
 [data-animate] {
   opacity: 0;
