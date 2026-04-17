@@ -90,12 +90,14 @@ export default function HeroSection({
           </div>
 
           {/* Case study list — horizontal scroll on mobile, 2-col grid on sm+ */}
-          <div className="flex gap-2 pointer-events-auto overflow-x-auto sm:flex-wrap sm:overflow-visible snap-x snap-mandatory sm:snap-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden -mx-[5vw] w-screen pl-[5vw] sm:mx-0 sm:w-full sm:pl-0" data-entrance="3">
+          <div className="flex gap-2 pointer-events-auto overflow-x-auto sm:flex-wrap sm:overflow-visible snap-x snap-mandatory sm:snap-none scroll-pl-6 sm:scroll-pl-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden -mx-[5vw] w-screen sm:mx-0 sm:w-full" data-entrance="3">
+            {/* Leading spacer */}
+            <div className="flex-shrink-0 w-6 sm:hidden" />
             {studies.map(s => (
               <CaseStudyCard key={s.id} study={s} />
             ))}
-            {/* Trailing spacer so last card clears the right edge */}
-            <div className="flex-shrink-0 w-[5vw] sm:hidden" />
+            {/* Trailing spacer */}
+            <div className="flex-shrink-0 w-6 sm:hidden" />
           </div>
 
         </div>
