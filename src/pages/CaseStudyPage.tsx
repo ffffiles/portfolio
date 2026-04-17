@@ -473,7 +473,7 @@ export default function CaseStudyPage() {
 
         {/* ── 10. FOOTER ───────────────────────────────────────────────────── */}
         <section style={{ backgroundColor: '#111113', height: isMobile ? 'auto' : 800, minHeight: isMobile ? 400 : undefined, padding: isMobile ? '80px 24px' : 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 24, width: 'min(480px, calc(100% - 48px))' }} data-animate>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 24, width: isMobile ? 'min(300px, 100%)' : 300 }} data-animate>
             <p className="font-noto" style={{ fontSize: isMobile ? 'clamp(20px, 5vw, 28px)' : 32, color: '#fefefe', letterSpacing: '-1.28px', lineHeight: 1.4, margin: 0, textAlign: 'center' }}>
               Get in Touch
             </p>
