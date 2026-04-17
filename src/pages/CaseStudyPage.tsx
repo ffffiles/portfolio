@@ -481,7 +481,7 @@ export default function CaseStudyPage() {
               {/* Email */}
               <a
                 href="mailto:carlfiler@me.com"
-                style={{ flex: 1, display: 'flex', alignItems: 'center', gap: 8, padding: '12px 16px 12px 12px', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 8, textDecoration: 'none', color: '#fefefe', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: 14, letterSpacing: '-0.28px', whiteSpace: 'nowrap', transition: 'border-color 0.15s ease, background-color 0.15s ease' }}
+                style={{ flex: 1, display: 'flex', alignItems: 'center', gap: 8, padding: '12px 16px 12px 12px', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 8, textDecoration: 'none', color: '#fefefe', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: 14, letterSpacing: '-0.28px', whiteSpace: 'nowrap', transition: 'border-color 0.15s ease, background-color 0.15s ease', cursor: 'pointer' }}
                 onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)'; e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.05)' }}
                 onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'; e.currentTarget.style.backgroundColor = '' }}
               >
@@ -496,7 +496,7 @@ export default function CaseStudyPage() {
                 href="https://www.linkedin.com/in/carlfiler"
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '12px 16px 12px 12px', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 8, textDecoration: 'none', color: '#fefefe', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: 14, letterSpacing: '-0.28px', whiteSpace: 'nowrap', transition: 'border-color 0.15s ease, background-color 0.15s ease' }}
+                style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '12px 16px 12px 12px', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 8, textDecoration: 'none', color: '#fefefe', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: 14, letterSpacing: '-0.28px', whiteSpace: 'nowrap', transition: 'border-color 0.15s ease, background-color 0.15s ease', cursor: 'pointer' }}
                 onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)'; e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.05)' }}
                 onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'; e.currentTarget.style.backgroundColor = '' }}
               >
