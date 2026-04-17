@@ -5,12 +5,12 @@ import { useTransitionNavigate } from '../context/TransitionContext'
 const imgHero          = '/images/case-hero.webp'
 const imgBroadcastHud  = '/images/case-broadcast-hud.webp'
 const imgScoreboard    = '/images/case-scoreboard.webp'
-const imgClutch        = '/images/case-clutch.webp'
-const imgCeremony      = '/images/case-ceremony.webp'
-const imgRoundInfo     = '/images/case-roundinfo.webp'
-const imgRoundInfo2    = '/images/case-roundinfo2.webp'
-const imgKDA           = '/images/case-kda.webp'
-const imgPlayerCards   = '/images/case-grid1.webp'
+const imgKDA           = '/images/case-grid1.webp'        // K/D/A player stats grid
+const imgClutch        = '/images/case-clutch.webp'       // Round ceremonies / CLUTCH art
+const imgRoundInfo     = '/images/case-roundinfo.webp'    // Round scorecard
+const imgCeremony      = '/images/case-ceremony.webp'     // CLUTCH ceremony banner
+const imgBuyPhase      = '/images/case-kda.webp'          // Buy phase player loadout table
+const imgPlayerCardsBg = '/images/case-grid2.webp'          // Clean fire / agent art background
 const imgPlayerCardSm  = '/images/case-player-card-sm.webp'
 const imgResults       = '/images/case-results.webp'
 
@@ -32,7 +32,7 @@ export default function CaseStudyPage() {
     }
   }, [])
 
-  // Prevent mrD-SmoothScroller from intercepting wheel events inside the scroll container
+  // Prevent mrD-SmoothScroller from intercepting wheel events
   useEffect(() => {
     const container = scrollRef.current
     if (!container) return
@@ -45,7 +45,6 @@ export default function CaseStudyPage() {
   useEffect(() => {
     const container = scrollRef.current
     if (!container) return
-
     const elements = container.querySelectorAll('[data-animate]')
     const observer = new IntersectionObserver(
       (entries) => {
@@ -124,43 +123,26 @@ export default function CaseStudyPage() {
             className="flex flex-col justify-center items-center gap-5 px-[clamp(32px,5vw,80px)] py-[clamp(80px,10vw,120px)] w-full md:w-1/2 md:h-full text-center"
             data-animate
           >
-            {/* Brand logo mark — CFX path only, no background */}
             <svg width="28" height="28" viewBox="0 0 512 513" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden className="mb-2 opacity-50">
               <path d="M476 134.278C476 161.278 454.112 183.167 427.111 183.167H217.224C208.059 183.167 199.269 186.807 192.788 193.288C186.307 199.769 182.667 208.559 182.667 217.724V305.389C182.667 318.889 193.611 329.833 207.111 329.833H280.444C307.445 329.833 329.333 351.722 329.333 378.722V427.611C329.333 454.612 307.445 476.5 280.444 476.5H84.8889C57.8884 476.5 36 454.612 36 427.611V232.056C36 205.055 57.8883 183.167 84.8889 183.167H158.216C164.701 183.167 170.92 180.591 175.505 176.005C180.091 171.42 182.667 165.201 182.667 158.716V85.3889C182.667 58.3883 204.555 36.5 231.556 36.5H427.111C454.112 36.5 476 58.3883 476 85.3889V134.278Z" fill="var(--cs-text-mute)" />
             </svg>
-
-            {/* Category label */}
-            <p
-              className="font-inter font-semibold text-[12px] uppercase tracking-[0.1em]"
-              style={{ color: 'var(--cs-text-mute)' }}
-            >
+            <p className="font-inter font-semibold text-[12px] uppercase tracking-[0.1em]" style={{ color: 'var(--cs-text-mute)' }}>
               Visual Design @ Riot Games
             </p>
-
-            {/* H1 */}
             <h1
               className="font-tungsten uppercase leading-[0.95] tracking-[-0.01em]"
-              style={{
-                fontSize: 'clamp(64px, 8vw, 110px)',
-                color: 'var(--cs-text-head)',
-              }}
+              style={{ fontSize: 'clamp(64px, 8vw, 110px)', color: 'var(--cs-text-head)' }}
             >
               Valorant<br />Esports
             </h1>
-
-            {/* Subhead */}
             <p
               className="font-noto max-w-[480px] leading-[1.4] tracking-[-0.04em]"
-              style={{
-                fontSize: 'clamp(16px, 1.8vw, 24px)',
-                color: 'var(--cs-text-mute)',
-              }}
+              style={{ fontSize: 'clamp(16px, 1.8vw, 24px)', color: 'var(--cs-text-mute)' }}
             >
               Valorant had appetite for a huge esports scene, but its in-game observer
               didn't provide enough info for viewers to follow a match.
             </p>
           </div>
-
           {/* Right: hero art */}
           <div className="w-full md:w-1/2 md:h-full overflow-hidden" data-animate>
             <img
@@ -209,8 +191,7 @@ export default function CaseStudyPage() {
                   className="font-noto leading-[1.4] tracking-[-0.04em]"
                   style={{ fontSize: 'clamp(14px, 1.2vw, 16px)', color: 'var(--cs-text-body)' }}
                 >
-                  This group updates the HUD most years for the year-end tournament:
-                  Masters.
+                  This group updates the HUD most years for the year-end tournament: Masters.
                 </p>
               </div>
             </div>
@@ -255,151 +236,168 @@ export default function CaseStudyPage() {
           </div>
         </section>
 
-        {/* ── 4. Scoreboard — black bg ──────────────────────────────────── */}
-        <HudSection
-          background="var(--cs-bg-black)"
-          image={imgScoreboard}
-          imageAlt="Main scoreboard"
-          title="Scoreboard"
-          body="A persistent scoreboard gives viewers an at-a-glance read on team scores, rounds remaining, and economy — without blocking the action."
-          openLightbox={openLightbox}
-        />
-
-        {/* ── 5. Kill Feed ─────────────────────────────────────────────── */}
-        <section className="w-full px-4 py-[clamp(40px,6vw,80px)]" style={{ backgroundColor: 'var(--cs-bg-dark)' }}>
-          <div className="flex flex-col gap-8 max-w-[1888px] mx-auto" data-animate>
-            {/* Main round-ceremony screenshot */}
-            <div className="rounded-[16px] overflow-hidden">
-              <img
-                src={imgClutch}
-                alt="Round ceremony / kill feed view"
-                className="w-full object-cover"
-                data-lightbox
-                loading="lazy"
-                draggable={false}
-                style={{ cursor: 'zoom-in' }}
-                onClick={() => openLightbox(imgClutch)}
-              />
-            </div>
-            {/* Ceremony overlay detail */}
-            <div className="flex justify-center">
-              <img
-                src={imgCeremony}
-                alt="Round ceremony overlay banner"
-                className="rounded-[8px] w-full"
-                style={{ maxWidth: 877 }}
-                loading="lazy"
-                draggable={false}
-                onClick={() => openLightbox(imgCeremony)}
-              />
-            </div>
-            {/* Caption */}
-            <div className="max-w-[800px] mx-auto flex flex-col gap-4 text-center">
+        {/* ── 4. Scoreboard — caption ABOVE image ───────────────────────── */}
+        <section
+          className="w-full px-[clamp(24px,4vw,40px)] py-[clamp(40px,6vw,80px)]"
+          style={{ backgroundColor: 'var(--cs-bg-black)' }}
+        >
+          <div className="flex flex-col items-center gap-8 max-w-[1440px] mx-auto" data-animate>
+            {/* Caption above */}
+            <div className="flex flex-col gap-3 text-center max-w-[700px]">
               <h2
                 className="font-tungsten uppercase leading-[1.05]"
                 style={{ fontSize: 'clamp(36px, 4vw, 48px)', color: 'var(--cs-text-head)' }}
               >
-                Kill Feed
+                Scoreboard
               </h2>
               <p
                 className="font-noto leading-[1.4] tracking-[-0.04em]"
-                style={{ fontSize: 'clamp(16px, 1.8vw, 24px)', color: 'var(--cs-text-mute)' }}
+                style={{ fontSize: 'clamp(14px, 1.4vw, 18px)', color: 'var(--cs-text-mute)' }}
               >
-                When a team is down to the last player we focus on them alone — a dramatic
-                clutch view that keeps commentary and viewer energy in sync.
+                The main scoreboard HUD gives the viewer info for in-game time, an overview of
+                teams and players at a high level, and time left in the Buy Phase.
               </p>
+            </div>
+            {/* Image */}
+            <div className="rounded-[16px] overflow-hidden w-full" style={{ cursor: 'zoom-in' }} onClick={() => openLightbox(imgScoreboard)}>
+              <img
+                src={imgScoreboard}
+                alt="Main scoreboard"
+                className="w-full object-cover"
+                loading="lazy"
+                draggable={false}
+              />
             </div>
           </div>
         </section>
 
-        {/* ── 6. Round Info ────────────────────────────────────────────── */}
-        <section className="w-full px-4 py-[clamp(40px,6vw,80px)]" style={{ backgroundColor: 'var(--cs-bg-dark)' }}>
-          <div className="flex flex-col gap-8 max-w-[1888px] mx-auto" data-animate>
-            {/* First round-info view */}
-            <div className="rounded-[16px] overflow-hidden">
-              <img
-                src={imgRoundInfo}
-                alt="Round info panel"
-                className="w-full object-cover"
-                data-lightbox
-                loading="lazy"
-                draggable={false}
-                style={{ cursor: 'zoom-in' }}
-                onClick={() => openLightbox(imgRoundInfo)}
-              />
+        {/* ── 5. K/D/A + Round Ceremonies — two columns ─────────────────── */}
+        <section
+          className="w-full px-[clamp(24px,4vw,40px)] py-[clamp(40px,6vw,80px)]"
+          style={{ backgroundColor: 'var(--cs-bg-dark)' }}
+        >
+          <div className="flex flex-col md:flex-row gap-6 max-w-[1440px] mx-auto" data-animate>
+
+            {/* Left: K/D/A stats */}
+            <div className="flex-1 flex flex-col gap-6">
+              <div className="rounded-[16px] overflow-hidden" style={{ cursor: 'zoom-in' }} onClick={() => openLightbox(imgKDA)}>
+                <img
+                  src={imgKDA}
+                  alt="Player K/D/A stats"
+                  className="w-full object-cover"
+                  loading="lazy"
+                  draggable={false}
+                />
+              </div>
+              <div className="flex flex-col gap-3">
+                <h2
+                  className="font-tungsten uppercase leading-[1.05]"
+                  style={{ fontSize: 'clamp(28px, 3vw, 40px)', color: 'var(--cs-text-head)' }}
+                >
+                  K/D/A
+                </h2>
+                <p
+                  className="font-noto leading-[1.4] tracking-[-0.04em]"
+                  style={{ fontSize: 'clamp(13px, 1.2vw, 16px)', color: 'var(--cs-text-mute)' }}
+                >
+                  K/D/A is shown between rounds and during timeouts — allowing viewers to build
+                  a picture of who is performing, and allowing casters to analyse accordingly.
+                </p>
+              </div>
             </div>
-            {/* Second round-info view */}
-            <div className="rounded-[16px] overflow-hidden">
-              <img
-                src={imgRoundInfo2}
-                alt="Round info panel — alternate view"
-                className="w-full object-cover"
-                data-lightbox
-                loading="lazy"
-                draggable={false}
-                style={{ cursor: 'zoom-in' }}
-                onClick={() => openLightbox(imgRoundInfo2)}
-              />
+
+            {/* Right: Round Ceremonies */}
+            <div className="flex-1 flex flex-col gap-6">
+              <div className="flex flex-col gap-4">
+                <div className="rounded-[16px] overflow-hidden" style={{ cursor: 'zoom-in' }} onClick={() => openLightbox(imgClutch)}>
+                  <img
+                    src={imgClutch}
+                    alt="Round Ceremonies — CLUTCH artwork"
+                    className="w-full object-cover"
+                    loading="lazy"
+                    draggable={false}
+                  />
+                </div>
+                <div className="rounded-[8px] overflow-hidden" style={{ cursor: 'zoom-in' }} onClick={() => openLightbox(imgCeremony)}>
+                  <img
+                    src={imgCeremony}
+                    alt="Red Bull CLUTCH ceremony banner"
+                    className="w-full object-cover"
+                    loading="lazy"
+                    draggable={false}
+                  />
+                </div>
+              </div>
+              <div className="flex flex-col gap-3">
+                <h2
+                  className="font-tungsten uppercase leading-[1.05]"
+                  style={{ fontSize: 'clamp(28px, 3vw, 40px)', color: 'var(--cs-text-head)' }}
+                >
+                  Round Ceremonies
+                </h2>
+                <p
+                  className="font-noto leading-[1.4] tracking-[-0.04em]"
+                  style={{ fontSize: 'clamp(13px, 1.2vw, 16px)', color: 'var(--cs-text-mute)' }}
+                >
+                  The HUD can also display ceremony events during rounds — things like clutch
+                  plays, first bloods, and ace's — so the team and casters can display custom
+                  dramatic visuals that elevate standout moments.
+                </p>
+              </div>
             </div>
-            {/* Caption */}
-            <div className="max-w-[800px] mx-auto flex flex-col gap-4 text-center">
-              <h2
-                className="font-tungsten uppercase leading-[1.05]"
-                style={{ fontSize: 'clamp(36px, 4vw, 48px)', color: 'var(--cs-text-head)' }}
-              >
-                Round Info
-              </h2>
-              <p
-                className="font-noto leading-[1.4] tracking-[-0.04em]"
-                style={{ fontSize: 'clamp(16px, 1.8vw, 24px)', color: 'var(--cs-text-mute)' }}
-              >
-                Round-over-round information — round number, victor, and method — displayed
-                cleanly during every Buy Phase so viewers never lose track of momentum.
-              </p>
-            </div>
+
           </div>
         </section>
 
-        {/* ── 7. Buy Phase ─────────────────────────────────────────────── */}
+        {/* ── 6. Round Info — image then caption ────────────────────────── */}
         <HudSection
           background="var(--cs-bg-dark)"
-          image={imgKDA}
-          imageAlt="K/D/A and Buy Phase stats"
-          title="Buy Phase"
-          body="K/D/A and economic breakdowns surface between rounds and during timeouts, letting casters analyse team strategy with real data."
+          image={imgRoundInfo}
+          imageAlt="Round info tracker"
+          title="Round Info"
+          body="When rounds end, the HUD surfaces the current scoring for the Buy Phase."
           openLightbox={openLightbox}
         />
 
-        {/* ── 8. Player Cards ───────────────────────────────────────────── */}
-        <section className="w-full px-4 py-[clamp(40px,6vw,80px)]" style={{ backgroundColor: 'var(--cs-bg-dark)' }}>
-          <div className="flex flex-col gap-8 max-w-[1888px] mx-auto" data-animate>
-            {/* Player stats grid — full 10-player layout */}
-            <div className="rounded-[16px] overflow-hidden max-w-[900px] mx-auto w-full">
-              <img
-                src={imgPlayerCards}
-                alt="Player stats grid"
-                className="w-full object-contain"
-                data-lightbox
-                loading="lazy"
-                draggable={false}
-                style={{ cursor: 'zoom-in' }}
-                onClick={() => openLightbox(imgPlayerCards)}
-              />
-            </div>
-            {/* Individual player card component detail */}
-            <div className="flex justify-center">
-              <img
-                src={imgPlayerCardSm}
-                alt="Individual player card component"
-                className="rounded-[8px] w-full"
-                style={{ maxWidth: 694 }}
-                loading="lazy"
-                draggable={false}
-                onClick={() => openLightbox(imgPlayerCardSm)}
-              />
-            </div>
-            {/* Caption */}
-            <div className="max-w-[800px] mx-auto flex flex-col gap-4 text-center">
+        {/* ── 7. Buy Phase — image then caption ─────────────────────────── */}
+        <HudSection
+          background="var(--cs-bg-dark)"
+          image={imgBuyPhase}
+          imageAlt="Buy phase player loadout table"
+          title="Buy Phase"
+          body="All of player loadout information is shown during a Buy Phase — including abilities, weapons, and economy — allowing casters to break down team strategy in real time."
+          openLightbox={openLightbox}
+        />
+
+        {/* ── 8. Player Cards — full-bleed clean art + card overlay ────── */}
+        <section className="relative w-full overflow-hidden" style={{ minHeight: '70vh' }}>
+          {/* Clean agent / fire art background */}
+          <div className="absolute inset-0">
+            <img
+              src={imgPlayerCardsBg}
+              alt=""
+              aria-hidden
+              className="w-full h-full object-cover"
+              draggable={false}
+            />
+            <div className="absolute inset-0" style={{ backgroundColor: 'rgba(0,0,0,0.45)' }} />
+          </div>
+
+          {/* Foreground */}
+          <div
+            className="relative z-10 flex flex-col items-center gap-8 px-[clamp(24px,6vw,80px)] py-[clamp(60px,8vw,120px)]"
+            data-animate
+          >
+            <img
+              src={imgPlayerCardSm}
+              alt="Player card component"
+              className="rounded-[8px] w-full"
+              style={{ maxWidth: 694, cursor: 'zoom-in' }}
+              loading="lazy"
+              draggable={false}
+              onClick={() => openLightbox(imgPlayerCardSm)}
+            />
+            <div className="flex flex-col gap-4 text-center max-w-[800px]">
               <h2
                 className="font-tungsten uppercase leading-[1.05]"
                 style={{ fontSize: 'clamp(36px, 4vw, 48px)', color: 'var(--cs-text-head)' }}
@@ -408,7 +406,7 @@ export default function CaseStudyPage() {
               </h2>
               <p
                 className="font-noto leading-[1.4] tracking-[-0.04em]"
-                style={{ fontSize: 'clamp(16px, 1.8vw, 24px)', color: 'var(--cs-text-mute)' }}
+                style={{ fontSize: 'clamp(16px, 1.8vw, 24px)', color: 'var(--cs-text-head)' }}
               >
                 These are one of the most important pieces of information we show. All
                 player data on one card — each element engineered to handle several
@@ -420,7 +418,6 @@ export default function CaseStudyPage() {
 
         {/* ── 9. Results — full-bleed dark photo ───────────────────────── */}
         <section className="relative w-full overflow-hidden" style={{ minHeight: '60vh' }}>
-          {/* Background */}
           <div className="absolute inset-0">
             <img
               src={imgResults}
@@ -429,10 +426,8 @@ export default function CaseStudyPage() {
               className="w-full h-full object-cover"
               draggable={false}
             />
-            <div className="absolute inset-0" style={{ backgroundColor: 'rgba(0,0,0,0.78)' }} />
+            <div className="absolute inset-0" style={{ backgroundColor: 'rgba(0,0,0,0.95)' }} />
           </div>
-
-          {/* Content */}
           <div
             className="relative z-10 flex flex-col gap-6 max-w-[1000px] mx-auto px-[clamp(24px,6vw,80px)] py-[clamp(60px,8vw,120px)]"
             data-animate
@@ -474,16 +469,13 @@ export default function CaseStudyPage() {
             className="font-noto leading-[1.4] tracking-[-0.04em] text-center"
             style={{ fontSize: 'clamp(20px, 2vw, 32px)', color: 'var(--cs-text-head)' }}
           >
-            Get in touch
+            Get in Touch
           </p>
           <div className="flex flex-col sm:flex-row gap-3 w-full max-w-[600px]">
             <a
               href="mailto:carlfiler@me.com"
               className="flex-1 flex items-center justify-center gap-2 font-inter font-semibold text-[14px] tracking-[-0.02em] py-3 px-4 rounded-[8px] no-underline transition-all duration-150 ease-out active:scale-[0.96] hover:bg-white/10"
-              style={{
-                color: 'var(--cs-text-head)',
-                border: '1px solid rgba(255,255,255,0.1)',
-              }}
+              style={{ color: 'var(--cs-text-head)', border: '1px solid rgba(255,255,255,0.1)' }}
             >
               <img src="/images/icon-mail.svg" alt="" className="w-5 h-5 shrink-0" style={{ filter: 'brightness(0) invert(1)' }} />
               carlfiler@me.com
@@ -493,10 +485,7 @@ export default function CaseStudyPage() {
               target="_blank"
               rel="noopener noreferrer"
               className="flex-1 flex items-center justify-center gap-2 font-inter font-semibold text-[14px] tracking-[-0.02em] py-3 px-4 rounded-[8px] no-underline transition-all duration-150 ease-out active:scale-[0.96] hover:bg-white/10"
-              style={{
-                color: 'var(--cs-text-head)',
-                border: '1px solid rgba(255,255,255,0.1)',
-              }}
+              style={{ color: 'var(--cs-text-head)', border: '1px solid rgba(255,255,255,0.1)' }}
             >
               <img src="/images/icon-linkedin.svg" alt="" className="w-5 h-5 shrink-0" style={{ filter: 'brightness(0) invert(1)' }} />
               LinkedIn
@@ -509,7 +498,7 @@ export default function CaseStudyPage() {
   )
 }
 
-// ── Reusable HUD showcase section ─────────────────────────────────────────
+// ── Reusable HUD section: image first, caption below ──────────────────────
 interface HudSectionProps {
   background: string
   image: string
@@ -521,22 +510,17 @@ interface HudSectionProps {
 
 function HudSection({ background, image, imageAlt, title, body, openLightbox }: HudSectionProps) {
   return (
-    <section className="w-full px-4 py-[clamp(40px,6vw,80px)]" style={{ backgroundColor: background }}>
-      <div className="flex flex-col gap-8 max-w-[1888px] mx-auto" data-animate>
-        {/* HUD screenshot */}
-        <div className="rounded-[16px] overflow-hidden">
+    <section className="w-full px-[clamp(24px,4vw,40px)] py-[clamp(40px,6vw,80px)]" style={{ backgroundColor: background }}>
+      <div className="flex flex-col gap-8 max-w-[1440px] mx-auto" data-animate>
+        <div className="rounded-[16px] overflow-hidden" style={{ cursor: 'zoom-in' }} onClick={() => openLightbox(image)}>
           <img
             src={image}
             alt={imageAlt}
             className="w-full object-cover"
-            data-lightbox
             loading="lazy"
             draggable={false}
-            onClick={() => openLightbox(image)}
           />
         </div>
-
-        {/* Caption */}
         <div className="max-w-[800px] mx-auto flex flex-col gap-4 text-center">
           <h2
             className="font-tungsten uppercase leading-[1.05]"
@@ -546,7 +530,7 @@ function HudSection({ background, image, imageAlt, title, body, openLightbox }: 
           </h2>
           <p
             className="font-noto leading-[1.4] tracking-[-0.04em]"
-            style={{ fontSize: 'clamp(16px, 1.8vw, 24px)', color: 'var(--cs-text-mute)' }}
+            style={{ fontSize: 'clamp(14px, 1.4vw, 18px)', color: 'var(--cs-text-mute)' }}
           >
             {body}
           </p>
