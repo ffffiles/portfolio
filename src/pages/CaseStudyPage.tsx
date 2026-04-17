@@ -496,10 +496,7 @@ export default function CaseStudyPage() {
                 rel="noopener noreferrer"
                 style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '12px 16px 12px 12px', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 8, textDecoration: 'none', color: '#fefefe', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: 14, letterSpacing: '-0.28px', whiteSpace: 'nowrap' }}
               >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
-                  <rect width="24" height="24" rx="4" fill="white" />
-                  <path d="M6.5 9H8.5V17H6.5V9ZM7.5 8C6.95 8 6.5 7.55 6.5 7C6.5 6.45 6.95 6 7.5 6C8.05 6 8.5 6.45 8.5 7C8.5 7.55 8.05 8 7.5 8ZM10 9H12V9.85C12.35 9.32 13.05 9 13.9 9C15.6 9 17 10.35 17 12.5V17H15V12.75C15 11.65 14.4 11 13.5 11C12.6 11 12 11.65 12 12.75V17H10V9Z" fill="#0A66C2" />
-                </svg>
+                <img src="/images/icon-linkedin.svg" alt="" width="24" height="24" style={{ flexShrink: 0 }} />
                 LinkedIn
               </a>
             </div>
