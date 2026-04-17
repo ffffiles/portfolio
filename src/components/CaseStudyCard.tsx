@@ -23,10 +23,10 @@ export default function CaseStudyCard({ study }: Props) {
         'flex flex-row items-center gap-6 p-1 rounded-[12px] w-full sm:w-[calc(50%-4px)]',
         'bg-[var(--surface-white)]',
         study.hasPage
-          ? 'cursor-pointer transition-shadow duration-150 hover:shadow-[0_2px_12px_rgba(0,0,0,0.08)] active:scale-[0.99] transition-transform'
+          ? 'cursor-pointer transition-[box-shadow,transform] duration-150 ease-out hover:shadow-[0_2px_12px_rgba(0,0,0,0.10)] active:scale-[0.96]'
           : '',
       ].join(' ')}
-      style={{ border: '1px solid var(--surface-elevation)' }}
+      style={{ boxShadow: '0 0 0 1px var(--surface-elevation)' }}
     >
       {/* Thumbnail */}
       <div
