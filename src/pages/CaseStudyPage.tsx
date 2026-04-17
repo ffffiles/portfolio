@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useCallback } from 'react'
+import React, { useEffect, useRef, useState, useCallback } from 'react'
 import { useTransitionNavigate } from '../context/TransitionContext'
 
 function useIsMobile(breakpoint = 768) {
@@ -11,7 +11,7 @@ function useIsMobile(breakpoint = 768) {
   return isMobile
 }
 
-// ── Assets (fresh from Figma) ──────────────────────────────────────────────
+// ── Assets ────────────────────────────────────────────────────────────────
 const imgHeroArt    = '/images/cs-hero-art.webp'
 const imgScoreboard = '/images/cs-scoreboard.webp'
 const imgKDA        = '/images/cs-kda.webp'
@@ -21,6 +21,12 @@ const imgBuyPhase   = '/images/cs-buyphase.webp'
 const imgImpact     = '/images/cs-impact.webp'
 const imgPlayerCard = '/images/cs-player-card.webp'
 
+// ── Hoisted static styles ─────────────────────────────────────────────────
+const sH2: React.CSSProperties = { fontSize: 'clamp(28px, 4vw, 48px)', color: '#fefefe', textTransform: 'uppercase', lineHeight: 1.1, margin: 0 }
+const sBody: React.CSSProperties = { fontSize: 'clamp(14px, 1.4vw, 24px)', color: '#a2a590', letterSpacing: '-0.96px', lineHeight: 1.4, margin: 0 }
+const sBodySm: React.CSSProperties = { fontSize: 'clamp(14px, 1.2vw, 24px)', color: '#a2a590', letterSpacing: '-0.96px', lineHeight: 1.4, margin: 0 }
+const sImgFill: React.CSSProperties = { position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', pointerEvents: 'none' }
+const sImgFillTop: React.CSSProperties = { position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', pointerEvents: 'none' }
 
 export default function CaseStudyPage() {
   const transitionTo  = useTransitionNavigate()
@@ -257,17 +263,17 @@ export default function CaseStudyPage() {
             <img
               src={imgScoreboard}
               alt="Valorant scoreboard HUD"
-              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', pointerEvents: 'none' }}
+              style={sImgFill}
               loading="lazy"
               draggable={false}
               onClick={() => openLightbox(imgScoreboard)}
             />
             {/* Caption — centered, 80px from top */}
             <div style={{ position: 'absolute', top: isMobile ? 16 : 80, left: '50%', transform: 'translateX(-50%)', width: 'min(800px, calc(100% - 48px))', textAlign: 'center', display: 'flex', flexDirection: 'column', gap: 16 }}>
-              <h2 className="font-tungsten" style={{ fontSize: 'clamp(28px, 4vw, 48px)' as string, color: '#fefefe', textTransform: 'uppercase', lineHeight: 1.1, margin: 0 }}>
+              <h2 className="font-tungsten" style={sH2}>
                 Scoreboard
               </h2>
-              <p className="font-noto" style={{ fontSize: 'clamp(14px, 1.4vw, 24px)', color: '#a2a590', letterSpacing: '-0.96px', lineHeight: 1.4, margin: 0 }}>
+              <p className="font-noto" style={sBody}>
                 The main scoreboard seamlessly integrates with the in-game clock, an example of how we were able to build around (and with) game information and animations.
               </p>
             </div>
@@ -287,16 +293,16 @@ export default function CaseStudyPage() {
             <img
               src={imgKDA}
               alt="K/D/A player stats"
-              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', pointerEvents: 'none' }}
+              style={sImgFillTop}
               loading="lazy"
               draggable={false}
             />
             {/* Caption — bottom-right area */}
             <div style={{ position: 'absolute', bottom: 0, right: 0, width: 'min(800px, 100%)', padding: isMobile ? '0 24px 40px' : '0 68px 80px', textAlign: 'center', display: 'flex', flexDirection: 'column', gap: 16 }}>
-              <h2 className="font-tungsten" style={{ fontSize: 'clamp(28px, 4vw, 48px)' as string, color: '#fefefe', textTransform: 'uppercase', lineHeight: 1.1, margin: 0 }}>
+              <h2 className="font-tungsten" style={sH2}>
                 K/D/A
               </h2>
-              <p className="font-noto" style={{ fontSize: 'clamp(14px, 1.2vw, 24px)', color: '#a2a590', letterSpacing: '-0.96px', lineHeight: 1.4, margin: 0 }}>
+              <p className="font-noto" style={sBodySm}>
                 K/D/A is shown between rounds and during timeouts.
               </p>
             </div>
@@ -311,16 +317,16 @@ export default function CaseStudyPage() {
             <img
               src={imgCeremonies}
               alt="Round Ceremonies — Red Bull CLUTCH"
-              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', pointerEvents: 'none' }}
+              style={sImgFillTop}
               loading="lazy"
               draggable={false}
             />
             {/* Caption — bottom-left area */}
             <div style={{ position: 'absolute', bottom: 0, left: 0, width: 'min(800px, 100%)', padding: isMobile ? '0 24px 40px' : '0 68px 80px', textAlign: 'center', display: 'flex', flexDirection: 'column', gap: 16 }}>
-              <h2 className="font-tungsten" style={{ fontSize: 'clamp(28px, 4vw, 48px)' as string, color: '#fefefe', textTransform: 'uppercase', lineHeight: 1.1, margin: 0 }}>
+              <h2 className="font-tungsten" style={sH2}>
                 Round Ceremonies
               </h2>
-              <p className="font-noto" style={{ fontSize: 'clamp(14px, 1.2vw, 24px)', color: '#a2a590', letterSpacing: '-0.96px', lineHeight: 1.4, margin: 0 }}>
+              <p className="font-noto" style={sBodySm}>
                 The winner of each round earns a graphic that changes based on the win conditions. Clutch, Thrifty, and Flawless each get their own ceremonies, as well as pistol round wins, which can display a teams esports bundle artwork.
               </p>
             </div>
@@ -339,16 +345,16 @@ export default function CaseStudyPage() {
             <img
               src={imgRoundInfo}
               alt="Round info tracker — TL vs DRX"
-              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', pointerEvents: 'none' }}
+              style={sImgFill}
               loading="lazy"
               draggable={false}
             />
             {/* Caption — bottom-center */}
             <div style={{ position: 'absolute', bottom: 0, left: '50%', transform: 'translateX(-50%)', width: 'min(800px, calc(100% - 48px))', padding: isMobile ? '0 0 20px' : '0 0 80px', textAlign: 'center', display: 'flex', flexDirection: 'column', gap: isMobile ? 8 : 16 }}>
-              <h2 className="font-tungsten" style={{ fontSize: 'clamp(28px, 4vw, 48px)' as string, color: '#fefefe', textTransform: 'uppercase', lineHeight: 1.1, margin: 0 }}>
+              <h2 className="font-tungsten" style={sH2}>
                 Round Info
               </h2>
-              <p className="font-noto" style={{ fontSize: 'clamp(14px, 1.2vw, 24px)', color: '#a2a590', letterSpacing: '-0.96px', lineHeight: 1.4, margin: 0 }}>
+              <p className="font-noto" style={sBodySm}>
                 Which round, who won, and how is displayed during the Buy Phase.
               </p>
             </div>
@@ -366,16 +372,16 @@ export default function CaseStudyPage() {
             <img
               src={imgBuyPhase}
               alt="Buy phase player loadout table"
-              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', pointerEvents: 'none' }}
+              style={sImgFill}
               loading="lazy"
               draggable={false}
             />
             {/* Caption — bottom-center */}
             <div style={{ position: 'absolute', bottom: 0, left: '50%', transform: 'translateX(-50%)', width: 'min(800px, calc(100% - 48px))', padding: isMobile ? '0 0 20px' : '0 0 80px', textAlign: 'center', display: 'flex', flexDirection: 'column', gap: isMobile ? 8 : 16 }}>
-              <h2 className="font-tungsten" style={{ fontSize: 'clamp(28px, 4vw, 48px)' as string, color: '#fefefe', textTransform: 'uppercase', lineHeight: 1.1, margin: 0 }}>
+              <h2 className="font-tungsten" style={sH2}>
                 Buy Phase
               </h2>
-              <p className="font-noto" style={{ fontSize: 'clamp(14px, 1.2vw, 24px)', color: '#a2a590', letterSpacing: '-0.96px', lineHeight: 1.4, margin: 0 }}>
+              <p className="font-noto" style={sBodySm}>
                 All of a players individual information — economy, utility, K/D/A, weapon choice, etc — displayed in a head-to-head comparison at the top of each round.
               </p>
             </div>
@@ -393,7 +399,7 @@ export default function CaseStudyPage() {
             src={imgImpact}
             alt=""
             aria-hidden
-            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', pointerEvents: 'none' }}
+            style={sImgFill}
             loading="lazy"
             draggable={false}
           />
@@ -421,7 +427,7 @@ export default function CaseStudyPage() {
             }
             data-animate
           >
-            <h2 className="font-tungsten" style={{ fontSize: 'clamp(28px, 4vw, 48px)' as string, color: '#fefefe', textTransform: 'uppercase', lineHeight: 1.1, margin: 0 }}>
+            <h2 className="font-tungsten" style={sH2}>
               Player Cards
             </h2>
             <p className="font-noto" style={{ fontSize: 'clamp(14px, 1.5vw, 24px)', color: '#fefefe', letterSpacing: '-0.96px', lineHeight: 1.4, margin: 0 }}>
@@ -453,7 +459,7 @@ export default function CaseStudyPage() {
             }
             data-animate
           >
-            <h2 className="font-tungsten" style={{ fontSize: 'clamp(28px, 4vw, 48px)' as string, color: '#fefefe', textTransform: 'uppercase', lineHeight: 1.1, margin: 0 }}>
+            <h2 className="font-tungsten" style={sH2}>
               Results
             </h2>
             <p className="font-noto" style={{ fontSize: isMobile ? 'clamp(18px, 4vw, 24px)' : 32, color: '#fefefe', letterSpacing: '-1.28px', lineHeight: 1.4, margin: 0 }}>
