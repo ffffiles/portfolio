@@ -20,7 +20,7 @@ export default function CaseStudyCard({ study }: Props) {
       onKeyDown={study.hasPage ? (e) => { if (e.key === 'Enter' || e.key === ' ') handleClick() } : undefined}
       aria-label={study.hasPage ? `View ${study.title}` : undefined}
       className={[
-        'flex flex-row items-center gap-6 p-1 rounded-[12px] w-full sm:w-[calc(50%-4px)]',
+        'flex flex-row items-center gap-6 p-1 rounded-[12px] w-[80vw] flex-shrink-0 snap-start sm:w-[calc(50%-4px)] sm:flex-shrink sm:snap-align-none',
         'bg-[var(--surface-white)]',
         study.hasPage
           ? 'cursor-pointer transition-shadow duration-150 hover:shadow-[0_2px_12px_rgba(0,0,0,0.08)] active:scale-[0.99] transition-transform'

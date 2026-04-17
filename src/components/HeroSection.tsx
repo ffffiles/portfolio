@@ -89,8 +89,8 @@ export default function HeroSection({
             </div>
           </div>
 
-          {/* Case study list — 2-column grid */}
-          <div className="flex flex-wrap gap-2 w-full pointer-events-auto" data-entrance="3">
+          {/* Case study list — horizontal scroll on mobile, 2-col grid on sm+ */}
+          <div className="flex gap-2 w-full pointer-events-auto overflow-x-auto sm:flex-wrap sm:overflow-visible snap-x snap-mandatory sm:snap-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" data-entrance="3">
             {studies.map(s => (
               <CaseStudyCard key={s.id} study={s} />
             ))}
