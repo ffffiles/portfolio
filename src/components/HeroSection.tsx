@@ -56,7 +56,7 @@ export default function HeroSection({
 
       {/* Centered content */}
       <div className="absolute inset-0 flex items-center justify-center overflow-y-auto py-20 pointer-events-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden overscroll-contain">
-        <div className="flex flex-col items-center w-[min(820px,90vw)] gap-[72px] pointer-events-none my-auto shrink-0">
+        <div className="flex flex-col items-center w-[min(820px,90vw)] gap-10 sm:gap-[72px] pointer-events-none my-auto shrink-0">
 
           {/* Headline + contact pills */}
           <div className="flex flex-col items-center gap-[24px] w-full" data-entrance="1">

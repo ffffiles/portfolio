@@ -26,6 +26,7 @@ const sH2: React.CSSProperties = { fontSize: 'clamp(28px, 4vw, 48px)', color: '#
 const sBody: React.CSSProperties = { fontSize: 'clamp(14px, 1.4vw, 24px)', color: '#a2a590', letterSpacing: '-0.96px', lineHeight: 1.4, margin: 0 }
 const sBodySm: React.CSSProperties = { fontSize: 'clamp(14px, 1.2vw, 24px)', color: '#a2a590', letterSpacing: '-0.96px', lineHeight: 1.4, margin: 0 }
 const sImgFill: React.CSSProperties = { position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', pointerEvents: 'none' }
+const sImgContain: React.CSSProperties = { position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'center', pointerEvents: 'none' }
 const sImgFillTop: React.CSSProperties = { position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', pointerEvents: 'none' }
 
 export default function CaseStudyPage() {
@@ -190,9 +191,9 @@ export default function CaseStudyPage() {
         </section>
 
         {/* ── 2. THE SOLUTION ──────────────────────────────────────────────── */}
-        <section style={{ backgroundColor: hudDark ? '#000000' : '#ffffff', minHeight: 500, display: 'flex', alignItems: 'center', transition: 'background-color 0.8s ease' }}>
+        <section style={{ backgroundColor: hudDark ? '#000000' : '#ffffff', display: 'flex', alignItems: 'center', transition: 'background-color 0.8s ease' }}>
           <div
-            style={{ maxWidth: 1000, width: '100%', margin: '0 auto', padding: 'clamp(60px,8vw,100px) clamp(24px,4vw,40px)', display: 'flex', flexDirection: 'column', gap: 16 }}
+            style={{ maxWidth: 1000, width: '100%', margin: '0 auto', padding: 'clamp(40px,6vw,80px) clamp(24px,4vw,40px)', display: 'flex', flexDirection: 'column', gap: 16 }}
             data-animate
           >
             <h2 className="font-tungsten" style={{ fontSize: 'clamp(28px, 4vw, 48px)' as string, color: hudDark ? '#fefefe' : '#171717', textTransform: 'uppercase', lineHeight: 1.1, margin: 0, transition: 'color 0.8s ease' }}>
@@ -263,7 +264,7 @@ export default function CaseStudyPage() {
             <img
               src={imgScoreboard}
               alt="Valorant scoreboard HUD"
-              style={sImgFill}
+              style={isMobile ? sImgContain : sImgFill}
               loading="lazy"
               draggable={false}
               onClick={() => openLightbox(imgScoreboard)}
@@ -345,7 +346,7 @@ export default function CaseStudyPage() {
             <img
               src={imgRoundInfo}
               alt="Round info tracker — TL vs DRX"
-              style={sImgFill}
+              style={isMobile ? sImgContain : sImgFill}
               loading="lazy"
               draggable={false}
             />
@@ -372,7 +373,7 @@ export default function CaseStudyPage() {
             <img
               src={imgBuyPhase}
               alt="Buy phase player loadout table"
-              style={sImgFill}
+              style={isMobile ? sImgContain : sImgFill}
               loading="lazy"
               draggable={false}
             />
@@ -414,7 +415,7 @@ export default function CaseStudyPage() {
             <img
               src={imgPlayerCard}
               alt="Phoenix player card component"
-              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', pointerEvents: 'none' }}
+              style={isMobile ? sImgContain : { position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', pointerEvents: 'none' }}
               loading="lazy"
               draggable={false}
             />
@@ -472,7 +473,7 @@ export default function CaseStudyPage() {
         </section>
 
         {/* ── 10. FOOTER ───────────────────────────────────────────────────── */}
-        <section style={{ backgroundColor: '#111113', height: isMobile ? 'auto' : 800, minHeight: isMobile ? 400 : undefined, padding: isMobile ? '80px 24px' : 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <section style={{ backgroundColor: '#111113', height: isMobile ? 'auto' : 480, minHeight: isMobile ? 300 : undefined, padding: isMobile ? '60px 24px' : 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 24, width: isMobile ? 'min(300px, 100%)' : 300 }} data-animate>
             <p className="font-noto" style={{ fontSize: isMobile ? 'clamp(20px, 5vw, 28px)' : 32, color: '#fefefe', letterSpacing: '-1.28px', lineHeight: 1.4, margin: 0, textAlign: 'center' }}>
               Get in Touch
