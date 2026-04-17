@@ -473,7 +473,7 @@ export default function CaseStudyPage() {
 
         {/* ── 10. FOOTER ───────────────────────────────────────────────────── */}
         <section style={{ backgroundColor: '#111113', height: isMobile ? 'auto' : 800, minHeight: isMobile ? 400 : undefined, padding: isMobile ? '80px 24px' : 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 24, width: isMobile ? 'min(300px, 100%)' : 300 }} data-animate>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 24, width: 'min(480px, calc(100% - 48px))' }} data-animate>
             <p className="font-noto" style={{ fontSize: isMobile ? 'clamp(20px, 5vw, 28px)' : 32, color: '#fefefe', letterSpacing: '-1.28px', lineHeight: 1.4, margin: 0, textAlign: 'center' }}>
               Get in Touch
             </p>
@@ -481,7 +481,9 @@ export default function CaseStudyPage() {
               {/* Email */}
               <a
                 href="mailto:carlfiler@me.com"
-                style={{ flex: 1, display: 'flex', alignItems: 'center', gap: 8, padding: '12px 16px 12px 12px', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 8, textDecoration: 'none', color: '#fefefe', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: 14, letterSpacing: '-0.28px', whiteSpace: 'nowrap' }}
+                style={{ flex: 1, display: 'flex', alignItems: 'center', gap: 8, padding: '12px 16px 12px 12px', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 8, textDecoration: 'none', color: '#fefefe', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: 14, letterSpacing: '-0.28px', whiteSpace: 'nowrap', transition: 'border-color 0.15s ease, background-color 0.15s ease' }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)'; e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.05)' }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'; e.currentTarget.style.backgroundColor = '' }}
               >
                 <svg width="18" height="13" viewBox="0 0 18 13" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
                   <path d="M1 1L9 7.5L17 1" stroke="#fefefe" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -494,7 +496,9 @@ export default function CaseStudyPage() {
                 href="https://www.linkedin.com/in/carlfiler"
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '12px 16px 12px 12px', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 8, textDecoration: 'none', color: '#fefefe', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: 14, letterSpacing: '-0.28px', whiteSpace: 'nowrap' }}
+                style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '12px 16px 12px 12px', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 8, textDecoration: 'none', color: '#fefefe', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: 14, letterSpacing: '-0.28px', whiteSpace: 'nowrap', transition: 'border-color 0.15s ease, background-color 0.15s ease' }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)'; e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.05)' }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'; e.currentTarget.style.backgroundColor = '' }}
               >
                 <img src="/images/icon-linkedin.svg" alt="" width="24" height="24" style={{ flexShrink: 0, filter: 'brightness(0) invert(1)' }} />
                 LinkedIn
