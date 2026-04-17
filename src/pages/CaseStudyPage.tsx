@@ -496,7 +496,7 @@ export default function CaseStudyPage() {
                 rel="noopener noreferrer"
                 style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '12px 16px 12px 12px', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 8, textDecoration: 'none', color: '#fefefe', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: 14, letterSpacing: '-0.28px', whiteSpace: 'nowrap' }}
               >
-                <img src="/images/icon-linkedin.svg" alt="" width="24" height="24" style={{ flexShrink: 0 }} />
+                <img src="/images/icon-linkedin.svg" alt="" width="24" height="24" style={{ flexShrink: 0, filter: 'brightness(0) invert(1)' }} />
                 LinkedIn
               </a>
             </div>
