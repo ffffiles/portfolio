@@ -96,7 +96,9 @@ body.case-open,
 body.case-open * {
   cursor: auto !important;
 }
-body.case-open [data-lightbox] {
+body.case-open [data-lightbox],
+body.case-open a[href],
+body.case-open button {
   cursor: pointer !important;
 }
 body.case-open #pencil-cursor {
