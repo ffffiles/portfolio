@@ -257,7 +257,7 @@ export default function CaseStudyPage() {
         {/* Black, full-width image card, caption overlaid near top-center */}
         <section style={{ backgroundColor: '#000000', padding: '16px 16px 8px' }}>
           <div
-            style={{ position: 'relative', width: '100%', aspectRatio: '1920/978', maxHeight: 961, maxWidth: 1440, margin: '0 auto', borderRadius: 8, overflow: 'hidden', backgroundColor: '#111113' }}
+            style={{ position: 'relative', width: '100%', aspectRatio: isMobile ? '1 / 1' : '1920/978', maxHeight: 961, maxWidth: 1440, margin: '0 auto', borderRadius: 8, overflow: 'hidden', backgroundColor: '#111113' }}
             data-animate
           >
             <img
@@ -338,7 +338,7 @@ export default function CaseStudyPage() {
         {/* Black, single full-width card, caption centered near bottom */}
         <section style={{ backgroundColor: '#000000', padding: '8px 16px' }}>
           <div
-            style={{ position: 'relative', width: '100%', aspectRatio: '1920/978', maxHeight: 961, maxWidth: 1440, margin: '0 auto', borderRadius: 8, overflow: 'hidden', backgroundColor: '#111113', cursor: 'zoom-in' }}
+            style={{ position: 'relative', width: '100%', aspectRatio: isMobile ? '1 / 1' : '1920/978', maxHeight: 961, maxWidth: 1440, margin: '0 auto', borderRadius: 8, overflow: 'hidden', backgroundColor: '#111113', cursor: 'zoom-in' }}
             data-animate
             onClick={() => openLightbox(imgRoundInfo)}
           >
@@ -365,7 +365,7 @@ export default function CaseStudyPage() {
         {/* Black, single full-width card, caption centered near bottom */}
         <section style={{ backgroundColor: '#000000', padding: '8px 16px 16px' }}>
           <div
-            style={{ position: 'relative', width: '100%', aspectRatio: '1920/978', maxHeight: 961, maxWidth: 1440, margin: '0 auto', borderRadius: 8, overflow: 'hidden', backgroundColor: '#111113', cursor: 'zoom-in' }}
+            style={{ position: 'relative', width: '100%', aspectRatio: isMobile ? '1 / 1' : '1920/978', maxHeight: 961, maxWidth: 1440, margin: '0 auto', borderRadius: 8, overflow: 'hidden', backgroundColor: '#111113', cursor: 'zoom-in' }}
             data-animate
             onClick={() => openLightbox(imgBuyPhase)}
           >
@@ -406,7 +406,7 @@ export default function CaseStudyPage() {
           {/* Player card */}
           <div
             style={isMobile
-              ? { position: 'relative', marginTop: 60, width: 'min(694px, calc(100% - 48px))', aspectRatio: '694 / 200', cursor: 'zoom-in' }
+              ? { position: 'relative', marginTop: 60, width: 'min(694px, calc(100% - 48px))', aspectRatio: '1 / 1', cursor: 'zoom-in' }
               : { position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 694, height: 200, cursor: 'zoom-in' }
             }
             onClick={() => openLightbox(imgPlayerCard)}
