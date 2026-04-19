@@ -54,6 +54,34 @@ export default function HeroSection({
         </button>
       </div>
 
+      {/* Experiments — bottom center */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2 pointer-events-auto" data-entrance="4">
+        <span className="font-inter font-semibold text-[11px] leading-none tracking-[0.8px] uppercase text-[var(--surface-black)] opacity-40 whitespace-nowrap">
+          Experiments
+        </span>
+        <div className="w-px h-3 bg-[var(--surface-black)] opacity-20" />
+        <a
+          href="https://carlfiler.com/draw"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-1.5 bg-[var(--button-gray)] hover:bg-[var(--surface-elevation)] rounded-[4px] px-[10px] py-[6px] cursor-pointer no-underline transition-[background-color,transform] duration-150 ease-out active:scale-[0.96]"
+        >
+          <span className="font-inter font-semibold text-[13px] leading-none tracking-[-0.26px] text-[var(--surface-black)] whitespace-nowrap">
+            Draw
+          </span>
+        </a>
+        <a
+          href="https://carlfiler.com/caesar"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-1.5 bg-[var(--button-gray)] hover:bg-[var(--surface-elevation)] rounded-[4px] px-[10px] py-[6px] cursor-pointer no-underline transition-[background-color,transform] duration-150 ease-out active:scale-[0.96]"
+        >
+          <span className="font-inter font-semibold text-[13px] leading-none tracking-[-0.26px] text-[var(--surface-black)] whitespace-nowrap">
+            Caesar
+          </span>
+        </a>
+      </div>
+
       {/* Centered content */}
       <div className="absolute inset-0 flex items-center justify-center overflow-y-auto py-20 pointer-events-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden overscroll-contain">
         <div className="flex flex-col items-center w-[min(820px,90vw)] gap-10 sm:gap-[72px] pointer-events-none my-auto shrink-0">
