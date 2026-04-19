@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Caesar</title>
+  <!-- Preload critical assets so they arrive before first render -->
+  <link rel="preload" href="/caesar/assets/ForevsDemo-Medium-CbSquKP5.otf" as="font" type="font/otf" crossorigin>
+  <link rel="preload" href="/caesar/assets/ForevsDemo-Bold-BqduwOCQ.otf" as="font" type="font/otf" crossorigin>
+  <link rel="preload" href="/caesar/assets/consummation-C0z3RaAd.webp" as="image">
+  <link rel="preload" href="/caesar/assets/destruction-BIoTMi5K.webp" as="image">
+  <link rel="preload" href="/caesar/assets/desolation-X8DoYpBa.webp" as="image">
+  <link rel="preload" href="/caesar/assets/british-museum-bust-draco-Bw-PDQHR.glb" as="fetch" crossorigin>
+  <script type="module" crossorigin src="/caesar/assets/index-CGwbvQeA.js"></script>
+  <link rel="stylesheet" crossorigin href="/caesar/assets/index-qhzFvFmW.css">
+</head>
+<body>
+  <!-- Background painting layers (crossfade via CSS transitions) -->
+  <div id="bg-consummation" class="painting-bg is-active"></div>
+  <div id="bg-destruction" class="painting-bg"></div>
+  <div id="bg-desolation" class="painting-bg"></div>
+
+  <!-- Canvas layers -->
+  <canvas id="title-canvas"></canvas>
+  <canvas id="three-canvas"></canvas>
+  <canvas id="text-canvas"></canvas>
+
+  <!-- Credits shown only in section 4 -->
+  <div id="credits">
+    <div class="credits-section">
+      <p class="credits-label">Font</p>
+      <p class="credits-value">Forevs by Grilli Type</p>
+    </div>
+    <div class="credits-section">
+      <p class="credits-label">Art</p>
+      <div class="credits-value">
+        <p>Cole, Thomas (1836) <em>The Consummation of Empire</em> [Oil on canvas]</p>
+        <p>Cole, Thomas (1836) <em>Destruction</em> [Oil on canvas]</p>
+        <p>Cole, Thomas (1836) <em>Desolation</em> [Oil on canvas]</p>
+      </div>
+    </div>
+    <div class="credits-section">
+      <p class="credits-label">3D Scan</p>
+      <p class="credits-value">Bust of Julius Caesar at The British Museum, London<br>[Scanned by Scan the World]</p>
+    </div>
+  </div>
+
+  <!-- Pause button -->
+  <button id="pause-btn" class="paused" aria-label="Resume rotation">
+    <span class="btn-icon btn-icon--pause">&#9646;&#9646;</span>
+    <span class="btn-icon btn-icon--play">&#9654;</span>
+  </button>
+
+  <!-- Scroll spacer (height set by JS to 5×vh) -->
+  <div id="scroll-spacer"></div>
+
+</body>
+</html>
