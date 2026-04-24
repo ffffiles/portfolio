@@ -212,7 +212,6 @@
   const NUM_COPIES  = 4;    // boiling-line animation cel count
   const WIGGLE_FPS  = 8;    // hard-switches per second
   const WIGGLE_AMP  = 2.0;  // max px offset per point per copy
-  const BG_COLOR    = '#fbfbfb';
 
   // ── Fills canvas — separate layer drawn beneath all strokes ─
   const fillsCanvas = document.createElement('canvas');
@@ -266,7 +265,12 @@
     if (pts.length < 2) return;
     const ci = Math.floor(t * WIGGLE_FPS) % NUM_COPIES;
     ctx.save();
-    ctx.strokeStyle = stroke.color;
+    if (stroke.eraser) {
+      ctx.globalCompositeOperation = 'destination-out';
+      ctx.strokeStyle = 'rgba(0,0,0,1)';
+    } else {
+      ctx.strokeStyle = stroke.color;
+    }
     ctx.lineWidth   = stroke.width;
     ctx.lineCap     = 'round';
     ctx.lineJoin    = 'round';
@@ -333,8 +337,9 @@
     const pos      = getPos(e);
     const isEraser = activeTool === 'erase';
     activeStroke = {
-      color:  isEraser ? BG_COLOR : currentColor,
+      color:  isEraser ? null : currentColor,
       width:  isEraser ? ERASE_WIDTH : LINE_WIDTH,
+      eraser: isEraser,
       points: [makePoint(pos.x, pos.y)],
     };
   }
