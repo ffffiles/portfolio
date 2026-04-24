@@ -55,7 +55,8 @@ export default function HeroSection({
       </div>
 
       {/* Experiments — bottom center */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-auto" data-entrance="4">
+      <div className="absolute bottom-6 left-0 right-0 flex justify-center pointer-events-none" data-entrance="4">
+      <div className="flex flex-col items-center gap-2 pointer-events-auto">
         <span className="font-inter font-medium text-[12px] leading-none tracking-[-0.24px] text-[#777777] whitespace-nowrap">
           Experiments:
         </span>
@@ -81,6 +82,7 @@ export default function HeroSection({
             </span>
           </a>
         </div>
+      </div>
       </div>
 
       {/* Centered content */}
