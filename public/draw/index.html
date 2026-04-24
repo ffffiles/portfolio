@@ -218,6 +218,14 @@
   const fillsCanvas = document.createElement('canvas');
   const fillsCtx    = fillsCanvas.getContext('2d');
 
+  // ── State ──────────────────────────────────────────────────
+  let history      = [];   // {type:'stroke', stroke} | {type:'fill', prev, next}
+  let redoStack    = [];
+  let activeStroke = null;
+  let isDrawing    = false;
+  let currentColor = '#171717';
+  let activeTool   = 'draw'; // 'draw' | 'erase' | 'fill'
+
   // ── Canvas + fills sizing ──────────────────────────────────
   function resize() {
     const w = window.innerWidth;
@@ -240,14 +248,6 @@
   }
   resize();
   window.addEventListener('resize', resize);
-
-  // ── State ──────────────────────────────────────────────────
-  let history      = [];   // {type:'stroke', stroke} | {type:'fill', prev, next}
-  let redoStack    = [];
-  let activeStroke = null;
-  let isDrawing    = false;
-  let currentColor = '#171717';
-  let activeTool   = 'draw'; // 'draw' | 'erase' | 'fill'
 
   // ── Boiling line ───────────────────────────────────────────
   function makePoint(x, y) {
