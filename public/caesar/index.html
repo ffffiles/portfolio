@@ -11,13 +11,13 @@
   <link rel="preload" href="/caesar/assets/destruction-BIoTMi5K.webp" as="image">
   <link rel="preload" href="/caesar/assets/desolation-X8DoYpBa.webp" as="image">
   <link rel="preload" href="/caesar/assets/british-museum-bust-draco-Bw-PDQHR.glb" as="fetch" crossorigin>
-  <script type="module" crossorigin src="/caesar/assets/index-upL8AzOq.js"></script>
-  <link rel="stylesheet" crossorigin href="/caesar/assets/index-qhzFvFmW.css">
+  <script type="module" crossorigin src="/caesar/assets/index-U02G1Ig7.js"></script>
+  <link rel="stylesheet" crossorigin href="/caesar/assets/index-CTVVxI9J.css">
 </head>
 <body>
   <!-- Background painting layers (crossfade via CSS transitions) -->
-  <div id="bg-consummation" class="painting-bg is-active"></div>
-  <div id="bg-destruction" class="painting-bg"></div>
+  <div id="bg-destruction" class="painting-bg is-active"></div>
+  <div id="bg-consummation" class="painting-bg"></div>
   <div id="bg-desolation" class="painting-bg"></div>
 
   <!-- Canvas layers -->
@@ -53,6 +53,15 @@
 
   <!-- Scroll spacer (height set by JS to 5×vh) -->
   <div id="scroll-spacer"></div>
+
+  <!--
+    Invisible spans force the browser to load both font weights before
+    document.fonts.ready resolves — canvas-only fonts aren't loaded otherwise.
+  -->
+  <span aria-hidden="true" style="font-family:'Forevs Demo';font-weight:500;
+    visibility:hidden;position:absolute;left:-9999px;font-size:16px;">.</span>
+  <span aria-hidden="true" style="font-family:'Forevs Demo';font-weight:700;
+    visibility:hidden;position:absolute;left:-9999px;font-size:16px;">.</span>
 
 </body>
 </html>
