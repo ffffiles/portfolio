@@ -318,18 +318,23 @@
     const w = window.innerWidth;
     const h = window.innerHeight;
 
-    // Pass 1 — render strokes (+ eraser holes) onto strokesCanvas
+    // Pass 1 — draw strokes only (no eraser) onto strokesCanvas
     strokesCtx.clearRect(0, 0, w, h);
     for (const item of history) {
-      if (item.type === 'stroke') drawStroke(strokesCtx, item.stroke, t);
+      if (item.type === 'stroke' && !item.stroke.eraser) drawStroke(strokesCtx, item.stroke, t);
     }
-    if (activeStroke) drawStroke(strokesCtx, activeStroke, t);
+    if (activeStroke && !activeStroke.eraser) drawStroke(strokesCtx, activeStroke, t);
 
-    // Pass 2 — composite: fills → strokes → main
-    // Eraser holes in strokesCanvas are transparent, letting fills show through.
+    // Pass 2 — composite fills + strokes onto main canvas
     ctx.clearRect(0, 0, w, h);
     ctx.drawImage(fillsCanvas,   0, 0, w, h);
     ctx.drawImage(strokesCanvas, 0, 0, w, h);
+
+    // Pass 3 — eraser cuts through both fills and strokes on the main canvas
+    for (const item of history) {
+      if (item.type === 'stroke' && item.stroke.eraser) drawStroke(ctx, item.stroke, t);
+    }
+    if (activeStroke?.eraser) drawStroke(ctx, activeStroke, t);
 
     requestAnimationFrame(frame);
   }
