@@ -1,5 +1,7 @@
+import { useState } from 'react'
 import type { CaseStudy } from '../data/caseStudies'
 import CaseStudyCard from './CaseStudyCard'
+import ColorPicker from './ColorPicker'
 
 interface Props {
   studies: CaseStudy[]
@@ -12,37 +14,48 @@ interface Props {
   onClear: () => void
 }
 
-const COLORS = ['#171717', '#ffdd00', '#19d9ff']
-
 export default function HeroSection({
   studies,
   color, onColorChange,
   strokeCount, redoCount,
   onUndo, onRedo, onClear,
 }: Props) {
+  const [pickerOpen, setPickerOpen] = useState(false)
+
   return (
     <div className="fixed inset-0 z-10 pointer-events-none">
 
-      {/* Color palette — top left */}
-      <div
-        className="absolute top-6 left-6 flex items-center gap-[6px] bg-[var(--surface-white)] rounded-full px-2 py-[6px] pointer-events-auto"
-        style={{ boxShadow: '0px 2px 8px 0px rgba(0,0,0,0.05), 0px 0px 2px 0px rgba(0,0,0,0.12), 0px 4px 4px -4px rgba(0,0,0,0.1)' }}
-        data-entrance="4"
-      >
-        {COLORS.map(c => (
-          <button
-            key={c}
-            className={`swatch cursor-pointer ${color === c ? 'active' : ''}`}
-            data-color={c}
-            style={{ background: c }}
-            onClick={() => onColorChange(c)}
-            aria-label={c}
-          />
-        ))}
-      </div>
+      {/* Controls — top right (color swatch + undo/redo/delete) */}
+      <div className="absolute top-6 right-6 flex items-center pointer-events-auto relative" data-entrance="4">
 
-      {/* Controls — top right */}
-      <div className="absolute top-6 right-6 flex items-center pointer-events-auto" data-entrance="4">
+        {/* Color swatch dot — opens picker */}
+        <div className="relative">
+          <button
+            className="ctrl-btn cursor-pointer flex items-center justify-center"
+            onClick={() => setPickerOpen(v => !v)}
+            aria-label="Pick color"
+            aria-expanded={pickerOpen}
+          >
+            <div
+              className="w-6 h-6 rounded-full border-2 flex items-center justify-center"
+              style={{ borderColor: color }}
+            >
+              <div
+                className="rounded-full"
+                style={{ width: '17.8px', height: '17.8px', background: color }}
+              />
+            </div>
+          </button>
+
+          {pickerOpen && (
+            <ColorPicker
+              color={color}
+              onChange={onColorChange}
+              onClose={() => setPickerOpen(false)}
+            />
+          )}
+        </div>
+
         <button className="ctrl-btn cursor-pointer" onClick={onUndo} disabled={strokeCount === 0} aria-label="Undo">
           <span className="material-icons">undo</span>
         </button>

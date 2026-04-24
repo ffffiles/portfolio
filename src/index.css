@@ -132,30 +132,6 @@ body.case-open #pencil-cursor {
 [data-entrance="3"] { animation-delay: 0.2s; }
 [data-entrance="4"] { animation-delay: 0.3s; }
 
-/* ── Color swatch ────────────────────────────────────────────────────────── */
-.swatch {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  border: none;
-  cursor: pointer;
-  transition: transform 0.15s;
-  outline: none;
-  flex-shrink: 0;
-  position: relative;
-}
-.swatch::after {
-  content: '';
-  position: absolute;
-  inset: -3px;
-  border-radius: 50%;
-  border: 2px solid transparent;
-  transition: border-color 0.15s;
-}
-.swatch.active::after { border-color: rgba(0,0,0,0.4); }
-.swatch[data-color="#ffdd00"].active::after { border-color: rgba(180,140,0,0.55); }
-.swatch[data-color="#19d9ff"].active::after { border-color: rgba(0,150,200,0.55); }
-.swatch:hover { transform: scale(1.08); }
 
 /* ── Control buttons ─────────────────────────────────────────────────────── */
 .ctrl-btn {
