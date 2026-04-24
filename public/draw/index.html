@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Drawing Background</title>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <title>Draw</title>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -24,6 +24,7 @@
       cursor: none;
     }
 
+    /* ── Custom cursors ─────────────────────────────────────── */
     #pencil-cursor {
       position: fixed;
       pointer-events: none;
@@ -32,168 +33,223 @@
       display: none;
     }
 
-    #topbar {
+    #eraser-cursor {
       position: fixed;
-      top: 0; left: 0; right: 0;
-      height: 56px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 16px;
-      z-index: 10;
       pointer-events: none;
+      z-index: 100;
+      width: 24px;
+      height: 24px;
+      border: 1.5px solid rgba(0,0,0,0.4);
+      border-radius: 50%;
+      background: rgba(251,251,251,0.65);
+      transform: translate(-50%, -50%);
+      display: none;
     }
 
-    #palette {
+    /* ── Toolbar ────────────────────────────────────────────── */
+    #toolbar {
+      position: fixed;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
       display: flex;
       align-items: center;
-      gap: 6px;
-      background: #fbfbfb;
-      border: 1px solid #efefef;
-      border-radius: 100px;
-      padding: 6px 8px;
-      box-shadow: 0 8px 8px -8px rgba(0,0,0,0.25);
-      pointer-events: all;
+      background: #ffffff;
+      border: 1px solid #ebebeb;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      z-index: 10;
+      overflow: hidden;
     }
 
-    .swatch {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      border: none;
-      cursor: none;
-      transition: transform 0.15s;
-      outline: none;
-      flex-shrink: 0;
-      position: relative;
-    }
-
-    .swatch::after {
-      content: '';
-      position: absolute;
-      inset: -3px;
-      border-radius: 50%;
-      border: 2px solid transparent;
-      transition: border-color 0.15s;
-    }
-
-    .swatch.active::after { border-color: rgba(0,0,0,0.4); }
-    .swatch[data-color="#ffdd00"].active::after { border-color: rgba(180,140,0,0.55); }
-    .swatch[data-color="#19d9ff"].active::after { border-color: rgba(0,150,200,0.55); }
-    .swatch:hover { transform: scale(1.08); }
-
-    #controls {
-      display: flex;
-      align-items: center;
-      pointer-events: all;
-    }
-
-    .ctrl-btn {
+    .tool-btn {
       display: flex;
       align-items: center;
       justify-content: center;
       width: 44px;
       height: 44px;
       border: none;
-      border-radius: 8px;
       background: transparent;
       cursor: none;
-      color: #444;
-      transition: background 0.12s, color 0.12s;
-      position: relative;
+      color: #555;
+      transition: background 0.1s;
+      flex-shrink: 0;
     }
 
-    .ctrl-btn:hover { background: rgba(0,0,0,0.05); color: #111; }
-    .ctrl-btn:active { background: rgba(0,0,0,0.09); }
-    .ctrl-btn:disabled { opacity: 0.25; cursor: none; }
-    .ctrl-btn:disabled:hover { background: transparent; color: #444; }
-    .ctrl-btn .material-icons { font-size: 20px; user-select: none; }
+    .tool-btn:hover:not(:disabled) { background: rgba(0,0,0,0.04); }
+    .tool-btn.active { background: #ebebeb; }
+    .tool-btn:disabled { opacity: 0.28; }
+    .tool-btn:disabled:hover { background: transparent; }
 
-    .ctrl-btn::after {
-      content: attr(data-tip);
-      position: absolute;
-      top: calc(100% + 4px);
+    .material-symbols-outlined {
+      font-size: 20px;
+      user-select: none;
+    }
+
+    /* Color swatch dot */
+    #color-swatch-ring {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 2px solid #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    #color-swatch-fill {
+      width: 17.8px;
+      height: 17.8px;
+      border-radius: 50%;
+      background: #000;
+    }
+
+    /* ── Color Picker popup ─────────────────────────────────── */
+    #color-picker {
+      position: fixed;
+      top: 68px;
       left: 50%;
       transform: translateX(-50%);
-      background: rgba(20,20,20,0.78);
-      color: #fff;
-      font-size: 11px;
-      font-family: system-ui, sans-serif;
-      padding: 3px 7px;
-      border-radius: 4px;
-      white-space: nowrap;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.15s;
+      z-index: 9999;
+      background: #fafafa;
+      border: 1px solid #ebebeb;
+      border-radius: 16px;
+      padding: 10px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.10), 0 1px 4px rgba(0,0,0,0.06);
+      width: min(300px, calc(100vw - 32px));
     }
-    .ctrl-btn:hover:not(:disabled)::after { opacity: 1; }
+
+    #color-picker-grid {
+      display: flex;
+      flex-direction: column;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .cp-row { display: flex; }
+
+    .cp-swatch {
+      flex: 1;
+      aspect-ratio: 1 / 1;
+      min-width: 0;
+      border: none;
+      padding: 0;
+      cursor: none;
+      position: relative;
+      transition: opacity 0.075s;
+    }
+
+    .cp-swatch:hover  { opacity: 0.8; }
+    .cp-swatch:active { opacity: 0.6; }
+
+    .cp-swatch-selected {
+      position: absolute;
+      inset: 3px;
+      border-radius: 2px;
+      box-shadow: 0 0 0 2px white, 0 0 0 3px rgba(0,0,0,0.15);
+      pointer-events: none;
+    }
   </style>
 </head>
 <body>
 
 <canvas id="canvas"></canvas>
 <div id="pencil-cursor"><img src="/images/cursor-pencil.svg" style="width:40px;height:40px;object-fit:contain;" draggable="false" alt="" /></div>
+<div id="eraser-cursor"></div>
 
-<div id="topbar">
-  <div id="palette">
-    <button class="swatch active" data-color="#171717" aria-label="Black"  style="background:#171717"></button>
-    <button class="swatch"        data-color="#ffdd00" aria-label="Yellow" style="background:#ffdd00"></button>
-    <button class="swatch"        data-color="#19d9ff" aria-label="Blue"   style="background:#19d9ff"></button>
-  </div>
-  <div id="controls">
-    <button class="ctrl-btn" id="btn-undo"  data-tip="Undo"  aria-label="Undo"  disabled><span class="material-icons">undo</span></button>
-    <button class="ctrl-btn" id="btn-redo"  data-tip="Redo"  aria-label="Redo"  disabled><span class="material-icons">redo</span></button>
-    <button class="ctrl-btn" id="btn-clear" data-tip="Clear" aria-label="Clear" disabled><span class="material-icons">delete</span></button>
-  </div>
+<div id="toolbar">
+  <button id="btn-color" class="tool-btn" aria-label="Pick color" aria-expanded="false">
+    <div id="color-swatch-ring">
+      <div id="color-swatch-fill"></div>
+    </div>
+  </button>
+  <button id="btn-draw"  class="tool-btn active" aria-label="Draw">
+    <span class="material-symbols-outlined">stylus</span>
+  </button>
+  <button id="btn-erase" class="tool-btn" aria-label="Erase">
+    <span class="material-symbols-outlined">ink_eraser</span>
+  </button>
+  <button id="btn-fill"  class="tool-btn" aria-label="Fill">
+    <span class="material-symbols-outlined">format_color_fill</span>
+  </button>
+  <button id="btn-undo"  class="tool-btn" aria-label="Undo"  disabled>
+    <span class="material-symbols-outlined">undo</span>
+  </button>
+  <button id="btn-redo"  class="tool-btn" aria-label="Redo"  disabled>
+    <span class="material-symbols-outlined">redo</span>
+  </button>
+  <button id="btn-clear" class="tool-btn" aria-label="Clear" disabled>
+    <span class="material-symbols-outlined">delete</span>
+  </button>
+</div>
+
+<div id="color-picker" hidden>
+  <div id="color-picker-grid"></div>
 </div>
 
 <script>
 (() => {
-  const canvas = document.getElementById('canvas');
-  const ctx    = canvas.getContext('2d');
-  const pencil = document.getElementById('pencil-cursor');
-  const dpr    = window.devicePixelRatio || 1;
+  const canvas       = document.getElementById('canvas');
+  const ctx          = canvas.getContext('2d');
+  const pencilCursor = document.getElementById('pencil-cursor');
+  const eraserCursor = document.getElementById('eraser-cursor');
+  const colorPicker  = document.getElementById('color-picker');
+  const btnColor     = document.getElementById('btn-color');
+  const btnDraw      = document.getElementById('btn-draw');
+  const btnErase     = document.getElementById('btn-erase');
+  const btnFill      = document.getElementById('btn-fill');
+  const btnUndo      = document.getElementById('btn-undo');
+  const btnRedo      = document.getElementById('btn-redo');
+  const btnClear     = document.getElementById('btn-clear');
+  const swatchRing   = document.getElementById('color-swatch-ring');
+  const swatchFill   = document.getElementById('color-swatch-fill');
+  const dpr          = window.devicePixelRatio || 1;
 
   // ── Config ─────────────────────────────────────────────────
-  const LINE_WIDTH = 8;
-  const NUM_COPIES = 4;    // boiling-line animation cel count
-  const WIGGLE_FPS = 8;    // hard-switches per second
-  const WIGGLE_AMP = 2.0;  // max px offset per point per copy
+  const LINE_WIDTH  = 8;
+  const ERASE_WIDTH = 24;   // eraser diameter in CSS px
+  const NUM_COPIES  = 4;    // boiling-line animation cel count
+  const WIGGLE_FPS  = 8;    // hard-switches per second
+  const WIGGLE_AMP  = 2.0;  // max px offset per point per copy
+  const BG_COLOR    = '#fbfbfb';
 
-  // ── Canvas sizing ──────────────────────────────────────────
+  // ── Fills canvas — separate layer drawn beneath all strokes ─
+  const fillsCanvas = document.createElement('canvas');
+  const fillsCtx    = fillsCanvas.getContext('2d');
+
+  // ── Canvas + fills sizing ──────────────────────────────────
   function resize() {
     const w = window.innerWidth;
     const h = window.innerHeight;
-    canvas.width  = Math.round(w * dpr);
-    canvas.height = Math.round(h * dpr);
+    canvas.width        = Math.round(w * dpr);
+    canvas.height       = Math.round(h * dpr);
     canvas.style.width  = w + 'px';
     canvas.style.height = h + 'px';
     ctx.scale(dpr, dpr);
+
+    // fillsCanvas matches main canvas physical pixels exactly
+    fillsCanvas.width  = canvas.width;
+    fillsCanvas.height = canvas.height;
+
+    // Fill ImageData is in physical pixels — can't survive a resize.
+    // Drop fill history items; draw strokes are coordinate-based and survive fine.
+    history   = history.filter(h => h.type === 'stroke');
+    redoStack = redoStack.filter(h => h.type === 'stroke');
+    updateButtons();
   }
   resize();
   window.addEventListener('resize', resize);
 
-  // ── Pencil cursor ──────────────────────────────────────────
-  document.addEventListener('mousemove', e => {
-    pencil.style.left = e.clientX + 'px';
-    pencil.style.top  = (e.clientY - 40) + 'px';
-  });
-  document.addEventListener('mouseenter', () => { pencil.style.display = 'block'; });
-  document.addEventListener('mouseleave', () => { pencil.style.display = 'none'; });
-  document.addEventListener('mousemove', () => { pencil.style.display = 'block'; }, { once: true });
-
   // ── State ──────────────────────────────────────────────────
-  let strokes      = [];
+  let history      = [];   // {type:'stroke', stroke} | {type:'fill', prev, next}
   let redoStack    = [];
   let activeStroke = null;
   let isDrawing    = false;
   let currentColor = '#171717';
+  let activeTool   = 'draw'; // 'draw' | 'erase' | 'fill'
 
   // ── Boiling line ───────────────────────────────────────────
-  // Each point stores pre-baked random offsets for NUM_COPIES
-  // variations. The renderer hard-switches between copies like
-  // animation cels — no interpolation, no sine waves.
-
   function makePoint(x, y) {
     const offsets = [];
     for (let c = 0; c < NUM_COPIES; c++) {
@@ -208,19 +264,15 @@
   function drawStroke(stroke, t) {
     const pts = stroke.points;
     if (pts.length < 2) return;
-
     const ci = Math.floor(t * WIGGLE_FPS) % NUM_COPIES;
-
     ctx.save();
     ctx.strokeStyle = stroke.color;
     ctx.lineWidth   = stroke.width;
     ctx.lineCap     = 'round';
     ctx.lineJoin    = 'round';
     ctx.beginPath();
-
     const o0 = pts[0].offsets[ci];
     ctx.moveTo(pts[0].x + o0.dx, pts[0].y + o0.dy);
-
     for (let i = 1; i < pts.length - 1; i++) {
       const oc = pts[i].offsets[ci];
       const on = pts[i + 1].offsets[ci];
@@ -230,7 +282,6 @@
       const ny = pts[i + 1].y + on.dy;
       ctx.quadraticCurveTo(cx, cy, (cx + nx) / 2, (cy + ny) / 2);
     }
-
     const oL = pts[pts.length - 1].offsets[ci];
     ctx.lineTo(pts[pts.length - 1].x + oL.dx, pts[pts.length - 1].y + oL.dy);
     ctx.stroke();
@@ -242,14 +293,18 @@
 
   function frame(now) {
     const t = (now - startTime) / 1000;
-    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    const w = window.innerWidth;
+    const h = window.innerHeight;
 
-    for (const stroke of strokes) {
-      drawStroke(stroke, t);
+    ctx.clearRect(0, 0, w, h);
+
+    // Fills layer beneath all strokes
+    ctx.drawImage(fillsCanvas, 0, 0, w, h);
+
+    for (const item of history) {
+      if (item.type === 'stroke') drawStroke(item.stroke, t);
     }
-    if (activeStroke) {
-      drawStroke(activeStroke, t);
-    }
+    if (activeStroke) drawStroke(activeStroke, t);
 
     requestAnimationFrame(frame);
   }
@@ -267,11 +322,19 @@
   function onStart(e) {
     if (e.target !== canvas) return;
     e.preventDefault();
+
+    if (activeTool === 'fill') {
+      const pos = getPos(e);
+      doFloodFill(pos.x, pos.y, currentColor);
+      return;
+    }
+
     isDrawing = true;
-    const pos = getPos(e);
+    const pos      = getPos(e);
+    const isEraser = activeTool === 'erase';
     activeStroke = {
-      color:  currentColor,
-      width:  LINE_WIDTH,
+      color:  isEraser ? BG_COLOR : currentColor,
+      width:  isEraser ? ERASE_WIDTH : LINE_WIDTH,
       points: [makePoint(pos.x, pos.y)],
     };
   }
@@ -291,7 +354,7 @@
     if (!isDrawing || !activeStroke) return;
     isDrawing = false;
     if (activeStroke.points.length >= 2) {
-      strokes.push(activeStroke);
+      history.push({ type: 'stroke', stroke: activeStroke });
       redoStack = [];
       updateButtons();
     }
@@ -306,41 +369,169 @@
   canvas.addEventListener('touchmove',  onMove,  { passive: false });
   canvas.addEventListener('touchend',   onEnd,   { passive: false });
 
-  // ── Palette ────────────────────────────────────────────────
-  document.querySelectorAll('.swatch').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.swatch').forEach(s => s.classList.remove('active'));
-      btn.classList.add('active');
-      currentColor = btn.dataset.color;
-    });
+  // ── Flood fill ─────────────────────────────────────────────
+  function hexToRgb(hex) {
+    return [
+      parseInt(hex.slice(1, 3), 16),
+      parseInt(hex.slice(3, 5), 16),
+      parseInt(hex.slice(5, 7), 16),
+    ];
+  }
+
+  // Treats near-transparent pixels as the same "empty" colour so
+  // anti-aliased stroke edges don't leak the fill.
+  function colorMatch(r1, g1, b1, a1, r2, g2, b2, a2) {
+    if (a1 < 10 && a2 < 10) return true;
+    return (
+      Math.abs(a1 - a2) <= 30 &&
+      Math.abs(r1 - r2) <= 30 &&
+      Math.abs(g1 - g2) <= 30 &&
+      Math.abs(b1 - b2) <= 30
+    );
+  }
+
+  function doFloodFill(cssX, cssY, colorHex) {
+    const pw = canvas.width;
+    const ph = canvas.height;
+    const px = Math.round(cssX * dpr);
+    const py = Math.round(cssY * dpr);
+    if (px < 0 || px >= pw || py < 0 || py >= ph) return;
+
+    // Read current composite (fills + strokes as currently rendered)
+    const composite = ctx.getImageData(0, 0, pw, ph).data;
+    const si = (py * pw + px) * 4;
+    const tr = composite[si], tg = composite[si + 1];
+    const tb = composite[si + 2], ta = composite[si + 3];
+
+    const [fr, fg, fb] = hexToRgb(colorHex);
+    // Already this colour — nothing to do
+    if (ta === 255 && tr === fr && tg === fg && tb === fb) return;
+
+    // Snapshot the fills canvas before the fill
+    const prevSnapshot = fillsCtx.getImageData(0, 0, pw, ph);
+
+    // BFS using an index-based queue (no shift() overhead)
+    const fillsData = fillsCtx.getImageData(0, 0, pw, ph);
+    const fd        = fillsData.data;
+    const visited   = new Uint8Array(pw * ph);
+    const queue     = new Int32Array(pw * ph);
+    let   head = 0, tail = 0;
+
+    const start = py * pw + px;
+    queue[tail++] = start;
+    visited[start] = 1;
+
+    while (head < tail) {
+      const pos = queue[head++];
+      const x   = pos % pw;
+      const y   = (pos / pw) | 0;
+
+      // Paint pixel on fills canvas
+      const fi = pos * 4;
+      fd[fi]     = fr;
+      fd[fi + 1] = fg;
+      fd[fi + 2] = fb;
+      fd[fi + 3] = 255;
+
+      // Flood to 4-connected neighbours
+      const nbrs = [
+        x > 0    ? pos - 1  : -1,
+        x < pw-1 ? pos + 1  : -1,
+        y > 0    ? pos - pw : -1,
+        y < ph-1 ? pos + pw : -1,
+      ];
+      for (const n of nbrs) {
+        if (n < 0 || visited[n]) continue;
+        const ni = n * 4;
+        if (colorMatch(
+          composite[ni], composite[ni+1], composite[ni+2], composite[ni+3],
+          tr, tg, tb, ta
+        )) {
+          visited[n] = 1;
+          queue[tail++] = n;
+        }
+      }
+    }
+
+    fillsCtx.putImageData(fillsData, 0, 0);
+    const nextSnapshot = fillsCtx.getImageData(0, 0, pw, ph);
+
+    history.push({ type: 'fill', prevSnapshot, nextSnapshot });
+    redoStack = [];
+    updateButtons();
+  }
+
+  // ── Tool selection ─────────────────────────────────────────
+  function setTool(tool) {
+    activeTool = tool;
+    btnDraw.classList.toggle('active',  tool === 'draw');
+    btnErase.classList.toggle('active', tool === 'erase');
+    btnFill.classList.toggle('active',  tool === 'fill');
+    // Fill tool uses system crosshair; draw/erase use custom cursors
+    canvas.style.cursor = tool === 'fill' ? 'crosshair' : 'none';
+    pencilCursor.style.display = 'none';
+    eraserCursor.style.display = 'none';
+  }
+
+  btnDraw.addEventListener('click',  () => setTool('draw'));
+  btnErase.addEventListener('click', () => setTool('erase'));
+  btnFill.addEventListener('click',  () => setTool('fill'));
+
+  // ── Cursor tracking ────────────────────────────────────────
+  document.addEventListener('mousemove', e => {
+    if (activeTool === 'draw') {
+      pencilCursor.style.left    = e.clientX + 'px';
+      pencilCursor.style.top     = (e.clientY - 40) + 'px';
+      pencilCursor.style.display = 'block';
+      eraserCursor.style.display = 'none';
+    } else if (activeTool === 'erase') {
+      eraserCursor.style.left    = e.clientX + 'px';
+      eraserCursor.style.top     = e.clientY + 'px';
+      eraserCursor.style.display = 'block';
+      pencilCursor.style.display = 'none';
+    } else {
+      pencilCursor.style.display = 'none';
+      eraserCursor.style.display = 'none';
+    }
+  });
+
+  document.addEventListener('mouseleave', () => {
+    pencilCursor.style.display = 'none';
+    eraserCursor.style.display = 'none';
   });
 
   // ── Controls ───────────────────────────────────────────────
-  const btnUndo  = document.getElementById('btn-undo');
-  const btnRedo  = document.getElementById('btn-redo');
-  const btnClear = document.getElementById('btn-clear');
-
   function updateButtons() {
-    btnUndo.disabled  = strokes.length === 0;
+    btnUndo.disabled  = history.length === 0;
     btnRedo.disabled  = redoStack.length === 0;
-    btnClear.disabled = strokes.length === 0;
+    btnClear.disabled = history.length === 0;
   }
 
   btnUndo.addEventListener('click', () => {
-    if (!strokes.length) return;
-    redoStack.push(strokes.pop());
+    if (!history.length) return;
+    const item = history.pop();
+    redoStack.push(item);
+    if (item.type === 'fill') {
+      fillsCtx.clearRect(0, 0, fillsCanvas.width, fillsCanvas.height);
+      fillsCtx.putImageData(item.prevSnapshot, 0, 0);
+    }
     updateButtons();
   });
 
   btnRedo.addEventListener('click', () => {
     if (!redoStack.length) return;
-    strokes.push(redoStack.pop());
+    const item = redoStack.pop();
+    history.push(item);
+    if (item.type === 'fill') {
+      fillsCtx.putImageData(item.nextSnapshot, 0, 0);
+    }
     updateButtons();
   });
 
   btnClear.addEventListener('click', () => {
-    strokes   = [];
+    history   = [];
     redoStack = [];
+    fillsCtx.clearRect(0, 0, fillsCanvas.width, fillsCanvas.height);
     updateButtons();
   });
 
@@ -350,6 +541,79 @@
     if (mod && e.key === 'z' && !e.shiftKey) { btnUndo.click(); e.preventDefault(); }
     if (mod && (e.key === 'y' || (e.key === 'z' && e.shiftKey))) { btnRedo.click(); e.preventDefault(); }
   });
+
+  // ── Color picker ───────────────────────────────────────────
+  const COLOR_ROWS = [
+    ['#fefffe','#ebebeb','#d6d6d6','#c2c2c2','#adadad','#999999','#858585','#707070','#5c5c5c','#474747','#333333','#000000'],
+    ['#00374a','#011d57','#11053b','#2e063d','#3c071b','#5c0701','#5a1c00','#583300','#563d00','#666100','#4f5504','#263e0f'],
+    ['#004d65','#012f7b','#1a0a52','#450d59','#551029','#831100','#7b2900','#7a4a00','#785800','#8d8602','#6f760a','#38571a'],
+    ['#016e8f','#0042a9','#2c0977','#61187c','#791a3d','#b51a00','#ad3e00','#a96800','#a67b01','#c4bc00','#9ba50e','#4e7a27'],
+    ['#008cb4','#0056d6','#371a94','#7a219e','#99244f','#e22400','#da5100','#d38301','#d19d01','#f5ec00','#c3d117','#669d34'],
+    ['#00a1d8','#0061fd','#4d22b2','#982abc','#b92d5d','#ff4015','#ff6a00','#ffab01','#fcc700','#fefb41','#d9ec37','#76bb40'],
+    ['#01c7fc','#3a87fd','#5e30eb','#be38f3','#e63b7a','#fe6250','#fe8648','#feb43f','#fecb3e','#fff76b','#e4ef65','#96d35f'],
+    ['#52d6fc','#74a7ff','#864ffd','#d357fe','#ee719e','#ff8c82','#fea57d','#fec777','#fed977','#fff994','#eaf28f','#b1dd8b'],
+    ['#93e3fc','#a7c6ff','#b18cfe','#e292fe','#f4a4c0','#ffb5af','#ffc5ab','#fed9a8','#fde4a8','#fffbb9','#f1f7b7','#cde8b5'],
+    ['#cbf0ff','#d2e2fe','#d8c9fe','#efcafe','#f9d3e0','#ffdad8','#ffe2d6','#feecd4','#fef1d5','#fdfbdd','#f6fadb','#deeed4'],
+  ];
+
+  // Build the 10×12 grid
+  const grid = document.getElementById('color-picker-grid');
+  COLOR_ROWS.forEach(row => {
+    const rowEl = document.createElement('div');
+    rowEl.className = 'cp-row';
+    row.forEach(c => {
+      const btn = document.createElement('button');
+      btn.className = 'cp-swatch';
+      btn.dataset.color = c;
+      btn.setAttribute('aria-label', c);
+      btn.style.background = c;
+      btn.addEventListener('click', () => {
+        currentColor = c;
+        syncColorUI();
+        colorPicker.hidden = true;
+        btnColor.setAttribute('aria-expanded', 'false');
+      });
+      rowEl.appendChild(btn);
+    });
+    grid.appendChild(rowEl);
+  });
+
+  function syncColorUI() {
+    swatchRing.style.borderColor = currentColor;
+    swatchFill.style.background  = currentColor;
+    // Update selected-swatch indicator
+    document.querySelectorAll('.cp-swatch').forEach(s => {
+      const existing = s.querySelector('.cp-swatch-selected');
+      const selected = s.dataset.color.toLowerCase() === currentColor.toLowerCase();
+      if (selected && !existing) {
+        const ind = document.createElement('span');
+        ind.className = 'cp-swatch-selected';
+        s.appendChild(ind);
+      } else if (!selected && existing) {
+        existing.remove();
+      }
+    });
+  }
+
+  // Toggle picker — clicking the button while open closes it
+  btnColor.addEventListener('click', () => {
+    const opening = colorPicker.hidden;
+    colorPicker.hidden = !opening;
+    btnColor.setAttribute('aria-expanded', String(opening));
+    if (opening) syncColorUI(); // refresh selected ring when opening
+  });
+
+  // Close on outside click (pointerdown fires before click, so exclude the button)
+  document.addEventListener('pointerdown', e => {
+    if (colorPicker.hidden) return;
+    if (!colorPicker.contains(e.target) && !btnColor.contains(e.target)) {
+      colorPicker.hidden = true;
+      btnColor.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // Init UI
+  syncColorUI();
 
 })();
 </script>
