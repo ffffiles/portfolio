@@ -57,7 +57,7 @@ export default function ColorPicker({ color, onChange, onClose }: Props) {
                   key={c}
                   onClick={() => { onChange(c); onClose() }}
                   aria-label={c}
-                  className="flex-1 h-[30px] min-w-0 relative cursor-pointer border-0 p-0 transition-opacity duration-75 hover:opacity-80 active:opacity-60"
+                  className="flex-1 aspect-square min-w-0 relative cursor-pointer border-0 p-0 transition-opacity duration-75 hover:opacity-80 active:opacity-60"
                   style={{ background: c }}
                 >
                   {selected && (
