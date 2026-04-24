@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { createPortal } from 'react-dom'
 
 // 10 rows × 12 columns from Figma design (node 187:2133)
 const COLOR_ROWS: string[][] = [
@@ -34,12 +35,13 @@ export default function ColorPicker({ color, onChange, onClose }: Props) {
     return () => document.removeEventListener('pointerdown', handlePointerDown)
   }, [onClose])
 
-  return (
+  return createPortal(
     <div
       ref={containerRef}
-      className="fixed right-6 z-50 rounded-[16px] p-[10px] overflow-hidden w-[300px]"
+      className="fixed right-6 rounded-[16px] p-[10px] overflow-hidden w-[300px]"
       style={{
         top: '68px',
+        zIndex: 9999,
         background: '#fafafa',
         border: '1px solid #ebebeb',
         boxShadow: '0 4px 24px rgba(0,0,0,0.10), 0 1px 4px rgba(0,0,0,0.06)',
@@ -70,6 +72,7 @@ export default function ColorPicker({ color, onChange, onClose }: Props) {
           </div>
         ))}
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }
