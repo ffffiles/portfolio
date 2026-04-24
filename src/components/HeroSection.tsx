@@ -26,7 +26,7 @@ export default function HeroSection({
     <div className="fixed inset-0 z-10 pointer-events-none">
 
       {/* Controls — top right (color swatch + undo/redo/delete) */}
-      <div className="absolute top-6 right-6 flex items-center pointer-events-auto relative" data-entrance="4">
+      <div className="absolute top-6 right-6 flex items-center pointer-events-auto" data-entrance="4">
 
         {/* Color swatch dot — opens picker */}
         <div className="relative">
