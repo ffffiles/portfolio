@@ -86,6 +86,9 @@
       user-select: none;
     }
 
+    /* Color selector gets a pointer — it opens a picker, not a drawing tool */
+    #btn-color { cursor: pointer; }
+
     /* Color swatch dot */
     #color-swatch-ring {
       width: 24px;
@@ -214,8 +217,13 @@
   const WIGGLE_AMP  = 2.0;  // max px offset per point per copy
 
   // ── Fills canvas — separate layer drawn beneath all strokes ─
-  const fillsCanvas = document.createElement('canvas');
-  const fillsCtx    = fillsCanvas.getContext('2d');
+  const fillsCanvas   = document.createElement('canvas');
+  const fillsCtx      = fillsCanvas.getContext('2d');
+
+  // Strokes are rendered here so destination-out eraser only punches
+  // through this layer — fills beneath remain intact.
+  const strokesCanvas = document.createElement('canvas');
+  const strokesCtx    = strokesCanvas.getContext('2d');
 
   // ── State ──────────────────────────────────────────────────
   let history      = [];   // {type:'stroke', stroke} | {type:'fill', prev, next}
@@ -235,9 +243,12 @@
     canvas.style.height = h + 'px';
     ctx.scale(dpr, dpr);
 
-    // fillsCanvas matches main canvas physical pixels exactly
-    fillsCanvas.width  = canvas.width;
-    fillsCanvas.height = canvas.height;
+    // Off-screen canvases match main canvas physical pixels exactly
+    fillsCanvas.width    = canvas.width;
+    fillsCanvas.height   = canvas.height;
+    strokesCanvas.width  = canvas.width;
+    strokesCanvas.height = canvas.height;
+    strokesCtx.scale(dpr, dpr);
 
     // Fill ImageData is in physical pixels — can't survive a resize.
     // Drop fill history items; draw strokes are coordinate-based and survive fine.
@@ -260,23 +271,23 @@
     return { x, y, offsets };
   }
 
-  function drawStroke(stroke, t) {
+  function drawStroke(targetCtx, stroke, t) {
     const pts = stroke.points;
     if (pts.length < 2) return;
     const ci = Math.floor(t * WIGGLE_FPS) % NUM_COPIES;
-    ctx.save();
+    targetCtx.save();
     if (stroke.eraser) {
-      ctx.globalCompositeOperation = 'destination-out';
-      ctx.strokeStyle = 'rgba(0,0,0,1)';
+      targetCtx.globalCompositeOperation = 'destination-out';
+      targetCtx.strokeStyle = 'rgba(0,0,0,1)';
     } else {
-      ctx.strokeStyle = stroke.color;
+      targetCtx.strokeStyle = stroke.color;
     }
-    ctx.lineWidth   = stroke.width;
-    ctx.lineCap     = 'round';
-    ctx.lineJoin    = 'round';
-    ctx.beginPath();
+    targetCtx.lineWidth   = stroke.width;
+    targetCtx.lineCap     = 'round';
+    targetCtx.lineJoin    = 'round';
+    targetCtx.beginPath();
     const o0 = pts[0].offsets[ci];
-    ctx.moveTo(pts[0].x + o0.dx, pts[0].y + o0.dy);
+    targetCtx.moveTo(pts[0].x + o0.dx, pts[0].y + o0.dy);
     for (let i = 1; i < pts.length - 1; i++) {
       const oc = pts[i].offsets[ci];
       const on = pts[i + 1].offsets[ci];
@@ -284,12 +295,12 @@
       const cy = pts[i].y + oc.dy;
       const nx = pts[i + 1].x + on.dx;
       const ny = pts[i + 1].y + on.dy;
-      ctx.quadraticCurveTo(cx, cy, (cx + nx) / 2, (cy + ny) / 2);
+      targetCtx.quadraticCurveTo(cx, cy, (cx + nx) / 2, (cy + ny) / 2);
     }
     const oL = pts[pts.length - 1].offsets[ci];
-    ctx.lineTo(pts[pts.length - 1].x + oL.dx, pts[pts.length - 1].y + oL.dy);
-    ctx.stroke();
-    ctx.restore();
+    targetCtx.lineTo(pts[pts.length - 1].x + oL.dx, pts[pts.length - 1].y + oL.dy);
+    targetCtx.stroke();
+    targetCtx.restore();
   }
 
   // ── Animation loop ─────────────────────────────────────────
@@ -300,15 +311,18 @@
     const w = window.innerWidth;
     const h = window.innerHeight;
 
-    ctx.clearRect(0, 0, w, h);
-
-    // Fills layer beneath all strokes
-    ctx.drawImage(fillsCanvas, 0, 0, w, h);
-
+    // Pass 1 — render strokes (+ eraser holes) onto strokesCanvas
+    strokesCtx.clearRect(0, 0, w, h);
     for (const item of history) {
-      if (item.type === 'stroke') drawStroke(item.stroke, t);
+      if (item.type === 'stroke') drawStroke(strokesCtx, item.stroke, t);
     }
-    if (activeStroke) drawStroke(activeStroke, t);
+    if (activeStroke) drawStroke(strokesCtx, activeStroke, t);
+
+    // Pass 2 — composite: fills → strokes → main
+    // Eraser holes in strokesCanvas are transparent, letting fills show through.
+    ctx.clearRect(0, 0, w, h);
+    ctx.drawImage(fillsCanvas,   0, 0, w, h);
+    ctx.drawImage(strokesCanvas, 0, 0, w, h);
 
     requestAnimationFrame(frame);
   }
