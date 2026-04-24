@@ -176,7 +176,7 @@
   // ── Pencil cursor ──────────────────────────────────────────
   document.addEventListener('mousemove', e => {
     pencil.style.left = e.clientX + 'px';
-    pencil.style.top  = (e.clientY - 50) + 'px';
+    pencil.style.top  = (e.clientY - 40) + 'px';
   });
   document.addEventListener('mouseenter', () => { pencil.style.display = 'block'; });
   document.addEventListener('mouseleave', () => { pencil.style.display = 'none'; });
